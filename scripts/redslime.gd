@@ -12,6 +12,9 @@ var can_die = false
 func _physics_process(delta):
 	deal_damage()
 	
+	$healthbar.max_value = 250
+	$healthbar.value = health
+	
 	if health > 0:
 		if player_chase:
 			move_and_collide(Vector2(0,0))

@@ -12,6 +12,9 @@ var can_die = false
 func _physics_process(delta):
 	deal_damage()
 	
+	$healthbar.max_value = 100
+	$healthbar.value = health
+	
 	if health > 0:
 		if player_chase:
 			move_and_collide(Vector2(0,0))
@@ -64,7 +67,7 @@ func deal_damage():
 				$AnimatedSprite2D.play("death")
 				health = 0
 	if can_die == true:
-		Global.experience += 100
+		Global.experience += 500
 		print("current exp: ", Global.experience)
 		print("current lvl: ", Global.level)
 		self.queue_free()
