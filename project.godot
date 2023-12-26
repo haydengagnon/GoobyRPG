@@ -11,13 +11,18 @@ config_version=5
 [application]
 
 config/name="GoobyRPGgame"
-run/main_scene="res://scenes/world.tscn"
+run/main_scene="res://scenes/homescreen.tscn"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 config/icon="res://art/icon.svg"
 
 [autoload]
 
 Global="*res://scripts/global.gd"
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="ignore"
 
 [dotnet]
 

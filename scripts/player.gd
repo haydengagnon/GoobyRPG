@@ -21,6 +21,8 @@ func _physics_process(delta):
 	enemy_attack()
 	redslime_attack()
 	attack()
+	interact()
+	death()
 	
 	Global.damage = Global.level * 50
 	Global.max_health = Global.level * 100
@@ -29,18 +31,10 @@ func _physics_process(delta):
 	
 	if Global.experience == 0:
 		Global.level = 1
-	if Global.experience == 500:
+	elif Global.experience >= 500 and Global.experience < 1125:
 		Global.level = floor((Global.experience / 500) + 1)
-	if Global.experience > 500:
-		Global.level = floor((Global.experience / (500 * 2.25)) + 1)
-	
-	
-	if Global.health <= 0:
-		player_alive = false #go to death screen
-		Global.health = 0
-		print("player has been killed")
-		self.queue_free()
-	
+	elif Global.experience >= 1125:
+		Global.level = floor((Global.experience / (500 * 2.25)) + 2)
 	
 func player_movement(delta):
 	if attack_ip == false:
@@ -145,20 +139,22 @@ func _on_player_hitbox_body_exited(body):
 		redslime_in_range = false
 		
 func enemy_attack():
-	if enemy_in_range and enemy_attack_cooldown == true and Global.enemy_dead == false:
-		Global.health -= 10
-		enemy_attack_cooldown = false
-		$attack_cooldown.start()
-		$regen_cooldown.start()
-		print("Blue slime hit! ", Global.health)
+	if Global.health > 0:
+		if enemy_in_range and enemy_attack_cooldown == true and Global.enemy_dead == false:
+			Global.health -= 10
+			enemy_attack_cooldown = false
+			$attack_cooldown.start()
+			$regen_cooldown.start()
+			print("Blue slime hit! ", Global.health)
 		
 func redslime_attack():
-	if redslime_in_range and enemy_attack_cooldown == true and Global.redslime_dead == false:
-		Global.health -= 20
-		enemy_attack_cooldown = false
-		$attack_cooldown.start()
-		$regen_cooldown.start()
-		print("Red slime hit! ", Global.health)
+	if Global.health > 0:
+		if redslime_in_range and enemy_attack_cooldown == true and Global.redslime_dead == false:
+			Global.health -= 20
+			enemy_attack_cooldown = false
+			$attack_cooldown.start()
+			$regen_cooldown.start()
+			print("Red slime hit! ", Global.health)
 
 func _on_attack_cooldown_timeout():
 	enemy_attack_cooldown = true
@@ -186,7 +182,9 @@ func attack():
 			$AnimatedSprite2D.play("back_attack")
 			$deal_attack_timer.start()
 			
-
+func interact():
+	if Input.is_action_just_pressed("interact"):
+		print("Current lvl: ", Global.level)
 
 func _on_deal_attack_timer_timeout():
 	$deal_attack_timer.stop()
@@ -206,3 +204,9 @@ func _on_regen_timer_timeout():
 		print("Healed to: ", Global.health)
 		
 
+func death():
+	if Global.health <= 0:
+		player_alive = false #go to death screen
+		Global.health = 0
+		print("player has been killed")
+		$AnimatedSprite2D.play("death")

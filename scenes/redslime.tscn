@@ -165,6 +165,15 @@ wait_time = 0.6
 wait_time = 0.5
 one_shot = true
 
+[node name="healthbar" type="ProgressBar" parent="."]
+modulate = Color(0.74902, 0, 0, 1)
+offset_left = -7.0
+offset_top = 1.0
+offset_right = 143.0
+offset_bottom = 28.0
+scale = Vector2(0.1, 0.1)
+show_percentage = false
+
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
 [connection signal="body_entered" from="redslime_hitbox" to="." method="_on_redslime_hitbox_body_entered"]
