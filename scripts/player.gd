@@ -4,6 +4,7 @@ var enemy_in_range = false
 var redslime_in_range = false
 var enemy_attack_cooldown = true
 var player_alive = true
+var level = Global.level
 
 var attack_ip = false
 
@@ -23,19 +24,14 @@ func _physics_process(delta):
 	attack()
 	interact()
 	death()
+	levelup(Global.level)
 	
-	Global.damage = Global.level * 50
+	Global.damage = Global.level * 25
 	Global.max_health = Global.level * 100
 	$healthbar.max_value = Global.max_health
 	$healthbar.value = Global.health
 	
-	if Global.experience == 0:
-		Global.level = 1
-	elif Global.experience >= 500 and Global.experience < 1125:
-		Global.level = floor((Global.experience / 500) + 1)
-	elif Global.experience >= 1125:
-		Global.level = floor((Global.experience / (500 * 2.25)) + 2)
-	
+
 func player_movement(delta):
 	if attack_ip == false:
 		if Input.is_action_pressed("move_right"):
@@ -140,21 +136,21 @@ func _on_player_hitbox_body_exited(body):
 		
 func enemy_attack():
 	if Global.health > 0:
-		if enemy_in_range and enemy_attack_cooldown == true and Global.enemy_dead == false:
-			Global.health -= 10
-			enemy_attack_cooldown = false
-			$attack_cooldown.start()
-			$regen_cooldown.start()
-			print("Blue slime hit! ", Global.health)
+			if enemy_in_range and enemy_attack_cooldown == true and Global.enemy_dead == false:
+				Global.health -= 10
+				enemy_attack_cooldown = false
+				$attack_cooldown.start()
+				$regen_cooldown.start()
+				print("Blue slime hit! ", Global.health)
 		
 func redslime_attack():
 	if Global.health > 0:
-		if redslime_in_range and enemy_attack_cooldown == true and Global.redslime_dead == false:
-			Global.health -= 20
-			enemy_attack_cooldown = false
-			$attack_cooldown.start()
-			$regen_cooldown.start()
-			print("Red slime hit! ", Global.health)
+			if redslime_in_range and enemy_attack_cooldown == true and Global.redslime_dead == false:
+				Global.health -= 20
+				enemy_attack_cooldown = false
+				$attack_cooldown.start()
+				$regen_cooldown.start()
+				print("Red slime hit! ", Global.health)
 
 func _on_attack_cooldown_timeout():
 	enemy_attack_cooldown = true
@@ -181,10 +177,15 @@ func attack():
 		if direction == "up":
 			$AnimatedSprite2D.play("back_attack")
 			$deal_attack_timer.start()
+		if Global.enemy_can_attack == false:
+			$attack_cooldown.start()
+		if Global.redslime_can_attack == false:
+			$attack_cooldown.start()
 			
 func interact():
 	if Input.is_action_just_pressed("interact"):
 		print("Current lvl: ", Global.level)
+		print("Current exp: ", Global.experience)
 
 func _on_deal_attack_timer_timeout():
 	$deal_attack_timer.stop()
@@ -210,3 +211,17 @@ func death():
 		Global.health = 0
 		print("player has been killed")
 		$AnimatedSprite2D.play("death")
+		
+func levelup(lvl):
+	var formula = floor(400 * (lvl * 1.25))
+	var exp_req = int(formula)
+	
+	if Global.experience == floor(400 * (lvl * 1.25)):
+		Global.level += 1
+		Global.experience = 0
+		print("Leveled Up! ", Global.level)
+	elif Global.experience > floor(400 * (lvl * 1.25)):
+		Global.level += 1
+		Global.experience = Global.experience % exp_req
+		print("Leveled Up! ", Global.level)
+		print("Current exp: ", Global.experience)

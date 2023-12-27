@@ -291,3 +291,4 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_pcllt")
 text = "EXIT"
 
 [connection signal="button_up" from="titlescreen/play" to="." method="_on_play_button_up"]
+[connection signal="button_up" from="titlescreen/exit" to="." method="_on_exit_button_up"]

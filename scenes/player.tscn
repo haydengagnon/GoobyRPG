@@ -444,7 +444,7 @@ wait_time = 0.75
 wait_time = 0.55
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
+zoom = Vector2(3.5, 3.5)
 limit_left = 0
 limit_top = 0
 limit_right = 300

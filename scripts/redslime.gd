@@ -8,6 +8,7 @@ var health = 250
 var player_in_zone = false
 var can_take_damage = true
 var can_die = false
+var just_hit = false
 
 func _physics_process(delta):
 	deal_damage()
@@ -16,9 +17,17 @@ func _physics_process(delta):
 	$healthbar.value = health
 	
 	if health > 0:
-		if player_chase:
+		if just_hit == true:
+			$AnimatedSprite2D.play("hit")
+			move_and_collide((Vector2(0,0)))
+			position -= (player.position - position) / speed
+			if (player.position.x - position.x) < 0:
+				$AnimatedSprite2D.flip_h = true
+			else:
+				$AnimatedSprite2D.flip_h = false
+		elif player_chase:
 			move_and_collide(Vector2(0,0))
-			position += (player.position - position)/speed
+			position += (player.position - position) / speed
 			
 			$AnimatedSprite2D.play("walk")
 			
@@ -55,8 +64,11 @@ func _on_redslime_hitbox_body_exited(body):
 
 func deal_damage():
 	if player_in_zone and Global.player_current_attack == true:
+		Global.redslime_can_attack = false
 		if can_take_damage == true:
 			health -= Global.damage
+			just_hit = true
+			$justhit.start()
 			$take_damage_cooldown.start()
 			can_take_damage = false
 			print("slime health = ", health)
@@ -66,9 +78,9 @@ func deal_damage():
 				$AnimatedSprite2D.play("death")
 				health = 0
 	if can_die == true:
-		Global.experience += 250
-		print("current exp: ", Global.experience)
-		print("current lvl: ", Global.level)
+		Global.experience += 100
+		#print("current exp: ", Global.experience)
+		#print("current lvl: ", Global.level)
 		self.queue_free()
 		can_die = false
 		Global.redslime_dead = false
@@ -76,7 +88,12 @@ func deal_damage():
 
 func _on_take_damage_cooldown_timeout():
 	can_take_damage = true
+	Global.redslime_can_attack = true
 
 
 func _on_death_timer_timeout():
 	can_die = true
+
+
+func _on_justhit_timeout():
+	just_hit = false
