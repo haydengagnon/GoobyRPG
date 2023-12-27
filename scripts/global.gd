@@ -16,6 +16,8 @@ var max_health = 100
 var health = 50
 var level = 1
 
+
+
 #player transition locations
 var player_exit_cliffside_posx = 275
 var player_exit_cliffside_posy = 20

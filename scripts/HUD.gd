@@ -5,5 +5,8 @@ func _ready():
 
 
 func _process(delta):
-	$Panel/Label.text = str("Level: ", Global.level)
+	$Panel/level.text = str("Level: ", Global.level)
+	$Panel/health.value = Global.health
+	$Panel/exp.value = Global.experience
+	$Panel/exp.max_value = 5
 
