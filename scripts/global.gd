@@ -3,6 +3,8 @@ extends Node
 var player_current_attack = false
 var enemy_dead = false
 var redslime_dead = false
+var enemy_can_attack = true
+var redslime_can_attack = true
 
 var current_scene = "world"
 var transition_scene = false
