@@ -28,8 +28,6 @@ func _physics_process(delta):
 	
 	Global.damage = Global.level * 25
 	Global.max_health = Global.level * 100
-	$healthbar.max_value = Global.max_health
-	$healthbar.value = Global.health
 	
 
 func player_movement(_delta):
@@ -158,34 +156,40 @@ func _on_attack_cooldown_timeout():
 func attack():
 	var direction = current_dir
 	
-	if Input.is_action_just_pressed("attack"):
-		Global.player_current_attack = true
-		attack_ip = true
-		velocity.x = 0
-		velocity.y = 0
-		if direction == "right":
-			$AnimatedSprite2D.flip_h = false
-			$AnimatedSprite2D.play("side_attack")
-			$deal_attack_timer.start()
-		if direction == "left":
-			$AnimatedSprite2D.flip_h = true
-			$AnimatedSprite2D.play("side_attack")
-			$deal_attack_timer.start()
-		if direction == "down":
-			$AnimatedSprite2D.play("front_attack")
-			$deal_attack_timer.start()
-		if direction == "up":
-			$AnimatedSprite2D.play("back_attack")
-			$deal_attack_timer.start()
-		if Global.enemy_can_attack == false:
-			$attack_cooldown.start()
-		if Global.redslime_can_attack == false:
-			$attack_cooldown.start()
+	if Global.has_sword == true:
+		if Input.is_action_just_pressed("attack"):
+			Global.player_current_attack = true
+			attack_ip = true
+			velocity.x = 0
+			velocity.y = 0
+			if direction == "right":
+				$AnimatedSprite2D.flip_h = false
+				$AnimatedSprite2D.play("side_attack")
+				$deal_attack_timer.start()
+			if direction == "left":
+				$AnimatedSprite2D.flip_h = true
+				$AnimatedSprite2D.play("side_attack")
+				$deal_attack_timer.start()
+			if direction == "down":
+				$AnimatedSprite2D.play("front_attack")
+				$deal_attack_timer.start()
+			if direction == "up":
+				$AnimatedSprite2D.play("back_attack")
+				$deal_attack_timer.start()
+			if Global.enemy_can_attack == false:
+				$attack_cooldown.start()
+			if Global.redslime_can_attack == false:
+				$attack_cooldown.start()
 			
 func interact():
 	if Input.is_action_just_pressed("interact"):
-		print("Current lvl: ", Global.level)
-		print("Current exp: ", Global.experience)
+		#print("Current lvl: ", Global.level)
+		#print("Current exp: ", Global.experience)
+		if Global.can_open == true:
+			Global.opened = true
+			print("Should open")
+		else:
+			Global.opened = false
 
 func _on_deal_attack_timer_timeout():
 	$deal_attack_timer.stop()

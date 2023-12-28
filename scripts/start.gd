@@ -1,7 +1,5 @@
 extends Node2D
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	if Global.game_first_loadin == true:
 		$player.position.x = Global.player_start_posx
@@ -9,12 +7,13 @@ func _ready():
 	elif Global.world_to_start == true:
 		$player.position.x = Global.player_world_to_start_posx
 		$player.position.y = Global.player_world_to_start_posy
+		Global.world_to_start = false
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	change_scene()
 	set_camera_limits()
+	sword_recieved()
 
 func set_camera_limits():
 	if Global.current_scene == "start":
@@ -39,3 +38,9 @@ func change_scene():
 		Global.game_first_loadin = false
 		Global.start_to_world = true
 		
+func sword_recieved():
+	if Global.done_opening_start == true:
+		if Global.sword_text == false:
+			$AnimationPlayer/recieve_sword.visible = true
+			$AnimationPlayer.play("get_sword")
+			Global.sword_text = true

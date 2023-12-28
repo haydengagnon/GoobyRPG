@@ -7,9 +7,24 @@ func _ready():
 
 
 func _process(_delta):
-	$Panel/level.text = str("Level: ", Global.level)
-	$Panel/health.value = Global.health
-	$Panel/exp.value = Global.experience
-	$Panel/exp.max_value = expneeded
+	display_other_stats()
+	
+	$basic_stats/level.text = str("Level: ", Global.level)
+	$basic_stats/health.value = Global.health
+	$basic_stats/exp.value = Global.experience
+	$basic_stats/exp.max_value = expneeded
 
+	$other_stats/vbox/damage.text = str("Damage: ", Global.damage)
+	$other_stats/vbox/armor.text = str("Armor: ", Global.armor)
+	$other_stats/vbox/exp.text = str("Exp: ", Global.experience, "/", floor(400 * (Global.level * 1.25)))
+	$other_stats/vbox/speed.text = "Speed: 100"
  
+func display_other_stats():
+	if Global.display_more_stats == true:
+		if Input.is_action_just_pressed("show_stats"):
+			Global.display_more_stats = false
+		$other_stats.visible = true
+	elif Global.display_more_stats == false:
+		if Input.is_action_just_pressed("show_stats"):
+			Global.display_more_stats = true
+		$other_stats.visible = false	

@@ -235,8 +235,7 @@ libraries = {
 
 [node name="GoobyRpgLogo" type="Sprite2D" parent="titlescreen/AnimationPlayer"]
 position = Vector2(576, 180)
-rotation = -0.0681243
-scale = Vector2(1.44516, 1.44516)
+scale = Vector2(1.25, 1.25)
 texture = ExtResource("4_kdubs")
 
 [node name="play" type="Button" parent="titlescreen"]

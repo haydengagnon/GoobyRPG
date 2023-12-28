@@ -38,9 +38,11 @@ func change_scene():
 		if Global.start_enter == true:
 			get_tree().change_scene_to_file("res://scenes/start.tscn")
 			Global.finish_changescenes()
+			Global.world_to_start = true
 		elif Global.cliffside_enter == true:
 			get_tree().change_scene_to_file("res://scenes/cliffside.tscn")
 			Global.finish_changescenes()
+			Global.world_to_cliffside = true
 
 func set_camera_limits():
 	if Global.current_scene == "world":
