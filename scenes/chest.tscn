@@ -1,0 +1,80 @@
+[gd_scene load_steps=10 format=3 uid="uid://xdwt1bulnai7"]
+
+[ext_resource type="Texture2D" uid="uid://bplgjf4jacpgt" path="res://art/objects/chest_01.png" id="1_n3u5l"]
+[ext_resource type="Script" path="res://scripts/chest.gd" id="1_pg7k3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_77gnb"]
+atlas = ExtResource("1_n3u5l")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3amv"]
+atlas = ExtResource("1_n3u5l")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vyijv"]
+atlas = ExtResource("1_n3u5l")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnqjj"]
+atlas = ExtResource("1_n3u5l")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cmdko"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_77gnb")
+}],
+"loop": false,
+"name": &"already open",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3amv")
+}],
+"loop": false,
+"name": &"closed",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vyijv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bnqjj")
+}],
+"loop": false,
+"name": &"open_chest",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1n4vx"]
+size = Vector2(14, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r25f1"]
+size = Vector2(14, 11)
+
+[node name="chest" type="CharacterBody2D"]
+y_sort_enabled = true
+script = ExtResource("1_pg7k3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cmdko")
+animation = &"closed"
+
+[node name="open_range" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="open_range"]
+position = Vector2(0, 9.5)
+shape = SubResource("RectangleShape2D_1n4vx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_r25f1")
+
+[node name="chest_done_opening" type="Timer" parent="."]
+
+[connection signal="body_entered" from="open_range" to="." method="_on_open_range_body_entered"]
+[connection signal="body_exited" from="open_range" to="." method="_on_open_range_body_exited"]
+[connection signal="timeout" from="chest_done_opening" to="." method="_on_chest_done_opening_timeout"]

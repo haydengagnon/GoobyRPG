@@ -10,7 +10,7 @@ var can_take_damage = true
 var can_die = false
 var just_hit = false
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	deal_damage()
 	
 	$healthbar.max_value = 250

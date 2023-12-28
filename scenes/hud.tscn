@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://h4e7cfq6dyrg"]
+[gd_scene load_steps=10 format=3 uid="uid://h4e7cfq6dyrg"]
 
 [ext_resource type="Script" path="res://scripts/HUD.gd" id="1_2oorf"]
 [ext_resource type="FontFile" uid="uid://c8u4kaw4qwv0y" path="res://fonts/Xolonium-Bold.ttf" id="2_h66x3"]
@@ -46,17 +46,30 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m8n5k"]
+bg_color = Color(0.415686, 0.34902, 0.211765, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.643137, 0.560784, 0.254902, 1)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_2oorf")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="basic_stats" type="Panel" parent="."]
 show_behind_parent = true
 offset_top = 498.0
 offset_right = 300.0
 offset_bottom = 648.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_cuno5")
 
-[node name="health" type="ProgressBar" parent="Panel"]
+[node name="health" type="ProgressBar" parent="basic_stats"]
 layout_mode = 0
 offset_left = 5.0
 offset_top = 64.0
@@ -66,7 +79,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_b71li")
 theme_override_styles/fill = SubResource("StyleBoxFlat_421ot")
 show_percentage = false
 
-[node name="exp" type="ProgressBar" parent="Panel"]
+[node name="exp" type="ProgressBar" parent="basic_stats"]
 layout_mode = 0
 offset_left = 5.0
 offset_top = 109.0
@@ -76,7 +89,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_vaptc")
 theme_override_styles/fill = SubResource("StyleBoxFlat_srdle")
 show_percentage = false
 
-[node name="level" type="Label" parent="Panel"]
+[node name="level" type="Label" parent="basic_stats"]
 layout_mode = 0
 offset_left = 5.0
 offset_top = 6.0
@@ -85,8 +98,9 @@ offset_bottom = 48.0
 theme_override_fonts/font = ExtResource("2_h66x3")
 theme_override_font_sizes/font_size = 32
 text = "Level "
+vertical_alignment = 1
 
-[node name="health_label" type="Label" parent="Panel"]
+[node name="health_label" type="Label" parent="basic_stats"]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 49.0
@@ -96,7 +110,8 @@ theme_override_fonts/font = ExtResource("3_jjjqn")
 theme_override_font_sizes/font_size = 12
 text = "Health"
 
-[node name="exp_label" type="Label" parent="Panel"]
+[node name="exp_label" type="Label" parent="basic_stats"]
+layout_mode = 0
 offset_left = 10.0
 offset_top = 93.0
 offset_right = 81.0
@@ -104,3 +119,37 @@ offset_bottom = 112.0
 theme_override_fonts/font = ExtResource("3_jjjqn")
 theme_override_font_sizes/font_size = 12
 text = "Experience"
+
+[node name="other_stats" type="Panel" parent="."]
+offset_top = 380.0
+offset_right = 186.0
+offset_bottom = 498.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_m8n5k")
+
+[node name="vbox" type="VBoxContainer" parent="other_stats"]
+top_level = true
+offset_left = 4.0
+offset_top = 380.0
+offset_right = 186.0
+offset_bottom = 498.0
+alignment = 1
+
+[node name="damage" type="Label" parent="other_stats/vbox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_jjjqn")
+text = "damage"
+
+[node name="armor" type="Label" parent="other_stats/vbox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_jjjqn")
+text = "armor"
+
+[node name="exp" type="Label" parent="other_stats/vbox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_jjjqn")
+text = "exp"
+
+[node name="speed" type="Label" parent="other_stats/vbox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_jjjqn")
+text = "speed"

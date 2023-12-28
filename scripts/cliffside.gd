@@ -1,6 +1,6 @@
 extends Node2D
 
-func _process(delta):
+func _process(_delta):
 	change_scene()
 	set_camera_limits()
 
@@ -9,6 +9,7 @@ func change_scene():
 		if Global.current_scene == "cliffside":
 			get_tree().change_scene_to_file("res://scenes/world.tscn")
 			Global.finish_changescenes()
+			Global.cliffside_to_world = true
 			
 
 func _on_cliffside_exit_body_entered(body):
