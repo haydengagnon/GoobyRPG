@@ -32,7 +32,7 @@ func _physics_process(delta):
 	$healthbar.value = Global.health
 	
 
-func player_movement(delta):
+func player_movement(_delta):
 	if attack_ip == false:
 		if Input.is_action_pressed("move_right"):
 			current_dir = "right"

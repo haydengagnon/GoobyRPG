@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://r3ynwewxhmpk"]
+[gd_scene load_steps=14 format=3 uid="uid://r3ynwewxhmpk"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_chg01"]
 [ext_resource type="Texture2D" uid="uid://tpes8f8ltmx8" path="res://art/tilesets/plains.png" id="1_jjg5e"]
@@ -167,6 +167,9 @@ sources/2 = SubResource("TileSetAtlasSource_3gmnp")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2jdtn"]
 size = Vector2(30, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5r6th"]
+size = Vector2(39, 73)
+
 [node name="world" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_chg01")
@@ -204,7 +207,7 @@ position = Vector2(92, 155)
 [node name="borders" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="borders"]
-polygon = PackedVector2Array(0, 0, 258, 0, 258, -20, 288, -20, 288, 0, 416, 0, 416, 208, 0, 208, 0, -2, -4, 3, -9, 216, 427, 214, 425, -8, 297, -7, 297, -30, 248, -31, 250, -8)
+polygon = PackedVector2Array(-41, 1, 258, 0, 258, -20, 288, -20, 288, 0, 416, 0, 416, 208, 0, 208, 0, 73, -39, 73, -9, 216, 427, 214, 425, -8, 297, -7, 297, -30, 248, -31, 250, -8, -42, -13)
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="borders"]
 polygon = PackedVector2Array(291, 1, 291, 26, 296, 31, 322, 31, 322, 31, 323, 41, 329, 46, 369, 47, 372, 63, 415, 63, 418, 50, 417, -2, 299, -2)
@@ -215,7 +218,15 @@ polygon = PackedVector2Array(291, 1, 291, 26, 296, 31, 322, 31, 322, 31, 323, 41
 position = Vector2(273, -10)
 shape = SubResource("RectangleShape2D_2jdtn")
 
-[node name="HUD" parent="." instance=ExtResource("7_y0ror")]
+[node name="start_entrance" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="start_entrance"]
+position = Vector2(-19.5, 36.5)
+shape = SubResource("RectangleShape2D_5r6th")
+
+[node name="HUD" parent="start_entrance" instance=ExtResource("7_y0ror")]
 
 [connection signal="body_entered" from="cliffside_entrance" to="." method="_on_cliffside_entrance_body_entered"]
 [connection signal="body_exited" from="cliffside_entrance" to="." method="_on_cliffside_entrance_body_exited"]
+[connection signal="body_entered" from="start_entrance" to="." method="_on_start_entrance_body_entered"]
+[connection signal="body_exited" from="start_entrance" to="." method="_on_start_entrance_body_exited"]
