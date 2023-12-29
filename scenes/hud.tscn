@@ -128,6 +128,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_m8n5k")
 
 [node name="vbox" type="VBoxContainer" parent="other_stats"]
 top_level = true
+layout_mode = 0
 offset_left = 4.0
 offset_top = 380.0
 offset_right = 186.0
