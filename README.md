@@ -6,3 +6,5 @@ A simple Role-Playing-Game that I'm developing using the Godot game engine
 2. Download the GoobyRPG.zip file
 3. Extract files to desired location
 4. Open folder and run GoobyRPG.exe
+
+![ScreenShot](/art/GoobyHomeScreen.png)
