@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://r3ynwewxhmpk"]
+[gd_scene load_steps=21 format=3 uid="uid://r3ynwewxhmpk"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_chg01"]
 [ext_resource type="Texture2D" uid="uid://tpes8f8ltmx8" path="res://art/tilesets/plains.png" id="1_jjg5e"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://br0hh220gcdhl" path="res://scenes/player.tscn" id="4_qk87m"]
 [ext_resource type="PackedScene" uid="uid://c4aso13oksqwx" path="res://scenes/enemy.tscn" id="5_answu"]
 [ext_resource type="PackedScene" uid="uid://h4e7cfq6dyrg" path="res://scenes/hud.tscn" id="7_y0ror"]
+[ext_resource type="FontFile" uid="uid://c46hadkwr6sgd" path="res://fonts/Xolonium-Regular.ttf" id="8_55iyh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v4u8i"]
 texture = ExtResource("1_jjg5e")
@@ -170,6 +171,51 @@ size = Vector2(30, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5r6th"]
 size = Vector2(39, 73)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jgexy"]
+size = Vector2(35, 49)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0uvw0"]
+size = Vector2(12, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ec5oy"]
+size = Vector2(14, 11)
+
+[sub_resource type="Animation" id="Animation_ygqjt"]
+resource_name = "startsign"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/start_sign_east:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5acau"]
+resource_name = "cliffsidesign"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/cliffside_sign_text:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_idheo"]
+_data = {
+"cliffsidesign": SubResource("Animation_5acau"),
+"startsign": SubResource("Animation_ygqjt")
+}
+
 [node name="world" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_chg01")
@@ -199,15 +245,15 @@ layer_2/tile_data = PackedInt32Array(65560, 655362, 7, 131077, 655362, 7, 720897
 position = Vector2(28, 63)
 
 [node name="enemy" parent="." groups=["characters"] instance=ExtResource("5_answu")]
-position = Vector2(283, 164)
+position = Vector2(285, 164)
 
 [node name="enemy2" parent="." groups=["characters"] instance=ExtResource("5_answu")]
-position = Vector2(92, 155)
+position = Vector2(174, 56)
 
 [node name="borders" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="borders"]
-polygon = PackedVector2Array(-41, 1, 258, 0, 258, -20, 288, -20, 288, 0, 416, 0, 416, 208, 0, 208, 0, 73, -39, 73, -9, 216, 427, 214, 425, -8, 297, -7, 297, -30, 248, -31, 250, -8, -42, -13)
+polygon = PackedVector2Array(-73, 0, -73, 82, -39, 82, -39, 0, 258, 0, 258, -20, 288, -20, 288, 0, 416, 0, 416, 94.083, 451, 94, 451, 143, 416, 143, 416, 208, 0, 208, 0, 73, -39, 73, -9, 216, 427, 214, 464, 213, 461, 75, 426, 76, 425, -8, 297, -7, 297, -30, 248, -31, 250, -8, -73, -8)
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="borders"]
 polygon = PackedVector2Array(291, 1, 291, 26, 296, 31, 322, 31, 322, 31, 323, 41, 329, 46, 369, 47, 372, 63, 415, 63, 418, 50, 417, -2, 299, -2)
@@ -226,7 +272,71 @@ shape = SubResource("RectangleShape2D_5r6th")
 
 [node name="HUD" parent="start_entrance" instance=ExtResource("7_y0ror")]
 
+[node name="village_entrance" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="village_entrance"]
+position = Vector2(433.5, 118.5)
+shape = SubResource("RectangleShape2D_jgexy")
+
+[node name="start_sign" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="start_sign"]
+position = Vector2(24, 31)
+shape = SubResource("RectangleShape2D_0uvw0")
+
+[node name="cliffside_sign" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="cliffside_sign"]
+position = Vector2(296, 48.5)
+shape = SubResource("RectangleShape2D_ec5oy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_idheo")
+}
+
+[node name="start_sign_east" type="Label" parent="AnimationPlayer"]
+visible = false
+offset_left = 3.0
+offset_top = 5.0
+offset_right = 843.0
+offset_bottom = 262.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_fonts/font = ExtResource("8_55iyh")
+theme_override_font_sizes/font_size = 100
+text = "Starter's Forest
+<--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="cliffside_sign_text" type="Label" parent="AnimationPlayer"]
+visible = false
+offset_left = 267.0
+offset_top = 13.0
+offset_right = 690.0
+offset_bottom = 493.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_constants/line_spacing = -79
+theme_override_fonts/font = ExtResource("8_55iyh")
+theme_override_font_sizes/font_size = 100
+text = "^
+|
+
+
+Cliffside"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="body_entered" from="cliffside_entrance" to="." method="_on_cliffside_entrance_body_entered"]
 [connection signal="body_exited" from="cliffside_entrance" to="." method="_on_cliffside_entrance_body_exited"]
 [connection signal="body_entered" from="start_entrance" to="." method="_on_start_entrance_body_entered"]
 [connection signal="body_exited" from="start_entrance" to="." method="_on_start_entrance_body_exited"]
+[connection signal="body_entered" from="village_entrance" to="." method="_on_village_entrance_body_entered"]
+[connection signal="body_exited" from="village_entrance" to="." method="_on_village_entrance_body_exited"]
+[connection signal="body_entered" from="start_sign" to="." method="_on_start_sign_body_entered"]
+[connection signal="body_exited" from="start_sign" to="." method="_on_start_sign_body_exited"]
+[connection signal="body_entered" from="cliffside_sign" to="." method="_on_cliffside_sign_body_entered"]
+[connection signal="body_exited" from="cliffside_sign" to="." method="_on_cliffside_sign_body_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
