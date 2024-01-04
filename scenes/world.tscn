@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://r3ynwewxhmpk"]
+[gd_scene load_steps=23 format=3 uid="uid://r3ynwewxhmpk"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_chg01"]
 [ext_resource type="Texture2D" uid="uid://tpes8f8ltmx8" path="res://art/tilesets/plains.png" id="1_jjg5e"]
@@ -175,25 +175,13 @@ size = Vector2(39, 73)
 size = Vector2(35, 49)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0uvw0"]
-size = Vector2(12, 12)
+size = Vector2(25, 23)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ec5oy"]
-size = Vector2(14, 11)
+size = Vector2(22, 23)
 
-[sub_resource type="Animation" id="Animation_ygqjt"]
-resource_name = "startsign"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimationPlayer/start_sign_east:theme_override_colors/font_color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_70ao7"]
+size = Vector2(25, 25)
 
 [sub_resource type="Animation" id="Animation_5acau"]
 resource_name = "cliffsidesign"
@@ -210,10 +198,41 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_ygqjt"]
+resource_name = "startsign"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/start_sign_east:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rpssc"]
+resource_name = "villagesign"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/village_sign_text:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_idheo"]
 _data = {
 "cliffsidesign": SubResource("Animation_5acau"),
-"startsign": SubResource("Animation_ygqjt")
+"startsign": SubResource("Animation_ygqjt"),
+"villagesign": SubResource("Animation_rpssc")
 }
 
 [node name="world" type="Node2D"]
@@ -281,14 +300,20 @@ shape = SubResource("RectangleShape2D_jgexy")
 [node name="start_sign" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="start_sign"]
-position = Vector2(24, 31)
+position = Vector2(24.5, 25.5)
 shape = SubResource("RectangleShape2D_0uvw0")
 
 [node name="cliffside_sign" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="cliffside_sign"]
-position = Vector2(296, 48.5)
+position = Vector2(296, 42.5)
 shape = SubResource("RectangleShape2D_ec5oy")
+
+[node name="village_sign" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="village_sign"]
+position = Vector2(391.5, 88.5)
+shape = SubResource("RectangleShape2D_70ao7")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -329,6 +354,20 @@ Cliffside"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="village_sign_text" type="Label" parent="AnimationPlayer"]
+visible = false
+offset_left = 382.0
+offset_top = 66.0
+offset_right = 802.0
+offset_bottom = 386.0
+scale = Vector2(0.05, 0.05)
+theme_override_fonts/font = ExtResource("8_55iyh")
+theme_override_font_sizes/font_size = 100
+text = "Village
+-->"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="body_entered" from="cliffside_entrance" to="." method="_on_cliffside_entrance_body_entered"]
 [connection signal="body_exited" from="cliffside_entrance" to="." method="_on_cliffside_entrance_body_exited"]
 [connection signal="body_entered" from="start_entrance" to="." method="_on_start_entrance_body_entered"]
@@ -339,4 +378,6 @@ vertical_alignment = 1
 [connection signal="body_exited" from="start_sign" to="." method="_on_start_sign_body_exited"]
 [connection signal="body_entered" from="cliffside_sign" to="." method="_on_cliffside_sign_body_entered"]
 [connection signal="body_exited" from="cliffside_sign" to="." method="_on_cliffside_sign_body_exited"]
+[connection signal="body_entered" from="village_sign" to="." method="_on_village_sign_body_entered"]
+[connection signal="body_exited" from="village_sign" to="." method="_on_village_sign_body_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
