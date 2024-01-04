@@ -4,6 +4,8 @@ var start_area_sign = false
 var start_sign_animation_done = false
 var cliffside_area_sign = false
 var cliffside_sign_animation_done = false
+var village_area_sign = false
+var village_area_sign_animation_done = false
 
 func _ready():
 	if Global.start_to_world == true:
@@ -77,7 +79,6 @@ func _on_village_entrance_body_exited(body):
 	if body.has_method("player"):
 		Global.transition_scene = false
 
-
 func _on_start_sign_body_entered(body):
 	if body.has_method("player"):
 		start_area_sign = true
@@ -90,12 +91,19 @@ func _on_cliffside_sign_body_entered(body):
 	if body.has_method("player"):
 		cliffside_area_sign = true
 
-
 func _on_cliffside_sign_body_exited(body):
 	if body.has_method("player"):
 		cliffside_area_sign = false
 	
-	
+func _on_village_sign_body_entered(body):
+	if body.has_method("player"):
+		village_area_sign = true
+
+func _on_village_sign_body_exited(body):
+	if body.has_method("player"):
+		village_area_sign = false
+
+
 func display_sign_text():
 	if start_area_sign == true:
 		$AnimationPlayer/start_sign_east.visible = true
@@ -112,6 +120,14 @@ func display_sign_text():
 	elif cliffside_area_sign == false:
 		$AnimationPlayer/cliffside_sign_text.visible = false
 		cliffside_sign_animation_done = false
+	
+	if village_area_sign == true:
+		$AnimationPlayer/village_sign_text.visible = true
+		if village_area_sign_animation_done == false:
+			$AnimationPlayer.play("villagesign")
+	elif village_area_sign == false:
+		$AnimationPlayer/village_sign_text.visible = false
+		village_area_sign_animation_done = false
 
 
 func _on_animation_player_animation_finished(anim_name):
@@ -119,6 +135,11 @@ func _on_animation_player_animation_finished(anim_name):
 		start_sign_animation_done = true
 	if anim_name == "cliffsidesign":
 		cliffside_sign_animation_done = true
+	if anim_name == "villagesign":
+		village_area_sign_animation_done = true
+
+
+
 
 
 

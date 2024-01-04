@@ -190,6 +190,8 @@ func interact():
 			print("Should open")
 		else:
 			Global.opened = false
+		if Global.talk_to_neil == true:
+			Global.neil_text = true
 
 func _on_deal_attack_timer_timeout():
 	$deal_attack_timer.stop()

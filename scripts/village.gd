@@ -7,6 +7,7 @@ func _ready():
 		$player.position.x = Global.player_world_to_village_posx
 		$player.position.y = Global.player_world_to_village_posy
 		Global.world_to_village = false
+	Global.current_scene = "village"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -54,3 +55,14 @@ func _on_west_entrance_body_entered(body):
 
 func _on_west_entrance_body_exited(body):
 	pass # Replace with function body.
+
+
+func _on_neiltalkarea_body_entered(body):
+	if body.has_method("player"):
+		Global.talk_to_neil = true
+
+
+func _on_neiltalkarea_body_exited(body):
+	if body.has_method("player"):
+		Global.talk_to_neil = false
+		Global.neil_text = false

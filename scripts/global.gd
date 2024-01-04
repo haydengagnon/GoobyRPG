@@ -30,6 +30,11 @@ var can_open = false
 var opened = false
 var done_opening_start = false
 
+#NPC logic
+var talk_to_neil = false
+var neil_text = false
+
+#Sword equipped
 var has_sword = false
 var sword_text = false
 
