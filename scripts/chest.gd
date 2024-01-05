@@ -19,6 +19,7 @@ func open_chest_start():
 	if Global.done_opening_start == false:
 		if Global.opened == true:
 			Global.has_sword = true
+			Global.rusty_sword = true
 			$AnimatedSprite2D.play("open_chest")
 			Global.opened = false
 			Global.done_opening_start = true

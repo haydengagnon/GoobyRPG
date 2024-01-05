@@ -25,8 +25,9 @@ func _physics_process(delta):
 	interact()
 	death()
 	levelup(Global.level)
+	damage()
 	
-	Global.damage = Global.level * 25
+	
 	Global.max_health = Global.level * 100
 	
 
@@ -192,6 +193,7 @@ func interact():
 			Global.opened = false
 		if Global.talk_to_neil == true:
 			Global.neil_text = true
+			print("spoken")
 
 func _on_deal_attack_timer_timeout():
 	$deal_attack_timer.stop()
@@ -231,3 +233,9 @@ func levelup(lvl):
 		Global.experience = Global.experience % exp_req
 		print("Leveled Up! ", Global.level)
 		print("Current exp: ", Global.experience)
+		
+func damage():
+	if Global.rusty_sword == true:
+		Global.damage = (Global.level - 1) * 10 + 25
+	elif Global.iron_sword == true:
+		Global.damage = (Global.level - 1) * 15 + 50

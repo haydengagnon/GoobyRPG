@@ -34,9 +34,16 @@ var done_opening_start = false
 var talk_to_neil = false
 var neil_text = false
 
+#Quest Logic
+var has_neil_quest = false
+var completed_neil_quest = false
+var blue_slime_kills = 5
+
 #Sword equipped
 var has_sword = false
 var sword_text = false
+var rusty_sword = false
+var iron_sword = false
 
 #player transition locations
 var player_exit_cliffside_posx = 275
@@ -85,4 +92,3 @@ func finish_changescenes():
 			if world_enter == true:
 				current_scene = "world"
 				world_enter = false
-
