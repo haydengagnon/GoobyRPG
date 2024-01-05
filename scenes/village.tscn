@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://biv0vl3twldvp"]
+[gd_scene load_steps=33 format=3 uid="uid://biv0vl3twldvp"]
 
 [ext_resource type="Script" path="res://scripts/village.gd" id="1_ibdcb"]
 [ext_resource type="Texture2D" uid="uid://cw3p3v6wsl4sq" path="res://art/tilesets/grass.png" id="1_l35s5"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://br0hh220gcdhl" path="res://scenes/player.tscn" id="11_cdiuq"]
 [ext_resource type="PackedScene" uid="uid://h4e7cfq6dyrg" path="res://scenes/hud.tscn" id="12_golhe"]
 [ext_resource type="PackedScene" uid="uid://bbbarl18rbcam" path="res://scenes/npc.tscn" id="13_heebi"]
+[ext_resource type="FontFile" uid="uid://c46hadkwr6sgd" path="res://fonts/Xolonium-Regular.ttf" id="14_soefw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ru17l"]
 texture = ExtResource("1_l35s5")
@@ -498,6 +499,85 @@ size = Vector2(83, 92)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gmtit"]
 size = Vector2(20, 31)
 
+[sub_resource type="Animation" id="Animation_v1dng"]
+resource_name = "neilquest"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("neil_speak/Panel:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.588235)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("neil_speak/Panel/Label:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": ["", "Hello adventurer, Would
+you please kill 5 blue
+slimes for me?"]
+}
+
+[sub_resource type="Animation" id="Animation_mvyb2"]
+resource_name = "neilquestcomplete"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("neil_speak/Panel:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.588235)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("neil_speak/Panel/Label:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": ["", "Thank you adventurer! 
+Have my old iron sword 
+as a reward."]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ug21q"]
+_data = {
+"neilquest": SubResource("Animation_v1dng"),
+"neilquestcomplete": SubResource("Animation_mvyb2")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_teolj"]
+bg_color = Color(0, 0, 0, 0.490196)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.756863, 0.529412, 0, 1)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
 [node name="village" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_ibdcb")
@@ -557,7 +637,6 @@ shape = SubResource("RectangleShape2D_qpmlo")
 polygon = PackedVector2Array(20, 13, 826, 14, 825, -56, 919, -56, 919, 0, 910, 0, 910, 14, 1101, 14, 1102, 319, 1120, 319, 1120, 310, 1203, 310, 1203, 402, 1101, 402, 1101, 610, 18, 607, 18, 417, 0, 417, 0, 434, -69, 434, -69, 344, 0, 344, 0, 350, 18, 350, 18, 205.976, 66, 206, 66, 176, 96, 176, 97, 160, 144, 160, 146, 177, 177, 177, 177, 162, 192, 161, 193, 146, 209, 144, 209, 128, 256, 128, 257, 98, 272, 96, 273, 82, 336, 81, 336, 57, 320, 55, 320, 14, 18, 13, -16, 13, -109, 403, -5, 671, 1191, 653, 1245, 277, 1128, -73, 676, -116, 19, -61, -17, 11)
 
 [node name="HUD" parent="." instance=ExtResource("12_golhe")]
-visible = false
 
 [node name="npc" parent="." instance=ExtResource("13_heebi")]
 position = Vector2(266, 208)
@@ -568,6 +647,29 @@ position = Vector2(266, 208)
 position = Vector2(266, 208.5)
 shape = SubResource("RectangleShape2D_gmtit")
 
+[node name="neil_speak" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ug21q")
+}
+
+[node name="Panel" type="Panel" parent="neil_speak"]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 241.0
+offset_top = 171.0
+offset_right = 291.0
+offset_bottom = 189.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_teolj")
+
+[node name="Label" type="Label" parent="neil_speak/Panel"]
+layout_mode = 0
+offset_right = 1000.0
+offset_bottom = 360.0
+scale = Vector2(0.05, 0.05)
+theme_override_fonts/font = ExtResource("14_soefw")
+theme_override_font_sizes/font_size = 75
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="body_entered" from="world_entrance" to="." method="_on_world_entrance_body_entered"]
 [connection signal="body_exited" from="world_entrance" to="." method="_on_world_entrance_body_exited"]
 [connection signal="body_entered" from="north_entrance" to="." method="_on_north_entrance_body_entered"]
@@ -576,3 +678,4 @@ shape = SubResource("RectangleShape2D_gmtit")
 [connection signal="body_exited" from="west_entrance" to="." method="_on_west_entrance_body_exited"]
 [connection signal="body_entered" from="neiltalkarea" to="." method="_on_neiltalkarea_body_entered"]
 [connection signal="body_exited" from="neiltalkarea" to="." method="_on_neiltalkarea_body_exited"]
+[connection signal="animation_finished" from="neil_speak" to="." method="_on_neil_speak_animation_finished"]
