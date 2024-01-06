@@ -11,6 +11,8 @@ var attack_ip = false
 const speed = 100
 var current_dir = "none"
 
+@export var inv: Inv
+
 func _ready():
 	$AnimatedSprite2D.play("front_idle")
 	if Global.game_first_loadin == true:
