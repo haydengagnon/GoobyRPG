@@ -37,7 +37,7 @@ var neil_text = false
 #Quest Logic
 var has_neil_quest = false
 var completed_neil_quest = false
-var blue_slime_kills = 5
+var blue_slime_kills = 0
 
 #Sword equipped
 var has_sword = false
