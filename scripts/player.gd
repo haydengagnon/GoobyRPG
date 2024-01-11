@@ -197,6 +197,13 @@ func interact():
 			Global.neil_text = true
 			print("spoken")
 
+func open_inv():
+	if Input.is_action_just_pressed("inventory"):
+		if Global.open_inv == false:
+			Global.open_inv = true
+		elif Global.open_inv == true:
+			Global.open_inv = true
+
 func _on_deal_attack_timer_timeout():
 	$deal_attack_timer.stop()
 	Global.player_current_attack = false

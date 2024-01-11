@@ -28,3 +28,10 @@ func display_other_stats():
 		if Input.is_action_just_pressed("show_stats"):
 			Global.display_more_stats = true
 		$other_stats.visible = false	
+
+func show_inv():
+	if Global.open_inv == false:
+		$Inv_UI.visible = false
+	elif Global.open_inv == true:
+		$Inv_UI.visible = true
+		
