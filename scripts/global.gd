@@ -30,6 +30,9 @@ var can_open = false
 var opened = false
 var done_opening_start = false
 
+#Inventory
+var open_inv = false
+
 #NPC logic
 var talk_to_neil = false
 var neil_text = false
