@@ -17,6 +17,7 @@ grow_vertical = 2
 script = ExtResource("1_rayja")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
+modulate = Color(1, 1, 1, 0.627451)
 layout_mode = 0
 offset_right = 94.0
 offset_bottom = 70.0
