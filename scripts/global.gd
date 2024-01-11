@@ -12,7 +12,7 @@ var current_scene = "start"
 var transition_scene = false
 var cliffside_enter = false
 var start_enter = false
-var village_enter = false 
+var village_enter = false
 var world_enter = false
 
 #player stats

@@ -5,6 +5,7 @@ var redslime_in_range = false
 var enemy_attack_cooldown = true
 var player_alive = true
 var level = Global.level
+var death_played = false
 
 var attack_ip = false
 
@@ -34,53 +35,54 @@ func _physics_process(delta):
 	
 
 func player_movement(_delta):
-	if attack_ip == false:
-		if Input.is_action_pressed("move_right"):
-			current_dir = "right"
-			play_animation(1)
-			if Input.is_action_pressed("move_up") and Input.is_action_pressed("move_down"):
-				velocity.x = speed
-				velocity.y = 0
-			elif Input.is_action_pressed("move_up"):
-				velocity.x = speed / 1.25
-				velocity.y = -speed / 1.25
+	if player_alive == true:
+		if attack_ip == false:
+			if Input.is_action_pressed("move_right"):
+				current_dir = "right"
+				play_animation(1)
+				if Input.is_action_pressed("move_up") and Input.is_action_pressed("move_down"):
+					velocity.x = speed
+					velocity.y = 0
+				elif Input.is_action_pressed("move_up"):
+					velocity.x = speed / 1.25
+					velocity.y = -speed / 1.25
+				elif Input.is_action_pressed("move_down"):
+					velocity.x = speed / 1.25
+					velocity.y = speed / 1.25
+				else:
+					velocity.x = speed
+					velocity.y = 0
+			elif Input.is_action_pressed("move_left"):
+				current_dir = "left"
+				play_animation(1)
+				if Input.is_action_pressed("move_up") and Input.is_action_pressed("move_down"):
+					velocity.x = -speed
+					velocity.y = 0
+				elif Input.is_action_pressed("move_up"):
+					velocity.x = -speed / 1.25
+					velocity.y = -speed / 1.25
+				elif Input.is_action_pressed("move_down"):
+					velocity.x = -speed / 1.25
+					velocity.y = speed / 1.25
+				else:
+					velocity.x = -speed
+					velocity.y = 0
 			elif Input.is_action_pressed("move_down"):
-				velocity.x = speed / 1.25
-				velocity.y = speed / 1.25
-			else:
-				velocity.x = speed
-				velocity.y = 0
-		elif Input.is_action_pressed("move_left"):
-			current_dir = "left"
-			play_animation(1)
-			if Input.is_action_pressed("move_up") and Input.is_action_pressed("move_down"):
-				velocity.x = -speed
-				velocity.y = 0
+				current_dir = "down"
+				play_animation(1)
+				velocity.x = 0
+				velocity.y = speed
 			elif Input.is_action_pressed("move_up"):
-				velocity.x = -speed / 1.25
-				velocity.y = -speed / 1.25
-			elif Input.is_action_pressed("move_down"):
-				velocity.x = -speed / 1.25
-				velocity.y = speed / 1.25
+				current_dir = "up"
+				play_animation(1)
+				velocity.x = 0
+				velocity.y = -speed
 			else:
-				velocity.x = -speed
+				play_animation(0)
+				velocity.x = 0
 				velocity.y = 0
-		elif Input.is_action_pressed("move_down"):
-			current_dir = "down"
-			play_animation(1)
-			velocity.x = 0
-			velocity.y = speed
-		elif Input.is_action_pressed("move_up"):
-			current_dir = "up"
-			play_animation(1)
-			velocity.x = 0
-			velocity.y = -speed
-		else:
-			play_animation(0)
-			velocity.x = 0
-			velocity.y = 0
 		
-	move_and_slide()
+		move_and_slide()
 
 func play_animation(movement):
 	var direction = current_dir
@@ -159,30 +161,31 @@ func _on_attack_cooldown_timeout():
 func attack():
 	var direction = current_dir
 	
-	if Global.has_sword == true:
-		if Input.is_action_just_pressed("attack"):
-			Global.player_current_attack = true
-			attack_ip = true
-			velocity.x = 0
-			velocity.y = 0
-			if direction == "right":
-				$AnimatedSprite2D.flip_h = false
-				$AnimatedSprite2D.play("side_attack")
-				$deal_attack_timer.start()
-			if direction == "left":
-				$AnimatedSprite2D.flip_h = true
-				$AnimatedSprite2D.play("side_attack")
-				$deal_attack_timer.start()
-			if direction == "down":
-				$AnimatedSprite2D.play("front_attack")
-				$deal_attack_timer.start()
-			if direction == "up":
-				$AnimatedSprite2D.play("back_attack")
-				$deal_attack_timer.start()
-			if Global.enemy_can_attack == false:
-				$attack_cooldown.start()
-			if Global.redslime_can_attack == false:
-				$attack_cooldown.start()
+	if player_alive == true:
+		if Global.has_sword == true:
+			if Input.is_action_just_pressed("attack"):
+				Global.player_current_attack = true
+				attack_ip = true
+				velocity.x = 0
+				velocity.y = 0
+				if direction == "right":
+					$AnimatedSprite2D.flip_h = false
+					$AnimatedSprite2D.play("side_attack")
+					$deal_attack_timer.start()
+				if direction == "left":
+					$AnimatedSprite2D.flip_h = true
+					$AnimatedSprite2D.play("side_attack")
+					$deal_attack_timer.start()
+				if direction == "down":
+					$AnimatedSprite2D.play("front_attack")
+					$deal_attack_timer.start()
+				if direction == "up":
+					$AnimatedSprite2D.play("back_attack")
+					$deal_attack_timer.start()
+				if Global.enemy_can_attack == false:
+					$attack_cooldown.start()
+				if Global.redslime_can_attack == false:
+					$attack_cooldown.start()
 			
 func interact():
 	if Input.is_action_just_pressed("interact"):
@@ -227,7 +230,8 @@ func death():
 		player_alive = false #go to death screen
 		Global.health = 0
 		print("player has been killed")
-		$AnimatedSprite2D.play("death")
+		if death_played == false:
+			$AnimatedSprite2D.play("death")
 		
 func levelup(lvl):
 	var formula = floor(400 * (lvl * 1.25))
@@ -248,3 +252,7 @@ func damage():
 		Global.damage = (Global.level - 1) * 10 + 25
 	elif Global.iron_sword == true:
 		Global.damage = (Global.level - 1) * 15 + 50
+
+
+func _on_animated_sprite_2d_animation_finished():
+	death_played = true
