@@ -8,8 +8,7 @@ var enemy_can_attack = true
 var redslime_can_attack = true
 
 #Inventory logic
-var mouse_in = false
-var item_equipped = false
+var weapon_equipped = false
 
 #Scene logic
 var current_scene = "start"
@@ -36,6 +35,7 @@ var done_opening_start = false
 
 #Inventory
 var open_inv = false
+var mouse_in = false
 
 #NPC logic
 var talk_to_neil = false

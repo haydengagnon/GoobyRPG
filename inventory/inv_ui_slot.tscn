@@ -42,5 +42,6 @@ text = "E"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="gui_input" from="CenterContainer" to="." method="_on_center_container_gui_input"]
 [connection signal="mouse_entered" from="CenterContainer" to="." method="_on_center_container_mouse_entered"]
 [connection signal="mouse_exited" from="CenterContainer" to="." method="_on_center_container_mouse_exited"]
