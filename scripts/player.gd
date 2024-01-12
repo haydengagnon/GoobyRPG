@@ -29,7 +29,7 @@ func _physics_process(delta):
 	death()
 	levelup(Global.level)
 	damage()
-	equip()
+	#equip()
 	
 	
 	Global.max_health = Global.level * 100
@@ -249,20 +249,12 @@ func levelup(lvl):
 		print("Current exp: ", Global.experience)
 		
 func damage():
-	if Global.rusty_sword == true:
+	if Global.has_sword == false:
+		Global.damage = 0
+	elif Global.rusty_sword == true:
 		Global.damage = (Global.level - 1) * 10 + 25
 	elif Global.iron_sword == true:
 		Global.damage = (Global.level - 1) * 15 + 50
-
-func equip():
-	if Global.mouse_in == true:
-		if Input.is_action_just_pressed("click"):
-			if Global.item_equipped == false:
-				Global.item_equipped = true
-				print("item equipped")
-			elif Global.item_equipped == true:
-				Global.item_equipped = false
-				print("item unequipped")
 
 func collect(item):
 	inv.insert(item)
