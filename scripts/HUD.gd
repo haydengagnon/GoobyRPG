@@ -11,6 +11,7 @@ func _process(_delta):
 	
 	$basic_stats/level.text = str("Level: ", Global.level)
 	$basic_stats/health.value = Global.health
+	$basic_stats/health.max_value = Global.max_health
 	$basic_stats/exp.value = Global.experience
 	$basic_stats/exp.max_value = expneeded
 

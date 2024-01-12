@@ -7,6 +7,10 @@ var redslime_dead = false
 var enemy_can_attack = true
 var redslime_can_attack = true
 
+#Inventory logic
+var mouse_in = false
+var item_equipped = false
+
 #Scene logic
 var current_scene = "start"
 var transition_scene = false
@@ -40,7 +44,7 @@ var neil_text = false
 #Quest Logic
 var has_neil_quest = false
 var completed_neil_quest = false
-var blue_slime_kills = 5
+var blue_slime_kills = 0
 
 #Sword equipped
 var has_sword = false

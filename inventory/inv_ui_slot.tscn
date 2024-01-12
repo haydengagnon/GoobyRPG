@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://daprqyeaj2qyh"]
+[gd_scene load_steps=4 format=3 uid="uid://daprqyeaj2qyh"]
 
 [ext_resource type="Script" path="res://inventory/inv_ui_slot.gd" id="1_k7v4d"]
 [ext_resource type="Texture2D" uid="uid://bhdvncbrxve7k" path="res://art/inventory/invslot.png" id="1_oxc0u"]
+[ext_resource type="FontFile" uid="uid://c46hadkwr6sgd" path="res://fonts/Xolonium-Regular.ttf" id="3_u3xi5"]
 
 [node name="inv_UI_slot" type="Panel"]
 self_modulate = Color(1, 1, 1, 0)
@@ -17,6 +18,7 @@ texture = ExtResource("1_oxc0u")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 custom_minimum_size = Vector2(16, 16)
+layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0
 
@@ -24,3 +26,21 @@ offset_bottom = 16.0
 layout_mode = 2
 
 [node name="item_display" type="Sprite2D" parent="CenterContainer/Panel"]
+
+[node name="Label" type="Label" parent="CenterContainer/Panel"]
+visible = false
+custom_minimum_size = Vector2(56, 94)
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 60.0
+offset_bottom = 97.0
+scale = Vector2(0.05, 0.05)
+theme_override_fonts/font = ExtResource("3_u3xi5")
+theme_override_font_sizes/font_size = 75
+text = "E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="mouse_entered" from="CenterContainer" to="." method="_on_center_container_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer" to="." method="_on_center_container_mouse_exited"]
