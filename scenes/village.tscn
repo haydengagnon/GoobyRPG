@@ -1,9 +1,11 @@
-[gd_scene load_steps=33 format=3 uid="uid://biv0vl3twldvp"]
+[gd_scene load_steps=36 format=3 uid="uid://biv0vl3twldvp"]
 
 [ext_resource type="Script" path="res://scripts/village.gd" id="1_ibdcb"]
 [ext_resource type="Texture2D" uid="uid://cw3p3v6wsl4sq" path="res://art/tilesets/grass.png" id="1_l35s5"]
 [ext_resource type="Texture2D" uid="uid://bri83bqk2oo17" path="res://art/tilesets/fences.png" id="2_1pi7h"]
+[ext_resource type="Script" path="res://inventory/inventory_item.gd" id="2_xbaep"]
 [ext_resource type="Texture2D" uid="uid://dv0a1y8w31w5j" path="res://art/tilesets/decor_16x16.png" id="3_pkogl"]
+[ext_resource type="Texture2D" uid="uid://bvei6qmn2n4yb" path="res://art/items/ironsword.jpg" id="3_yck3q"]
 [ext_resource type="Texture2D" uid="uid://cnxo3exi6olty" path="res://art/tilesets/walls/walls.png" id="4_lipfb"]
 [ext_resource type="Texture2D" uid="uid://dpavh3dnej1u7" path="res://art/tilesets/floors/wooden.png" id="5_1lhs6"]
 [ext_resource type="Texture2D" uid="uid://cw70sr0njfwtm" path="res://art/tilesets/walls/wooden_door.png" id="6_8m47e"]
@@ -14,6 +16,11 @@
 [ext_resource type="PackedScene" uid="uid://h4e7cfq6dyrg" path="res://scenes/hud.tscn" id="12_golhe"]
 [ext_resource type="PackedScene" uid="uid://bbbarl18rbcam" path="res://scenes/npc.tscn" id="13_heebi"]
 [ext_resource type="FontFile" uid="uid://c46hadkwr6sgd" path="res://fonts/Xolonium-Regular.ttf" id="14_soefw"]
+
+[sub_resource type="Resource" id="Resource_17t87"]
+script = ExtResource("2_xbaep")
+name = ""
+texture = ExtResource("3_yck3q")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ru17l"]
 texture = ExtResource("1_l35s5")
@@ -581,6 +588,7 @@ corner_radius_bottom_left = 2
 [node name="village" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_ibdcb")
+ironsword = SubResource("Resource_17t87")
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true

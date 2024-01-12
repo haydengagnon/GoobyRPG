@@ -1,7 +1,8 @@
 extends Node2D
 
 var neil_done_talking = false
-
+@export var ironsword = InvItem
+var player = null
 
 func _ready():
 	if Global.world_to_village == true:
@@ -62,6 +63,7 @@ func _on_west_entrance_body_exited(body):
 func _on_neiltalkarea_body_entered(body):
 	if body.has_method("player"):
 		Global.talk_to_neil = true
+		player = body
 		print("can talk")
 
 
@@ -69,6 +71,7 @@ func _on_neiltalkarea_body_exited(body):
 	if body.has_method("player"):
 		Global.talk_to_neil = false
 		Global.neil_text = false
+		player = null
 		print("can't talk")
 
 func neil_speak():
@@ -79,7 +82,9 @@ func neil_speak():
 			$neil_speak.play("neilquest")
 		Global.has_neil_quest = true
 	elif Global.neil_text == true and Global.blue_slime_kills >= 5:
-		Global.completed_neil_quest = true
+		if Global.completed_neil_quest == false:
+			player.collect(ironsword)
+			Global.completed_neil_quest = true
 		Global.rusty_sword = false
 		Global.iron_sword = true
 		$neil_speak/Panel.visible = true
