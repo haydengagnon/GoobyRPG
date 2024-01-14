@@ -1,7 +1,5 @@
 extends CharacterBody2D
 
-@export var item: InvItem
-var player = null
 
 func _physics_process(_delta):
 	open_chest_start()
@@ -11,19 +9,16 @@ func _physics_process(_delta):
 func _on_open_range_body_entered(body):
 	if body.has_method("player"):
 		Global.can_open = true
-		player = body
 		print("can open")
 
 
 func _on_open_range_body_exited(body):
 	if body.has_method("player"):
 		Global.can_open = false
-		player = null
 
 func open_chest_start():
 	if Global.done_opening_start == false:
 		if Global.opened == true:
-			player.collect(item)
 			Global.has_sword = true
 			Global.rusty_sword = true
 			$AnimatedSprite2D.play("open_chest")

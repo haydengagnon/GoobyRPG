@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/HUD.gd" id="1_2oorf"]
 [ext_resource type="FontFile" uid="uid://c8u4kaw4qwv0y" path="res://fonts/Xolonium-Bold.ttf" id="2_h66x3"]
 [ext_resource type="FontFile" uid="uid://c46hadkwr6sgd" path="res://fonts/Xolonium-Regular.ttf" id="3_jjjqn"]
-[ext_resource type="PackedScene" uid="uid://broagupaoffqa" path="res://inventory/inv_ui.tscn" id="4_82ee5"]
+[ext_resource type="PackedScene" uid="uid://cjwxvk1py80ck" path="res://scenes/inventory.tscn" id="4_uh35v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cuno5"]
 bg_color = Color(0.686275, 0.466667, 0, 0.294118)
@@ -156,9 +156,5 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_jjjqn")
 text = "speed"
 
-[node name="Inv_UI" parent="." instance=ExtResource("4_82ee5")]
-offset_left = 870.0
-offset_top = 437.0
-offset_right = -188.0
-offset_bottom = -141.0
-scale = Vector2(3, 3)
+[node name="Inventory" parent="." instance=ExtResource("4_uh35v")]
+position = Vector2(802, 448)

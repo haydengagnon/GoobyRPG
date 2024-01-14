@@ -7,8 +7,6 @@ var redslime_dead = false
 var enemy_can_attack = true
 var redslime_can_attack = true
 
-#Inventory logic
-var weapon_equipped = false
 
 #Scene logic
 var current_scene = "start"
