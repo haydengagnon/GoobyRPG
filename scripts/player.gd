@@ -12,7 +12,6 @@ var attack_ip = false
 const speed = 100
 var current_dir = "none"
 
-@export var inv: Inv
 
 func _ready():
 	$AnimatedSprite2D.play("front_idle")
@@ -29,7 +28,6 @@ func _physics_process(delta):
 	death()
 	levelup(Global.level)
 	damage()
-	#equip()
 	
 	
 	Global.max_health = Global.level * 100
@@ -255,9 +253,6 @@ func damage():
 		Global.damage = (Global.level - 1) * 10 + 25
 	elif Global.iron_sword == true:
 		Global.damage = (Global.level - 1) * 15 + 50
-
-func collect(item):
-	inv.insert(item)
 
 func _on_animated_sprite_2d_animation_finished():
 	death_played = true

@@ -8,6 +8,7 @@ func _ready():
 
 func _process(_delta):
 	display_other_stats()
+	inventory()
 	
 	$basic_stats/level.text = str("Level: ", Global.level)
 	$basic_stats/health.value = Global.health
@@ -29,10 +30,14 @@ func display_other_stats():
 		if Input.is_action_just_pressed("show_stats"):
 			Global.display_more_stats = true
 		$other_stats.visible = false	
-
-func show_inv():
-	if Global.open_inv == false:
-		$Inv_UI.visible = false
-	elif Global.open_inv == true:
-		$Inv_UI.visible = true
 		
+
+func inventory():
+	if Global.open_inv == true:
+		if Input.is_action_just_pressed("inventory"):
+			Global.open_inv = false
+		$Inventory.visible = true
+	elif Global.open_inv == false:
+		if Input.is_action_just_pressed("inventory"):
+			Global.open_inv = true
+		$Inventory.visible = false
