@@ -188,23 +188,8 @@ func attack():
 			
 func interact():
 	if Input.is_action_just_pressed("interact"):
-		#print("Current lvl: ", Global.level)
-		#print("Current exp: ", Global.experience)
-		if Global.can_open == true:
-			Global.opened = true
-			print("Should open")
-		else:
-			Global.opened = false
 		if Global.talk_to_neil == true:
 			Global.neil_text = true
-			print("spoken")
-
-func open_inv():
-	if Input.is_action_just_pressed("inventory"):
-		if Global.open_inv == false:
-			Global.open_inv = true
-		elif Global.open_inv == true:
-			Global.open_inv = true
 
 func _on_deal_attack_timer_timeout():
 	$deal_attack_timer.stop()
@@ -222,7 +207,7 @@ func _on_regen_timer_timeout():
 		if Global.health > Global.max_health:
 			Global.health = Global.max_health
 		print("Healed to: ", Global.health)
-		
+
 
 func death():
 	if Global.health <= 0:
@@ -231,7 +216,7 @@ func death():
 		print("player has been killed")
 		if death_played == false:
 			$AnimatedSprite2D.play("death")
-		
+
 func levelup(lvl):
 	var formula = floor(400 * (lvl * 1.25))
 	var exp_req = int(formula)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://ck1t61jb6x31u"]
+[gd_scene load_steps=19 format=3 uid="uid://ck1t61jb6x31u"]
 
 [ext_resource type="Script" path="res://scripts/start.gd" id="1_s4txc"]
 [ext_resource type="Texture2D" uid="uid://tpes8f8ltmx8" path="res://art/tilesets/plains.png" id="1_vixmm"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://b2u3gdep4g2vr" path="res://art/objects/objects.png" id="3_2skfo"]
 [ext_resource type="Texture2D" uid="uid://bplgjf4jacpgt" path="res://art/objects/chest_01.png" id="4_6yw57"]
 [ext_resource type="PackedScene" uid="uid://br0hh220gcdhl" path="res://scenes/player.tscn" id="5_vkm8s"]
-[ext_resource type="PackedScene" uid="uid://h4e7cfq6dyrg" path="res://scenes/hud.tscn" id="7_7cbjr"]
 [ext_resource type="PackedScene" uid="uid://c4aso13oksqwx" path="res://scenes/enemy.tscn" id="7_vhg7g"]
 [ext_resource type="FontFile" uid="uid://c46hadkwr6sgd" path="res://fonts/Xolonium-Regular.ttf" id="8_op8u0"]
 [ext_resource type="PackedScene" uid="uid://xdwt1bulnai7" path="res://scenes/chest.tscn" id="10_f1kyg"]
@@ -297,8 +296,6 @@ shape = SubResource("RectangleShape2D_q4bpb")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(571, 149, 577, 174, 586, 174, 592, 236, 578, 237, 576, 255, 533, 254, 524, 240, 468, 241, 466, 256, 435, 257, 434, 269, 353, 273, 349, 255, 243, 256, 243, 272, 159, 272, 157, 257, 143, 254, 145, 246, 159, 245, 160, 235, 176, 235, 176, 241, 204, 249, 204, 234, 204, 234, 384, 233, 385, 246, 399, 245, 399, 233, 428, 232, 433, 217, 478, 218, 479, 190, 495, 188, 496, 177, 525, 169, 525, 161, 533, 151)
-
-[node name="HUD" parent="." instance=ExtResource("7_7cbjr")]
 
 [node name="movement" type="Label" parent="."]
 offset_left = 75.0

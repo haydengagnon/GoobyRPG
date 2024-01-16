@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://biv0vl3twldvp"]
+[gd_scene load_steps=32 format=3 uid="uid://biv0vl3twldvp"]
 
 [ext_resource type="Script" path="res://scripts/village.gd" id="1_ibdcb"]
 [ext_resource type="Texture2D" uid="uid://cw3p3v6wsl4sq" path="res://art/tilesets/grass.png" id="1_l35s5"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://bplgjf4jacpgt" path="res://art/objects/chest_01.png" id="8_68fqw"]
 [ext_resource type="Texture2D" uid="uid://tpes8f8ltmx8" path="res://art/tilesets/plains.png" id="9_te2pk"]
 [ext_resource type="PackedScene" uid="uid://br0hh220gcdhl" path="res://scenes/player.tscn" id="11_cdiuq"]
-[ext_resource type="PackedScene" uid="uid://h4e7cfq6dyrg" path="res://scenes/hud.tscn" id="12_golhe"]
 [ext_resource type="PackedScene" uid="uid://bbbarl18rbcam" path="res://scenes/npc.tscn" id="13_heebi"]
 [ext_resource type="FontFile" uid="uid://c46hadkwr6sgd" path="res://fonts/Xolonium-Regular.ttf" id="14_soefw"]
 
@@ -635,8 +634,6 @@ shape = SubResource("RectangleShape2D_qpmlo")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(20, 13, 826, 14, 825, -56, 919, -56, 919, 0, 910, 0, 910, 14, 1101, 14, 1102, 319, 1120, 319, 1120, 310, 1203, 310, 1203, 402, 1101, 402, 1101, 610, 18, 607, 18, 417, 0, 417, 0, 434, -69, 434, -69, 344, 0, 344, 0, 350, 18, 350, 18, 205.976, 66, 206, 66, 176, 96, 176, 97, 160, 144, 160, 146, 177, 177, 177, 177, 162, 192, 161, 193, 146, 209, 144, 209, 128, 256, 128, 257, 98, 272, 96, 273, 82, 336, 81, 336, 57, 320, 55, 320, 14, 18, 13, -16, 13, -109, 403, -5, 671, 1191, 653, 1245, 277, 1128, -73, 676, -116, 19, -61, -17, 11)
-
-[node name="HUD" parent="." instance=ExtResource("12_golhe")]
 
 [node name="npc" parent="." instance=ExtResource("13_heebi")]
 position = Vector2(266, 208)
