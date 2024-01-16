@@ -1,0 +1,19 @@
+{
+	"rustysword": {
+		"ItemCategory": "Weapon",
+		"StackSize": 1,
+		"ItemAttack": 10,
+		"Description": "A rusty sword that you found in the forest"
+	},
+	"ironsword": {
+		"ItemCategory": "Weapon",
+		"StackSize": 1,
+		"ItemAttack": 15,
+		"Description": "An iron sword gifted to you by Neil"
+	},
+	"healthpotion": {
+		"ItemCategory": "Consumable",
+		"StackSize": 5,
+		"Description": "A potion that restores 100 health"
+	}
+}

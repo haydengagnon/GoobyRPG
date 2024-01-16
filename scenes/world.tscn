@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://r3ynwewxhmpk"]
+[gd_scene load_steps=22 format=3 uid="uid://r3ynwewxhmpk"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_chg01"]
 [ext_resource type="Texture2D" uid="uid://tpes8f8ltmx8" path="res://art/tilesets/plains.png" id="1_jjg5e"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://b2u3gdep4g2vr" path="res://art/objects/objects.png" id="3_yqcae"]
 [ext_resource type="PackedScene" uid="uid://br0hh220gcdhl" path="res://scenes/player.tscn" id="4_qk87m"]
 [ext_resource type="PackedScene" uid="uid://c4aso13oksqwx" path="res://scenes/enemy.tscn" id="5_answu"]
-[ext_resource type="PackedScene" uid="uid://h4e7cfq6dyrg" path="res://scenes/hud.tscn" id="7_y0ror"]
 [ext_resource type="FontFile" uid="uid://c46hadkwr6sgd" path="res://fonts/Xolonium-Regular.ttf" id="8_55iyh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v4u8i"]
@@ -288,8 +287,6 @@ shape = SubResource("RectangleShape2D_2jdtn")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="start_entrance"]
 position = Vector2(-19.5, 36.5)
 shape = SubResource("RectangleShape2D_5r6th")
-
-[node name="HUD" parent="start_entrance" instance=ExtResource("7_y0ror")]
 
 [node name="village_entrance" type="Area2D" parent="."]
 

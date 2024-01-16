@@ -19,6 +19,8 @@ config/windows_native_icon="res://art/GoobyRPGLogo.ico"
 [autoload]
 
 Global="*res://scripts/global.gd"
+JsonData="*res://scripts/JSONData.gd"
+PlayerInventory="*res://scripts/playerinventory.gd"
 
 [display]
 

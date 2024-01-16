@@ -1,13 +1,15 @@
 extends Panel
 
-var RustySwordClass = preload("res://scenes/rusty_sword.tscn")
+var ItemClass = preload("res://scenes/item.tscn")
 var item = null
+var slot_index
 
 
 func _ready():
-	if randi() % 2 == 0:
-		item = RustySwordClass.instantiate()		
-		add_child(item)
+	pass
+	#if randi() % 2 == 0:
+	#	item = ItemClass.instantiate()		
+	#	add_child(item)
 
 
 func pickFromSlot():
@@ -22,4 +24,12 @@ func putIntoSlot(new_item):
 	var inventoryNode = find_parent("Inventory")
 	inventoryNode.remove_child(item)
 	add_child(item)
+
+func initialize_item(item_name, item_quantity):
+	if item == null:
+		item = ItemClass.instantiate()
+		add_child(item)
+		item.set_item(item_name, item_quantity)
+	else:
+		item.set_item(item_name, item_quantity)
 

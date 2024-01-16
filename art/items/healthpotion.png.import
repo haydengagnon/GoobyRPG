@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvei6qmn2n4yb"
-path="res://.godot/imported/ironsword.jpg-086b34b72510e55dad7ea52a946e4579.ctex"
+uid="uid://cbf78q1myh6hv"
+path="res://.godot/imported/healthpotion.png-f763aa1dc2e9a8085660416d19ad98c4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/items/ironsword.jpg"
-dest_files=["res://.godot/imported/ironsword.jpg-086b34b72510e55dad7ea52a946e4579.ctex"]
+source_file="res://art/items/healthpotion.png"
+dest_files=["res://.godot/imported/healthpotion.png-f763aa1dc2e9a8085660416d19ad98c4.ctex"]
 
 [params]
 

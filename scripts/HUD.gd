@@ -9,6 +9,8 @@ func _ready():
 func _process(_delta):
 	display_other_stats()
 	inventory()
+	#if Input.is_action_pressed("interact"):
+	#	$Inventory.initialize_inventory()
 	
 	$basic_stats/level.text = str("Level: ", Global.level)
 	$basic_stats/health.value = Global.health
