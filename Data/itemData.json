@@ -14,6 +14,25 @@
 	"healthpotion": {
 		"ItemCategory": "Consumable",
 		"StackSize": 5,
+		"HealAmount": 50,
 		"Description": "A potion that restores 100 health"
+	},
+	"leathershirt": {
+		"ItemCategory": "BodyArmor",
+		"StackSize": 1,
+		"HealthBonus": 50,
+		"Description": "A crude armor made out of leather"
+	},
+	"leatherhat": {
+		"ItemCategory": "HeadArmor",
+		"StackSize": 1,
+		"HealthBonus": 25,
+		"Description": "A crude hat made out of leather"
+	},
+	"leatherpants": {
+		"ItemCategory": "LegArmor",
+		"StackSize": 1,
+		"HealthBonus": 35,
+		"Description": "A crude pair of pants made out of leather"
 	}
 }

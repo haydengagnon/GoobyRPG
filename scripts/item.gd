@@ -30,8 +30,8 @@ func decrease_item_quantity(amount_to_remove):
 	item_quantity -= amount_to_remove
 	$Label.text = str(item_quantity)
 
-func set_item(name, quantity):
-	item_name = name
+func set_item(nm, quantity):
+	item_name = nm
 	item_quantity = quantity
 	$TextureRect.texture = load("res://art/items/" + item_name + ".png")
 	

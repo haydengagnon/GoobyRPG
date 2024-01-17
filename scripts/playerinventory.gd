@@ -6,9 +6,20 @@ const InventoryScene = preload("res://scenes/inventory.tscn")
 var NUM_INVENTORY_SLOTS = 20
 
 var inventory = {
-	0: ["ironsword", 1],
-	1: ["healthpotion", 1]
+	0: ["healthpotion", 1]
 }
+
+var equips = {
+	0: ["leatherhat", 1],
+	1: ["leathershirt", 1],
+	2: ["leatherpants", 1]
+}
+
+var weapons = {
+	0: ["rustysword", 1]
+}
+
+
 
 func add_item(item_name, item_quantity):
 	for item in inventory:
@@ -32,13 +43,31 @@ func add_item(item_name, item_quantity):
 			return
 
 func add_item_to_empty_slot(item: ItemClass, slot: SlotClass):
-	inventory[slot.slot_index] = [item.item_name, item.item_quantity]
+		match slot.SlotType:
+			SlotClass.SlotType.INVENTORY:
+				inventory[slot.slot_index] = [item.item_name, item.item_quantity]
+			SlotClass.SlotType.WEAPON:
+				weapons[slot.slot_index] = [item.item_name, item.item_quantity]
+			_:
+				equips[slot.slot_index] = [item.item_name, item.item_quantity]
 
 func remove_item(slot: SlotClass):
-	inventory.erase(slot.slot_index)
+	match slot.SlotType:
+		SlotClass.SlotType.INVENTORY:
+			inventory.erase(slot.slot_index)
+		SlotClass.SlotType.WEAPON:
+			weapons.erase(slot.slot_index)
+		_:
+			equips.erase(slot.slot_index)
 
 func add_item_quantity(slot: SlotClass, quantity_to_add: int):
-	inventory[slot.slot_index][1] += quantity_to_add
+	match slot.SlotType:
+		SlotClass.SlotType.INVENTORY:
+			inventory[slot.slot_index][1] += quantity_to_add
+		SlotClass.SlotType.WEAPON:
+			weapons[slot.slot_index][1] += quantity_to_add
+		_:
+			equips[slot.slot_index][1] += quantity_to_add
 
 func update_slot_visual(slot_index, item_name, new_quantity):
 	var slot = get_tree().root.get_node("/root/" + Global.current_scene + "/player/HUD/Inventory/GridContainer/Slot" + str(slot_index + 1))
