@@ -4,6 +4,16 @@ var ItemClass = preload("res://scenes/item.tscn")
 var item = null
 var slot_index
 
+enum SlotType {
+	INVENTORY,
+	HAT,
+	SHIRT,
+	PANTS,
+	WEAPON,
+	OFFHAND
+}
+
+var slotType = null
 
 func _ready():
 	pass
