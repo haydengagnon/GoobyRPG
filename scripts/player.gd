@@ -6,8 +6,8 @@ var enemy_attack_cooldown = true
 var player_alive = true
 var level = Global.level
 var death_played = false
-
 var attack_ip = false
+var weapon_damage
 
 const speed = 100
 var current_dir = "none"
@@ -234,9 +234,9 @@ func levelup(lvl):
 func damage():
 	if Global.has_sword == false:
 		Global.damage = 0
-	elif Global.rusty_sword == true:
+	elif Global.weapon == "rustysword":
 		Global.damage = (Global.level - 1) * 10 + 25
-	elif Global.iron_sword == true:
+	elif Global.weapon == "ironsword":
 		Global.damage = (Global.level - 1) * 15 + 50
 
 func _on_animated_sprite_2d_animation_finished():

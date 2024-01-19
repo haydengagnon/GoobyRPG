@@ -25,8 +25,6 @@ func open_chest_start():
 		if Input.is_action_just_pressed("interact"):
 			if opened == false:
 				PlayerInventory.add_item(item_name, 1)
-				Global.has_sword = true
-				Global.rusty_sword = true
 				$AnimatedSprite2D.play("open_chest")
 				opened = true
 				done_opening = true

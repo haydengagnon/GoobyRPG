@@ -18,21 +18,27 @@
 		"Description": "A potion that restores 100 health"
 	},
 	"leathershirt": {
-		"ItemCategory": "BodyArmor",
+		"ItemCategory": "Shirt",
 		"StackSize": 1,
 		"HealthBonus": 50,
 		"Description": "A crude armor made out of leather"
 	},
 	"leatherhat": {
-		"ItemCategory": "HeadArmor",
+		"ItemCategory": "Hat",
 		"StackSize": 1,
 		"HealthBonus": 25,
 		"Description": "A crude hat made out of leather"
 	},
 	"leatherpants": {
-		"ItemCategory": "LegArmor",
+		"ItemCategory": "Pants",
 		"StackSize": 1,
 		"HealthBonus": 35,
 		"Description": "A crude pair of pants made out of leather"
+	},
+	"dagger": {
+		"ItemCategory": "Offhand",
+		"StackSize": 1,
+		"ItemAttack": 10,
+		"Description": "A small dagger easily handled in you weak hand"
 	}
 }

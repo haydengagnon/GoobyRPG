@@ -47,8 +47,7 @@ var blue_slime_kills = 0
 #Sword equipped
 var has_sword = false
 var sword_text = false
-var rusty_sword = false
-var iron_sword = false
+var weapon = null
 
 #player transition locations
 var player_exit_cliffside_posx = 275
