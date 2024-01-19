@@ -17,6 +17,7 @@ func _process(_delta):
 	$basic_stats/health.max_value = Global.max_health
 	$basic_stats/exp.value = Global.experience
 	$basic_stats/exp.max_value = expneeded
+	$basic_stats/health/Label.text = str(Global.health) + " / " + str(Global.max_health)
 
 	$other_stats/vbox/damage.text = str("Damage: ", Global.damage)
 	$other_stats/vbox/armor.text = str("Armor: ", Global.armor)

@@ -80,6 +80,17 @@ theme_override_styles/background = SubResource("StyleBoxFlat_b71li")
 theme_override_styles/fill = SubResource("StyleBoxFlat_421ot")
 show_percentage = false
 
+[node name="Label" type="Label" parent="basic_stats/health"]
+layout_mode = 0
+offset_right = 5820.0
+offset_bottom = 600.0
+scale = Vector2(0.05, 0.05)
+theme_override_fonts/font = ExtResource("3_jjjqn")
+theme_override_font_sizes/font_size = 400
+text = "Health/Health"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="exp" type="ProgressBar" parent="basic_stats"]
 layout_mode = 0
 offset_left = 5.0

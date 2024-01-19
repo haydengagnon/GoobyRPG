@@ -8,6 +8,7 @@ var level = Global.level
 var death_played = false
 var attack_ip = false
 var weapon_damage
+var offhand_damage
 
 const speed = 100
 var current_dir = "none"
@@ -234,10 +235,13 @@ func levelup(lvl):
 func damage():
 	if Global.has_sword == false:
 		Global.damage = 0
-	elif Global.weapon == "rustysword":
-		Global.damage = (Global.level - 1) * 10 + 25
-	elif Global.weapon == "ironsword":
-		Global.damage = (Global.level - 1) * 15 + 50
+	if Global.has_sword == true:
+		var weapon_damage = JsonData.item_data[Global.weapon]["ItemAttack"]
+		if Global.offhand != null:
+			var offhand_damage = JsonData.item_data[Global.offhand]["ItemAttack"]
+			Global.damage = (Global.level - 1) * 10 + weapon_damage + offhand_damage
+		else:
+			Global.damage = (Global.level - 1) * 10 + weapon_damage
 
 func _on_animated_sprite_2d_animation_finished():
 	death_played = true
