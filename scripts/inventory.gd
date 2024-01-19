@@ -30,7 +30,7 @@ func _ready():
 
 	initialize_inventory()
 	initialize_equips()
-	intitalize_weapons()
+	initialize_weapons()
 
 func slot_gui_input(event: InputEvent, slot: SlotClass):
 	if event is InputEventMouseButton:
@@ -62,48 +62,69 @@ func initialize_equips():
 		if PlayerInventory.equips.has(i):
 			equip_slots[i].initialize_item(PlayerInventory.equips[i][0], PlayerInventory.equips[i][1])
 
-func intitalize_weapons():
+func initialize_weapons():
 	var weapon_slots = weapon_slot.get_children()
 	for i in range(weapon_slots.size()):
 		if PlayerInventory.weapons.has(i):
 			weapon_slots[i].initialize_item(PlayerInventory.weapons[i][0], PlayerInventory.weapons[i][1])
 
+func update_weapons():
+	if PlayerInventory.weapons.has(0):
+		Global.has_sword = true
+		Global.weapon = PlayerInventory.weapons[0][0]
+	else:
+		Global.has_sword = false
+		Global.weapon = null
+	print(Global.weapon)
+
+
 func able_to_put_into_slot(slot: SlotClass):
-	var holding_item = find_parent("HUD").holding_item
 	if holding_item == null:
 		return true
 	var holding_item_category = JsonData.item_data[holding_item.item_name]["ItemCategory"]
-	#if slot.SlotType == SlotClass.SlotType.SHIRT:
-	#	return holding_item_category == "Shirt"
-	
+	if slot.slotType == SlotClass.SlotType.SHIRT:
+		return holding_item_category == "Shirt"
+	if slot.slotType == SlotClass.SlotType.HAT:
+		return holding_item_category == "Hat"
+	if slot.slotType == SlotClass.SlotType.PANTS:
+		return holding_item_category == "Pants"
+	if slot.slotType == SlotClass.SlotType.WEAPON:
+		return holding_item_category == "Weapon"
+	if slot.slotType == SlotClass.SlotType.OFFHAND:
+		return holding_item_category == "Offhand"
+	return true
 
 func left_click_empty_slot(slot: SlotClass):
-	if able_to_put_into_slot:
+	if able_to_put_into_slot(slot):
 		PlayerInventory.add_item_to_empty_slot(holding_item, slot)
 		slot.putIntoSlot(holding_item)
+		update_weapons()
 		holding_item = null
 
 func left_click_different_item(event: InputEvent, slot: SlotClass):
-	PlayerInventory.remove_item(slot)
-	PlayerInventory.add_item_to_empty_slot(holding_item, slot)
-	var temp_item = slot.item
-	slot.pickFromSlot()
-	temp_item.global_position = event.global_position
-	slot.putIntoSlot(holding_item)
-	holding_item = temp_item
+	if able_to_put_into_slot(slot):
+		PlayerInventory.remove_item(slot)
+		PlayerInventory.add_item_to_empty_slot(holding_item, slot)
+		var temp_item = slot.item
+		slot.pickFromSlot()
+		temp_item.global_position = event.global_position
+		slot.putIntoSlot(holding_item)
+		update_weapons()
+		holding_item = temp_item
 
 func left_click_same_item(_event: InputEvent, slot: SlotClass):
-	var stack_size = int(JsonData.item_data[slot.item.item_name]["StackSize"])
-	var able_to_add = stack_size - slot.item.item_quantity
-	if able_to_add >= holding_item.item_quantity:
-		PlayerInventory.add_item_quantity(slot, holding_item.item_quantity)
-		slot.item.add_item_quantity(holding_item.item_quantity)
-		holding_item.queue_free()
-		holding_item = null
-	else:
-		PlayerInventory.add_item_quantity(slot, able_to_add)
-		slot.item.add_item_quantity(able_to_add)
-		holding_item.decrease_item_quantity(able_to_add)
+	if able_to_put_into_slot(slot):
+		var stack_size = int(JsonData.item_data[slot.item.item_name]["StackSize"])
+		var able_to_add = stack_size - slot.item.item_quantity
+		if able_to_add >= holding_item.item_quantity:
+			PlayerInventory.add_item_quantity(slot, holding_item.item_quantity)
+			slot.item.add_item_quantity(holding_item.item_quantity)
+			holding_item.queue_free()
+			holding_item = null
+		else:
+			PlayerInventory.add_item_quantity(slot, able_to_add)
+			slot.item.add_item_quantity(able_to_add)
+			holding_item.decrease_item_quantity(able_to_add)
 
 func left_click_not_holding_item(slot: SlotClass):
 	PlayerInventory.remove_item(slot)
@@ -117,3 +138,6 @@ func open_inventory(event: InputEvent):
 			$Inventory.visible = false
 		else:
 			$Inventory.visible = true
+
+func equip_item(slot: SlotClass):
+	print(slot.item)

@@ -17,10 +17,6 @@ var slotType = null
 
 func _ready():
 	pass
-	#if randi() % 2 == 0:
-	#	item = ItemClass.instantiate()		
-	#	add_child(item)
-
 
 func pickFromSlot():
 	remove_child(item)

@@ -2,11 +2,18 @@ extends Node
 
 const SlotClass = preload("res://scripts/Slot.gd")
 const ItemClass = preload("res://scripts/item.gd")
-const InventoryScene = preload("res://scenes/inventory.tscn")
 var NUM_INVENTORY_SLOTS = 20
 
+var weapon_damage
+var offhand_damage
+var hat_health
+var shirt_health
+var pants_health
+
 var inventory = {
-	0: ["healthpotion", 1]
+	0: ["healthpotion", 1],
+	1: ["dagger", 1],
+	2: ["ironsword", 1]
 }
 
 var equips = {
@@ -16,7 +23,7 @@ var equips = {
 }
 
 var weapons = {
-	0: ["rustysword", 1]
+	
 }
 
 
@@ -43,28 +50,34 @@ func add_item(item_name, item_quantity):
 			return
 
 func add_item_to_empty_slot(item: ItemClass, slot: SlotClass):
-		match slot.SlotType:
+		match slot.slotType:
 			SlotClass.SlotType.INVENTORY:
 				inventory[slot.slot_index] = [item.item_name, item.item_quantity]
 			SlotClass.SlotType.WEAPON:
+				weapons[slot.slot_index] = [item.item_name, item.item_quantity]
+			SlotClass.SlotType.OFFHAND:
 				weapons[slot.slot_index] = [item.item_name, item.item_quantity]
 			_:
 				equips[slot.slot_index] = [item.item_name, item.item_quantity]
 
 func remove_item(slot: SlotClass):
-	match slot.SlotType:
+	match slot.slotType:
 		SlotClass.SlotType.INVENTORY:
 			inventory.erase(slot.slot_index)
 		SlotClass.SlotType.WEAPON:
+			weapons.erase(slot.slot_index)
+		SlotClass.SlotType.OFFHAND:
 			weapons.erase(slot.slot_index)
 		_:
 			equips.erase(slot.slot_index)
 
 func add_item_quantity(slot: SlotClass, quantity_to_add: int):
-	match slot.SlotType:
+	match slot.slotType:
 		SlotClass.SlotType.INVENTORY:
 			inventory[slot.slot_index][1] += quantity_to_add
 		SlotClass.SlotType.WEAPON:
+			weapons[slot.slot_index][1] += quantity_to_add
+		SlotClass.SlotType.OFFHAND:
 			weapons[slot.slot_index][1] += quantity_to_add
 		_:
 			equips[slot.slot_index][1] += quantity_to_add
