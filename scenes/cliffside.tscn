@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://h7gq3fxns2mq"]
+[gd_scene load_steps=14 format=3 uid="uid://h7gq3fxns2mq"]
 
 [ext_resource type="Script" path="res://scripts/cliffside.gd" id="1_2jlaw"]
 [ext_resource type="Texture2D" uid="uid://cw3p3v6wsl4sq" path="res://art/tilesets/grass.png" id="1_lkwu8"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b2u3gdep4g2vr" path="res://art/objects/objects.png" id="3_r7al3"]
 [ext_resource type="PackedScene" uid="uid://br0hh220gcdhl" path="res://scenes/player.tscn" id="4_lcvd4"]
 [ext_resource type="PackedScene" uid="uid://mom618kl3h80" path="res://scenes/redslime.tscn" id="6_aollk"]
+[ext_resource type="PackedScene" uid="uid://xdwt1bulnai7" path="res://scenes/chest.tscn" id="7_oj3gm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xdnqh"]
 texture = ExtResource("1_lkwu8")
@@ -217,6 +218,9 @@ sources/3 = SubResource("TileSetAtlasSource_berqh")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f1i5w"]
 size = Vector2(115, 32)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n1ros"]
+size = Vector2(16, 20)
+
 [node name="cliffside" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_2jlaw")
@@ -262,5 +266,16 @@ shape = SubResource("RectangleShape2D_f1i5w")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="borders"]
 polygon = PackedVector2Array(34, 272, 34, 193, 64, 192, 64, 122, 58, 119, 48, 119, 45, 102, 33, 101, 33, 30, 96, 31, 96, 59, 100, 63, 143, 63, 146, 64, 146, 74, 147, 78, 203, 78, 209, 76, 208, 30, 288, 31, 289, 43, 293, 45, 304, 46, 306, 59, 310, 62, 345, 62, 353, 57, 352, 46, 385, 46, 387, 58, 392, 61, 459, 61, 465, 58, 464, 33, 467, 28, 496, 30, 498, 114, 498, 120, 484, 120, 482, 123, 482, 136, 470, 136, 465, 140, 466, 184, 469, 190, 497, 189, 497, 193, 497, 230, 453, 233, 449, 238, 450, 249, 417, 249, 416, 243, 413, 232, 352, 232, 352, 186, 349, 183, 292, 183, 290, 188, 290, 199, 279, 199, 274, 204, 274, 216, 261, 216, 257, 223, 257, 248, 208, 249, 208, 239, 204, 233, 151, 233, 145, 239, 145, 272, 147, 272, 147, 306, 34, 305, 31, 316, 163, 317, 160, 246, 167, 317, 527, 272, 528, 0, 1, 0, 0, 273, 31, 306, 31, 272)
 
+[node name="chest" parent="." instance=ExtResource("7_oj3gm")]
+position = Vector2(480, 42)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(480, 48)
+shape = SubResource("RectangleShape2D_n1ros")
+
 [connection signal="body_entered" from="cliffside_exit" to="." method="_on_cliffside_exit_body_entered"]
 [connection signal="body_exited" from="cliffside_exit" to="." method="_on_cliffside_exit_body_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

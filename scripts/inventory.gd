@@ -31,6 +31,8 @@ func _ready():
 	initialize_inventory()
 	initialize_equips()
 	initialize_weapons()
+	update_weapons()
+	update_equipment()
 
 func slot_gui_input(event: InputEvent, slot: SlotClass):
 	if event is InputEventMouseButton:
@@ -75,7 +77,24 @@ func update_weapons():
 	else:
 		Global.has_sword = false
 		Global.weapon = null
-	print(Global.weapon)
+	if PlayerInventory.weapons.has(1):
+		Global.offhand = PlayerInventory.weapons[1][0]
+	else:
+		Global.offhand = null
+
+func update_equipment():
+	if PlayerInventory.equips.has(0):
+		Global.hat = PlayerInventory.equips[0][0]
+	else:
+		Global.hat = null
+	if PlayerInventory.equips.has(1):
+		Global.shirt = PlayerInventory.equips[1][0]
+	else:
+		Global.shirt = null
+	if PlayerInventory.equips.has(2):
+		Global.pants = PlayerInventory.equips[2][0]
+	else:
+		Global.pants = null
 
 
 func able_to_put_into_slot(slot: SlotClass):
@@ -99,6 +118,7 @@ func left_click_empty_slot(slot: SlotClass):
 		PlayerInventory.add_item_to_empty_slot(holding_item, slot)
 		slot.putIntoSlot(holding_item)
 		update_weapons()
+		update_equipment()
 		holding_item = null
 
 func left_click_different_item(event: InputEvent, slot: SlotClass):
@@ -110,6 +130,7 @@ func left_click_different_item(event: InputEvent, slot: SlotClass):
 		temp_item.global_position = event.global_position
 		slot.putIntoSlot(holding_item)
 		update_weapons()
+		update_equipment()
 		holding_item = temp_item
 
 func left_click_same_item(_event: InputEvent, slot: SlotClass):
@@ -128,6 +149,8 @@ func left_click_same_item(_event: InputEvent, slot: SlotClass):
 
 func left_click_not_holding_item(slot: SlotClass):
 	PlayerInventory.remove_item(slot)
+	update_weapons()
+	update_equipment()
 	holding_item = slot.item
 	slot.pickFromSlot()
 	holding_item.global_position = get_global_mouse_position()
@@ -138,6 +161,3 @@ func open_inventory(event: InputEvent):
 			$Inventory.visible = false
 		else:
 			$Inventory.visible = true
-
-func equip_item(slot: SlotClass):
-	print(slot.item)

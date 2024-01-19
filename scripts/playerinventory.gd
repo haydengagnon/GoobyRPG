@@ -11,15 +11,11 @@ var shirt_health
 var pants_health
 
 var inventory = {
-	0: ["healthpotion", 1],
-	1: ["dagger", 1],
-	2: ["ironsword", 1]
+	
 }
 
 var equips = {
-	0: ["leatherhat", 1],
-	1: ["leathershirt", 1],
-	2: ["leatherpants", 1]
+	
 }
 
 var weapons = {

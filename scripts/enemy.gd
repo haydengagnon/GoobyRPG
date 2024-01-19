@@ -73,16 +73,18 @@ func deal_damage():
 			$justhit.start()
 			$take_damage_cooldown.start()
 			can_take_damage = false
-			print("slime health = ", health)
 			if health <= 0:
 				Global.enemy_dead = true
 				$death_timer.start()
 				$AnimatedSprite2D.play("death")
 				health = 0
 	if can_die == true:
+		var dagger_drop_rate = randi_range(0, 9)
+		var item = "dagger"
+		print(dagger_drop_rate)
 		Global.experience += 50
-		#print("current exp: ", Global.experience)
-		#print("current lvl: ", Global.level)
+		if dagger_drop_rate == 9:
+			PlayerInventory.add_item(item, 1)
 		self.queue_free()
 		can_die = false
 		Global.enemy_dead = false

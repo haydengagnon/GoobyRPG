@@ -71,16 +71,17 @@ func deal_damage():
 			$justhit.start()
 			$take_damage_cooldown.start()
 			can_take_damage = false
-			print("slime health = ", health)
 			if health <= 0:
 				Global.redslime_dead = true
 				$death_timer.start()
 				$AnimatedSprite2D.play("death")
 				health = 0
 	if can_die == true:
+		var leather_shirt_drop = randi_range(0, 9)
+		var item = "leathershirt"
 		Global.experience += 100
-		#print("current exp: ", Global.experience)
-		#print("current lvl: ", Global.level)
+		if leather_shirt_drop == 9:
+			PlayerInventory.add_item(item, 1)
 		self.queue_free()
 		can_die = false
 		Global.redslime_dead = false

@@ -2,13 +2,13 @@
 	"rustysword": {
 		"ItemCategory": "Weapon",
 		"StackSize": 1,
-		"ItemAttack": 10,
+		"ItemAttack": 20,
 		"Description": "A rusty sword that you found in the forest"
 	},
 	"ironsword": {
 		"ItemCategory": "Weapon",
 		"StackSize": 1,
-		"ItemAttack": 15,
+		"ItemAttack": 40,
 		"Description": "An iron sword gifted to you by Neil"
 	},
 	"healthpotion": {
@@ -38,7 +38,7 @@
 	"dagger": {
 		"ItemCategory": "Offhand",
 		"StackSize": 1,
-		"ItemAttack": 10,
+		"ItemAttack": 15,
 		"Description": "A small dagger easily handled in you weak hand"
 	}
 }
