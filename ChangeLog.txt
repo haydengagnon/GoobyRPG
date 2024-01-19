@@ -1,0 +1,16 @@
+January 19, 2023:
+	Added Inventory
+	Added Equipment slots
+		Weapon functionality
+		offhand functionality
+		armor functionality
+	New sprites
+		iron sword
+		rusty sword
+		health potion
+		leather hat
+		leather shirt
+		leather pants
+	Drops:
+		Redslime - leather shirt
+		Blueslime - dagger

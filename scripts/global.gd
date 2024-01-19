@@ -27,9 +27,8 @@ var armor = 0
 var display_more_stats = false
 
 #Chest logic
-var can_open = false
-var opened = false
-var done_opening_start = false
+var start_chest_opened = false
+var cliffside_chest_opened = false
 
 #Inventory
 var open_inv = false
@@ -47,8 +46,13 @@ var blue_slime_kills = 0
 #Sword equipped
 var has_sword = false
 var sword_text = false
+
+#Equippped items
 var weapon = null
 var offhand = null
+var hat = null
+var shirt = null
+var pants = null
 
 #player transition locations
 var player_exit_cliffside_posx = 275

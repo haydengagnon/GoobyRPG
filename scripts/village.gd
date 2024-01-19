@@ -62,16 +62,15 @@ func _on_west_entrance_body_exited(body):
 func _on_neiltalkarea_body_entered(body):
 	if body.has_method("player"):
 		Global.talk_to_neil = true
-		print("can talk")
 
 
 func _on_neiltalkarea_body_exited(body):
 	if body.has_method("player"):
 		Global.talk_to_neil = false
 		Global.neil_text = false
-		print("can't talk")
 
 func neil_speak():
+	var item = "ironsword"
 	if Global.neil_text == true and Global.blue_slime_kills < 5:
 		$neil_speak/Panel.visible = true
 		$neil_speak/Panel/Label.visible = true
@@ -80,9 +79,8 @@ func neil_speak():
 		Global.has_neil_quest = true
 	elif Global.neil_text == true and Global.blue_slime_kills >= 5:
 		if Global.completed_neil_quest == false:
+			PlayerInventory.add_item(item, 1)
 			Global.completed_neil_quest = true
-		Global.rusty_sword = false
-		Global.iron_sword = true
 		$neil_speak/Panel.visible = true
 		$neil_speak/Panel/Label.visible = true
 		if neil_done_talking == false:

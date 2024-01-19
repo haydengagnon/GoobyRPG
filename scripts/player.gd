@@ -9,6 +9,9 @@ var death_played = false
 var attack_ip = false
 var weapon_damage
 var offhand_damage
+var hat_health
+var shirt_health
+var pants_health
 
 const speed = 100
 var current_dir = "none"
@@ -16,8 +19,10 @@ var current_dir = "none"
 
 func _ready():
 	$AnimatedSprite2D.play("front_idle")
+	health()
 	if Global.game_first_loadin == true:
 		Global.health = Global.max_health
+	$regen_timer.start()
 
 
 func _physics_process(delta):
@@ -29,9 +34,8 @@ func _physics_process(delta):
 	death()
 	levelup(Global.level)
 	damage()
+	health()
 	
-	
-	Global.max_health = Global.level * 100
 	
 
 func player_movement(_delta):
@@ -143,8 +147,8 @@ func enemy_attack():
 				Global.health -= 10
 				enemy_attack_cooldown = false
 				$attack_cooldown.start()
+				$regen_timer.stop()
 				$regen_cooldown.start()
-				print("Blue slime hit! ", Global.health)
 		
 func redslime_attack():
 	if Global.health > 0:
@@ -152,8 +156,8 @@ func redslime_attack():
 				Global.health -= 20
 				enemy_attack_cooldown = false
 				$attack_cooldown.start()
+				$regen_timer.stop()
 				$regen_cooldown.start()
-				print("Red slime hit! ", Global.health)
 
 func _on_attack_cooldown_timeout():
 	enemy_attack_cooldown = true
@@ -207,14 +211,12 @@ func _on_regen_timer_timeout():
 		Global.health += Global.max_health / 10
 		if Global.health > Global.max_health:
 			Global.health = Global.max_health
-		print("Healed to: ", Global.health)
 
 
 func death():
 	if Global.health <= 0:
 		player_alive = false #go to death screen
 		Global.health = 0
-		print("player has been killed")
 		if death_played == false:
 			$AnimatedSprite2D.play("death")
 
@@ -225,12 +227,9 @@ func levelup(lvl):
 	if Global.experience == floor(400 * (lvl * 1.25)):
 		Global.level += 1
 		Global.experience = 0
-		print("Leveled Up! ", Global.level)
 	elif Global.experience > floor(400 * (lvl * 1.25)):
 		Global.level += 1
 		Global.experience = Global.experience % exp_req
-		print("Leveled Up! ", Global.level)
-		print("Current exp: ", Global.experience)
 		
 func damage():
 	if Global.has_sword == false:
@@ -242,6 +241,23 @@ func damage():
 			Global.damage = (Global.level - 1) * 10 + weapon_damage + offhand_damage
 		else:
 			Global.damage = (Global.level - 1) * 10 + weapon_damage
+
+func health():
+	if Global.hat != null:
+		hat_health = JsonData.item_data[Global.hat]["HealthBonus"]
+	else:
+		hat_health = 0
+	if Global.shirt != null:
+		shirt_health = JsonData.item_data[Global.shirt]["HealthBonus"]
+	else:
+		shirt_health = 0
+	if Global.pants != null:
+		pants_health = JsonData.item_data[Global.pants]["HealthBonus"]
+	else:
+		pants_health = 0
+	Global.max_health = Global.level * 100 + hat_health + shirt_health + pants_health
+	if Global.health > Global.max_health:
+		Global.health = Global.max_health
 
 func _on_animated_sprite_2d_animation_finished():
 	death_played = true
