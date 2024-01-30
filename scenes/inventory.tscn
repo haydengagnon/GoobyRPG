@@ -141,6 +141,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_s2oh5")
 script = ExtResource("4_t3i60")
 
 [node name="Label" type="Label" parent="WeaponSlots/WeaponSlot"]
+layout_mode = 0
 offset_right = 656.0
 offset_bottom = 184.0
 scale = Vector2(0.05, 0.05)
@@ -158,6 +159,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_s2oh5")
 script = ExtResource("4_t3i60")
 
 [node name="Label" type="Label" parent="WeaponSlots/OffhandSlot"]
+layout_mode = 0
 offset_right = 656.0
 offset_bottom = 184.0
 scale = Vector2(0.05, 0.05)
@@ -199,6 +201,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_s2oh5")
 script = ExtResource("4_t3i60")
 
 [node name="Label" type="Label" parent="EquipSlots/ShirtSlot"]
+layout_mode = 0
 offset_right = 620.0
 offset_bottom = 184.0
 scale = Vector2(0.05, 0.05)
@@ -216,6 +219,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_s2oh5")
 script = ExtResource("4_t3i60")
 
 [node name="Label" type="Label" parent="EquipSlots/PantsSlot"]
+layout_mode = 0
 offset_right = 620.0
 offset_bottom = 184.0
 scale = Vector2(0.05, 0.05)

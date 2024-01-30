@@ -235,9 +235,9 @@ func damage():
 	if Global.has_sword == false:
 		Global.damage = 0
 	if Global.has_sword == true:
-		var weapon_damage = JsonData.item_data[Global.weapon]["ItemAttack"]
+		weapon_damage = JsonData.item_data[Global.weapon]["ItemAttack"]
 		if Global.offhand != null:
-			var offhand_damage = JsonData.item_data[Global.offhand]["ItemAttack"]
+			offhand_damage = JsonData.item_data[Global.offhand]["ItemAttack"]
 			Global.damage = (Global.level - 1) * 10 + weapon_damage + offhand_damage
 		else:
 			Global.damage = (Global.level - 1) * 10 + weapon_damage
