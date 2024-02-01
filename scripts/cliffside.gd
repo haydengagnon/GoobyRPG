@@ -6,6 +6,13 @@ var done_opening
 
 func _ready():
 	Global.current_scene = "cliffside"
+	if Global.world_to_cliffside == true:
+		$player.position.x = Global.player_enter_cliffside_posx
+		$player.position.y = Global.player_enter_cliffside_posy
+		Global.world_to_cliffside = false
+	else:
+		$player.position = Global.player_position
+		
 	if Global.cliffside_chest_opened == true:
 		$chest/AnimatedSprite2D.play("already open")
 	else:
