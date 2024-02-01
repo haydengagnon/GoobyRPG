@@ -20,6 +20,8 @@ func _ready():
 		$player.position.x = Global.player_village_to_world_posx
 		$player.position.y = Global.player_village_to_world_posy
 		Global.village_to_world = false
+	else:
+		$player.position = Global.player_position
 	Global.current_scene = "world"
 
 func _process(_delta):

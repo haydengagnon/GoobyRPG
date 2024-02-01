@@ -5,17 +5,22 @@ var can_open = false
 var item_name
 
 func _ready():
-	if Global.game_first_loadin == true:
-		$player.position.x = Global.player_start_posx
-		$player.position.y = Global.player_start_posy
-	elif Global.world_to_start == true:
+	print($player.position)
+	if Global.world_to_start == true:
 		$player.position.x = Global.player_world_to_start_posx
 		$player.position.y = Global.player_world_to_start_posy
 		Global.world_to_start = false
+	elif Global.game_first_loadin == true:
+		$player.position.x = Global.player_start_posx
+		$player.position.y = Global.player_start_posy
+		Global.game_first_loadin = false
+	else:
+		$player.position = Global.player_position
 	if Global.start_chest_opened == true:
 		$chest/AnimatedSprite2D.play("already open")
 	else:
 		$chest/AnimatedSprite2D.play("closed")
+	print($player.position)
 
 
 func _process(_delta):
@@ -44,7 +49,6 @@ func change_scene():
 	if Global.transition_scene == true:
 		get_tree().change_scene_to_file("res://scenes/world.tscn")
 		Global.finish_changescenes()
-		Global.game_first_loadin = false
 		Global.start_to_world = true
 		
 func sword_recieved():
