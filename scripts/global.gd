@@ -57,6 +57,8 @@ var pants = null
 #player transition locations
 var player_exit_cliffside_posx = 275
 var player_exit_cliffside_posy = 20
+var player_enter_cliffside_posx = 88
+var player_enter_cliffside_posy = 256
 var player_start_to_world_posx = 30
 var player_start_to_world_posy = 64
 var player_start_posx = 61
