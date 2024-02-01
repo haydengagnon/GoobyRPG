@@ -67,6 +67,7 @@ var player_village_to_world_posx = 400
 var player_village_to_world_posy = 123
 var player_world_to_village_posx = 28
 var player_world_to_village_posy = 396
+var player_position = Vector2(0, 0)
 
 #player transition position logic
 var start_to_world = false

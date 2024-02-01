@@ -69,6 +69,8 @@ func _on_close_button_up():
 func _on_load_button_down():
 	pass
 	_saver_loader.load_game()
+	paused = false
+	$pausemenu.visible = false
 
 
 func _on_save_button_down():

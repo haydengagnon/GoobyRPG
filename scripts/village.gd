@@ -8,6 +8,8 @@ func _ready():
 		$player.position.x = Global.player_world_to_village_posx
 		$player.position.y = Global.player_world_to_village_posy
 		Global.world_to_village = false
+	else:
+		$player.position = Global.player_position
 	Global.current_scene = "village"
 
 

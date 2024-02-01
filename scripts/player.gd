@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+
 var enemy_in_range = false
 var redslime_in_range = false
 var enemy_attack_cooldown = true
@@ -186,10 +187,6 @@ func attack():
 				if direction == "up":
 					$AnimatedSprite2D.play("back_attack")
 					$deal_attack_timer.start()
-				if Global.enemy_can_attack == false:
-					$attack_cooldown.start()
-				if Global.redslime_can_attack == false:
-					$attack_cooldown.start()
 			
 func interact():
 	if Input.is_action_just_pressed("interact"):
