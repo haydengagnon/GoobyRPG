@@ -1,28 +1,24 @@
-[gd_resource type="Resource" script_class="SavedGame" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="SavedGame" load_steps=2 format=3 uid="uid://ckulhg7tvhyf5"]
 
-[ext_resource type="Script" path="res://saved_game.gd" id="1_j1nch"]
+[ext_resource type="Script" path="res://saved_game.gd" id="1_hhkhm"]
 
 [resource]
-script = ExtResource("1_j1nch")
-level = 3
-experience = 1000
-health = 385.0
+script = ExtResource("1_hhkhm")
+level = 1
+experience = 0
+health = 100.0
 first_loadin = false
-current_scene = "village"
-player_position = Vector2(299.934, 254.123)
-player_weapons = {
-0: ["ironsword", 1],
-1: ["dagger", 1]
-}
-player_equipment = {
-1: ["leathershirt", 1],
-2: ["leatherpants", 1]
-}
+current_scene = "start"
+player_position = Vector2(444.665, 158.667)
+player_weapons = {}
+player_equipment = {}
 player_inventory = {
 0: ["rustysword", 1]
 }
 start_chest = true
-cliffside_chest = true
-neil_quest_has = true
-neil_quest_complete = true
-neil_blue_slime_kills = 5
+cliffside_chest = false
+neil_quest_has = false
+neil_quest_complete = false
+neil_blue_slime_kills = 0
+blue_slime_positions = Array[Vector2]([Vector2(214, 195)])
+red_slime_positions = Array[Vector2]([])

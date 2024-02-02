@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready var _saver_loader:SaverLoader = $player/SaverLoader
+
 var start_area_sign = false
 var start_sign_animation_done = false
 var cliffside_area_sign = false
@@ -23,6 +25,7 @@ func _ready():
 	else:
 		$player.position = Global.player_position
 	Global.current_scene = "world"
+	_saver_loader.load_enemies()
 
 func _process(_delta):
 	change_scene()

@@ -23,11 +23,17 @@ func save_game():
 	saved_game.neil_quest_complete = Global.completed_neil_quest
 	saved_game.neil_blue_slime_kills = Global.blue_slime_kills
 	
-	ResourceSaver.save(saved_game, "res://savegame.tres")
+	for enemy in get_tree().get_nodes_in_group("blue_slime"):
+		saved_game.blue_slime_positions.append(enemy.position)
+	
+	for redslime in get_tree().get_nodes_in_group("red_slime"):
+		saved_game.red_slime_positions.append(redslime.position)
+	
+	ResourceSaver.save(saved_game, "user://savegame.tres")
 	
 	
 func load_game():
-	var saved_game:SavedGame = load("res://savegame.tres") as SavedGame
+	var saved_game:SavedGame = load("user://savegame.tres") as SavedGame
 	
 	Global.level = saved_game.level
 	Global.health = saved_game.health
@@ -44,6 +50,8 @@ func load_game():
 	Global.has_neil_quest = saved_game.neil_quest_has
 	Global.completed_neil_quest = saved_game.neil_quest_complete
 	Global.blue_slime_kills = saved_game.neil_blue_slime_kills
+	
+	
 	
 	$"../HUD/Inventory".initialize_inventory()
 	$"../HUD/Inventory".initialize_weapons()
@@ -55,7 +63,7 @@ func load_game():
 	
 	
 func load_from_home():
-	var saved_game:SavedGame = load("res://savegame.tres") as SavedGame
+	var saved_game:SavedGame = load("user://savegame.tres") as SavedGame
 	
 	Global.level = saved_game.level
 	Global.health = saved_game.health
@@ -72,3 +80,32 @@ func load_from_home():
 	Global.has_neil_quest = saved_game.neil_quest_has
 	Global.completed_neil_quest = saved_game.neil_quest_complete
 	Global.blue_slime_kills = saved_game.neil_blue_slime_kills
+	
+	
+
+func load_enemies():
+	var saved_game:SavedGame = load("user://savegame.tres") as SavedGame
+	
+	for enemy in get_tree().get_nodes_in_group("blue_slime"):
+		enemy.get_parent().remove_child(enemy)
+		enemy.queue_free()
+	
+	for position in saved_game.blue_slime_positions:
+		var blue_slime_scene = preload("res://scenes/enemy.tscn")
+		var new_blue_slime = blue_slime_scene.instantiate()
+		
+		$"../..".add_child(new_blue_slime)
+		new_blue_slime.position = position
+		new_blue_slime.visible = true
+		print(new_blue_slime.position)
+	
+	for redslime in get_tree().get_nodes_in_group("red_slime"):
+		redslime.get_parent().remove_child(redslime)
+		redslime.queue_free()
+		
+	for position in saved_game.red_slime_positions:
+		var red_slime_scene = preload("res://scenes/redslime.tscn")
+		var new_red_slime = red_slime_scene.instantiate()
+		
+		$"../..".add_child(new_red_slime)
+		new_red_slime.position = position
