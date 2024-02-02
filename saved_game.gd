@@ -15,3 +15,5 @@ extends Resource
 @export var neil_quest_has: bool
 @export var neil_quest_complete: bool
 @export var neil_blue_slime_kills: int
+@export var blue_slime_positions: Array[Vector2] = []
+@export var red_slime_positions: Array[Vector2] = []

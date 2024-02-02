@@ -153,7 +153,7 @@ radius = 62.0081
 [sub_resource type="CircleShape2D" id="CircleShape2D_c0wm0"]
 radius = 5.09902
 
-[node name="enemy" type="CharacterBody2D"]
+[node name="enemy" type="CharacterBody2D" groups=["blue_slime"]]
 script = ExtResource("1_4wfbl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
