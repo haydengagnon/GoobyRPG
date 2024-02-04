@@ -316,9 +316,108 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_roxlk")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_pcllt")
 text = "EXIT"
 
+[node name="GridContainer" type="GridContainer" parent="titlescreen"]
+visible = false
+custom_minimum_size = Vector2(500, 80)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -40.0
+offset_right = 250.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 100
+columns = 3
+
+[node name="slot1" type="Button" parent="titlescreen/GridContainer"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_x6xvx")
+theme_override_styles/normal = SubResource("StyleBoxFlat_2wttv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_wgshn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dks7f")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6sv0x")
+text = "Slot 1"
+
+[node name="slot2" type="Button" parent="titlescreen/GridContainer"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_x6xvx")
+theme_override_styles/normal = SubResource("StyleBoxFlat_2wttv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_wgshn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dks7f")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6sv0x")
+text = "Slot 2
+"
+
+[node name="slot3" type="Button" parent="titlescreen/GridContainer"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_x6xvx")
+theme_override_styles/normal = SubResource("StyleBoxFlat_2wttv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_wgshn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dks7f")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6sv0x")
+text = "Slot 3"
+
+[node name="back" type="Button" parent="titlescreen"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 76.0
+offset_right = 100.0
+offset_bottom = 126.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_x6xvx")
+theme_override_styles/normal = SubResource("StyleBoxFlat_2s3ig")
+theme_override_styles/hover = SubResource("StyleBoxFlat_kqt1j")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_roxlk")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pcllt")
+text = "BACK"
+
 [node name="SaverLoader" parent="." instance=ExtResource("7_8b6j4")]
 unique_name_in_owner = true
 
 [connection signal="button_up" from="titlescreen/play" to="." method="_on_play_button_up"]
 [connection signal="button_up" from="titlescreen/load" to="." method="_on_load_button_up"]
 [connection signal="button_up" from="titlescreen/exit" to="." method="_on_exit_button_up"]
+[connection signal="button_up" from="titlescreen/GridContainer/slot1" to="." method="_on_slot_1_button_up"]
+[connection signal="button_up" from="titlescreen/GridContainer/slot2" to="." method="_on_slot_2_button_up"]
+[connection signal="button_up" from="titlescreen/GridContainer/slot3" to="." method="_on_slot_3_button_up"]
+[connection signal="button_up" from="titlescreen/back" to="." method="_on_back_button_up"]
