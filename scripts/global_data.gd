@@ -7,3 +7,5 @@ extends Resource
 @export var completed_neil_quest: bool
 @export var neil_blue_slime_kills: int
 @export var bigg_e_red_slime_kills: int
+@export var has_bigg_e_quest: bool
+@export var completed_bigg_e_quest: bool

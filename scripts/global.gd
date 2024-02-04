@@ -47,6 +47,8 @@ var neil_text = false
 var has_neil_quest = false
 var completed_neil_quest = false
 var neil_blue_slime_kills = 0
+var has_bigg_e_quest = false
+var completed_bigg_e_quest = false
 var bigg_e_red_slime_kills = 0
 
 #Sword equipped

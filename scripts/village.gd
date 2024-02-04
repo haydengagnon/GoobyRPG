@@ -1,7 +1,9 @@
 extends Node2D
 
 var neil_done_talking = false
-
+var bigg_e_done_talking = false
+var talk_to_bigg_e = false
+var bigg_e_text = false
 
 func _ready():
 	if Global.world_to_village == true:
@@ -99,3 +101,39 @@ func _on_neil_speak_animation_finished(anim_name):
 		neil_done_talking = true
 	if anim_name == "neilquestcomplete":
 		neil_done_talking = true
+
+
+func _on_area_2d_body_entered(body):
+	if body.has_method("player"):
+		talk_to_bigg_e = true
+
+
+func _on_area_2d_body_exited(body):
+	if body.has_method("player"):
+		talk_to_bigg_e = false
+		bigg_e_text = false
+
+func bigg_e_speak():
+	var item = "leatherhat"
+	if bigg_e_text == true and Global.bigg_e_red_slime_kills < 3:
+		$bigg_e_speak/Panel.visible = true
+		$bigg_e_speak/Panel/Label.visible = true
+		if bigg_e_done_talking == false:
+			$bigg_e_speak.play("biggequest")
+		Global.has_bigg_e_quest = true
+	elif  bigg_e_text == true and Global.bigg_e_red_slime_kills >= 3:
+		if Global.completed_bigg_e_quest == false:
+			PlayerInventory.add_item(item, 1)
+			Global.completed_bigg_e_quest = true
+		$bigg_e_speak/Panel.visible = true
+		$bigg_e_speak/Panel/Label.visible = true
+		if bigg_e_done_talking == false:
+			$bigg_e_speak/Panel.visible = false
+			$bigg_e_speak/Panel/Label.visible = false
+			bigg_e_done_talking = false
+
+func _on_bigg_e_speak_animation_finished(anim_name):
+	if anim_name == "biggequest":
+		bigg_e_done_talking = true
+	if anim_name == "biggequestcomplete":
+		bigg_e_done_talking = true
