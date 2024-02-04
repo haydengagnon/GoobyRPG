@@ -7,51 +7,55 @@ func _ready():
 
 func save_game():
 	var saved_game := SavedGame.new()
+	var global_data = GlobalData.new()
 	
 	saved_game.level = Global.level
 	saved_game.health = Global.health
 	saved_game.experience = Global.experience
-	saved_game.first_loadin = Global.game_first_loadin
+	saved_game.game_first_loadin = Global.game_first_loadin
 	saved_game.current_scene = Global.current_scene
 	saved_game.player_position = player.position
 	saved_game.player_inventory = PlayerInventory.inventory
 	saved_game.player_weapons = PlayerInventory.weapons
 	saved_game.player_equipment = PlayerInventory.equips
-	saved_game.start_chest = Global.start_chest_opened
-	saved_game.cliffside_chest = Global.cliffside_chest_opened
-	saved_game.neil_quest_has = Global.has_neil_quest
-	saved_game.neil_quest_complete = Global.completed_neil_quest
-	saved_game.neil_blue_slime_kills = Global.blue_slime_kills
 	
-	for enemy in get_tree().get_nodes_in_group("blue_slime"):
-		saved_game.blue_slime_positions.append(enemy.position)
+	global_data.start_chest_opened = Global.start_chest_opened
+	global_data.cliffside_chest_opened = Global.cliffside_chest_opened
+	global_data.has_neil_quest = Global.has_neil_quest
+	global_data.completed_neil_quest = Global.completed_neil_quest
+	global_data.neil_blue_slime_kills = Global.neil_blue_slime_kills
+	global_data.bigg_e_red_slime_kills = Global.bigg_e_red_slime_kills
 	
-	for redslime in get_tree().get_nodes_in_group("red_slime"):
-		saved_game.red_slime_positions.append(redslime.position)
+	var saved_data:Array[SavedData] = []
+	get_tree().call_group("game_events", "on_save_game", saved_data)
+	saved_game.saved_data = saved_data
+	saved_game.global_data = global_data
 	
 	ResourceSaver.save(saved_game, "user://savegame.tres")
 	
 	
 func load_game():
 	var saved_game:SavedGame = load("user://savegame.tres") as SavedGame
+	var global_dict = (saved_game.global_data.get_property_list())
+	
+	var i = 0
+	for item in global_dict:
+		var item_name = item["name"]
+		i += 1
+		if i > 8:
+			Global.set(item_name, saved_game.global_data.get(item_name))
 	
 	Global.level = saved_game.level
 	Global.health = saved_game.health
 	Global.experience = saved_game.experience
-	Global.game_first_loadin = saved_game.first_loadin
+	Global.game_first_loadin = saved_game.game_first_loadin
 	Global.current_scene = saved_game.current_scene
 	get_tree().change_scene_to_file("res://scenes/" + Global.current_scene + ".tscn")
 	Global.player_position = saved_game.player_position
 	PlayerInventory.inventory = saved_game.player_inventory
 	PlayerInventory.weapons = saved_game.player_weapons
 	PlayerInventory.equips = saved_game.player_equipment
-	Global.start_chest_opened = saved_game.start_chest
-	Global.cliffside_chest_opened = saved_game.cliffside_chest
-	Global.has_neil_quest = saved_game.neil_quest_has
-	Global.completed_neil_quest = saved_game.neil_quest_complete
-	Global.blue_slime_kills = saved_game.neil_blue_slime_kills
-	
-	
+	Global.game_loaded = true
 	
 	$"../HUD/Inventory".initialize_inventory()
 	$"../HUD/Inventory".initialize_weapons()
@@ -64,48 +68,38 @@ func load_game():
 	
 func load_from_home():
 	var saved_game:SavedGame = load("user://savegame.tres") as SavedGame
+	var global_dict = (saved_game.global_data.get_property_list())
+	print(saved_game.global_data.get("start_chest_opened"))
 	
+	var i = 0
+	for item in global_dict:
+		var item_name = item["name"]
+		i += 1
+		if i > 8:
+			Global.set(item_name, saved_game.global_data.get(item_name))
+		
 	Global.level = saved_game.level
 	Global.health = saved_game.health
 	Global.experience = saved_game.experience
-	Global.game_first_loadin = saved_game.first_loadin
+	Global.game_first_loadin = saved_game.game_first_loadin
 	Global.current_scene = saved_game.current_scene
 	get_tree().change_scene_to_file("res://scenes/" + Global.current_scene + ".tscn")
 	Global.player_position = saved_game.player_position
 	PlayerInventory.inventory = saved_game.player_inventory
 	PlayerInventory.weapons = saved_game.player_weapons
 	PlayerInventory.equips = saved_game.player_equipment
-	Global.start_chest_opened = saved_game.start_chest
-	Global.cliffside_chest_opened = saved_game.cliffside_chest
-	Global.has_neil_quest = saved_game.neil_quest_has
-	Global.completed_neil_quest = saved_game.neil_quest_complete
-	Global.blue_slime_kills = saved_game.neil_blue_slime_kills
+	Global.game_loaded = true
 	
 	
-
 func load_enemies():
 	var saved_game:SavedGame = load("user://savegame.tres") as SavedGame
 	
-	for enemy in get_tree().get_nodes_in_group("blue_slime"):
-		enemy.get_parent().remove_child(enemy)
-		enemy.queue_free()
+	get_tree().call_group("game_events", "on_before_load_game")
 	
-	for position in saved_game.blue_slime_positions:
-		var blue_slime_scene = preload("res://scenes/enemy.tscn")
-		var new_blue_slime = blue_slime_scene.instantiate()
+	for item in saved_game.saved_data:
+		var scene = load(item.scene_path) as PackedScene
+		var restored_node = scene.instantiate()
+		$"../..".add_child(restored_node)
 		
-		$"../..".add_child(new_blue_slime)
-		new_blue_slime.position = position
-		new_blue_slime.visible = true
-		print(new_blue_slime.position)
-	
-	for redslime in get_tree().get_nodes_in_group("red_slime"):
-		redslime.get_parent().remove_child(redslime)
-		redslime.queue_free()
-		
-	for position in saved_game.red_slime_positions:
-		var red_slime_scene = preload("res://scenes/redslime.tscn")
-		var new_red_slime = red_slime_scene.instantiate()
-		
-		$"../..".add_child(new_red_slime)
-		new_red_slime.position = position
+		if restored_node.has_method("on_load_game"):
+			restored_node.on_load_game(item)

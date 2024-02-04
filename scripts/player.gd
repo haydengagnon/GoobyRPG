@@ -252,7 +252,7 @@ func health():
 		pants_health = JsonData.item_data[Global.pants]["HealthBonus"]
 	else:
 		pants_health = 0
-	Global.max_health = Global.level * 100 + hat_health + shirt_health + pants_health
+	Global.max_health = 100 + ((Global.level - 1) * 50) + hat_health + shirt_health + pants_health
 	if Global.health > Global.max_health:
 		Global.health = Global.max_health
 

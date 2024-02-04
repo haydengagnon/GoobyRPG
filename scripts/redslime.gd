@@ -39,6 +39,22 @@ func _physics_process(_delta):
 		else:
 			$AnimatedSprite2D.play("idle")
 
+func on_save_game(saved_data:Array[SavedData]):
+	var my_data = SavedData.new()
+	my_data.position = position
+	my_data.health = health
+	my_data.scene_path = scene_file_path
+	
+	saved_data.append(my_data)
+
+func on_before_load_game():
+	get_parent().remove_child(self)
+	queue_free()
+
+func on_load_game(saved_data:SavedData):
+	position = saved_data.position
+	health = saved_data.health
+
 func _on_detection_area_body_entered(body):
 	if body.has_method("player"):
 		player = body

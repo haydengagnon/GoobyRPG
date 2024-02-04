@@ -25,7 +25,9 @@ func _ready():
 	else:
 		$player.position = Global.player_position
 	Global.current_scene = "world"
-	_saver_loader.load_enemies()
+	if Global.game_loaded == true:
+		_saver_loader.load_enemies()
+		Global.game_loaded = false
 
 func _process(_delta):
 	change_scene()

@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready var _saver_loader:SaverLoader = $player/SaverLoader
+
 var can_open
 var item_name
 var done_opening
@@ -17,6 +19,9 @@ func _ready():
 		$chest/AnimatedSprite2D.play("already open")
 	else:
 		$chest/AnimatedSprite2D.play("closed")
+	if Global.game_loaded == true:
+		_saver_loader.load_enemies()
+		Global.game_loaded = false
 
 func _process(_delta):
 	change_scene()
