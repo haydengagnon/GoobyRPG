@@ -235,6 +235,174 @@ theme_override_fonts/font = ExtResource("2_h66x3")
 theme_override_font_sizes/font_size = 50
 text = "Load"
 
+[node name="loadmenu" type="Panel" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -375.0
+offset_top = -204.0
+offset_right = 375.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_48uv5")
+
+[node name="GridContainer" type="GridContainer" parent="loadmenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -50.0
+offset_right = 350.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 50
+columns = 3
+
+[node name="loadslot1" type="Button" parent="loadmenu/GridContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h66x3")
+theme_override_font_sizes/font_size = 50
+text = "Slot 1"
+
+[node name="loadslot2" type="Button" parent="loadmenu/GridContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h66x3")
+theme_override_font_sizes/font_size = 50
+text = "Slot 2"
+
+[node name="loadslot3" type="Button" parent="loadmenu/GridContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h66x3")
+theme_override_font_sizes/font_size = 50
+text = "Slot 3"
+
+[node name="loadlabel" type="Label" parent="loadmenu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -115.0
+offset_top = 9.0
+offset_right = 4506.0
+offset_bottom = 913.0
+grow_horizontal = 2
+scale = Vector2(0.05, 0.05)
+theme_override_fonts/font = ExtResource("2_h66x3")
+theme_override_font_sizes/font_size = 750
+text = "Load Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="loadbackbutton" type="Button" parent="loadmenu"]
+custom_minimum_size = Vector2(50, 25)
+layout_mode = 0
+offset_left = 25.0
+offset_top = 11.0
+offset_right = 101.0
+offset_bottom = 50.0
+theme_override_fonts/font = ExtResource("2_h66x3")
+theme_override_font_sizes/font_size = 25
+text = "Back"
+
+[node name="savemenu" type="Panel" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -375.0
+offset_top = -204.0
+offset_right = 375.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_48uv5")
+
+[node name="GridContainer" type="GridContainer" parent="savemenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -50.0
+offset_right = 350.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 50
+columns = 3
+
+[node name="saveslot1" type="Button" parent="savemenu/GridContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h66x3")
+theme_override_font_sizes/font_size = 50
+text = "Slot 1"
+
+[node name="saveslot2" type="Button" parent="savemenu/GridContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h66x3")
+theme_override_font_sizes/font_size = 50
+text = "Slot 2"
+
+[node name="saveslot3" type="Button" parent="savemenu/GridContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h66x3")
+theme_override_font_sizes/font_size = 50
+text = "Slot 3"
+
+[node name="savelabel" type="Label" parent="savemenu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -115.0
+offset_top = 9.0
+offset_right = 4506.0
+offset_bottom = 913.0
+grow_horizontal = 2
+scale = Vector2(0.05, 0.05)
+theme_override_fonts/font = ExtResource("2_h66x3")
+theme_override_font_sizes/font_size = 750
+text = "Save Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="savebackbutton" type="Button" parent="savemenu"]
+custom_minimum_size = Vector2(50, 25)
+layout_mode = 0
+offset_left = 25.0
+offset_top = 11.0
+offset_right = 101.0
+offset_bottom = 50.0
+theme_override_fonts/font = ExtResource("2_h66x3")
+theme_override_font_sizes/font_size = 25
+text = "Back"
+
 [connection signal="button_down" from="pausemenu/GridContainer/save" to="." method="_on_save_button_down"]
 [connection signal="button_up" from="pausemenu/GridContainer/Close" to="." method="_on_close_button_up"]
 [connection signal="button_down" from="pausemenu/GridContainer/load" to="." method="_on_load_button_down"]
+[connection signal="button_up" from="loadmenu/GridContainer/loadslot1" to="." method="_on_loadslot_1_button_up"]
+[connection signal="button_up" from="loadmenu/GridContainer/loadslot2" to="." method="_on_loadslot_2_button_up"]
+[connection signal="button_up" from="loadmenu/GridContainer/loadslot3" to="." method="_on_loadslot_3_button_up"]
+[connection signal="button_up" from="loadmenu/loadbackbutton" to="." method="_on_loadbackbutton_button_up"]
+[connection signal="button_up" from="savemenu/GridContainer/saveslot1" to="." method="_on_saveslot_1_button_up"]
+[connection signal="button_up" from="savemenu/GridContainer/saveslot2" to="." method="_on_saveslot_2_button_up"]
+[connection signal="button_up" from="savemenu/GridContainer/saveslot3" to="." method="_on_saveslot_3_button_up"]
+[connection signal="button_up" from="savemenu/savebackbutton" to="." method="_on_savebackbutton_button_up"]

@@ -9,6 +9,9 @@ var redslime_can_attack = true
 
 #Load Logic
 var game_loaded = false
+var load1 = false
+var load2 = false
+var load3 = false
 
 #Scene logic
 var current_scene = "start"

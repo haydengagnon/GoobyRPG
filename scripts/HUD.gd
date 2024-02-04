@@ -67,10 +67,50 @@ func _on_close_button_up():
 
 
 func _on_load_button_down():
-	_saver_loader.load_game()
-	paused = false
+	$loadmenu.visible = true
 	$pausemenu.visible = false
 
 
 func _on_save_button_down():
-	_saver_loader.save_game()
+	$savemenu.visible = true
+	$pausemenu.visible = false
+
+
+func _on_loadslot_1_button_up():
+	_saver_loader.load_game1()
+	paused = false
+	Global.game_loaded = true
+
+
+func _on_loadslot_2_button_up():
+	_saver_loader.load_game2()
+	paused = false
+	Global.game_loaded = true
+
+
+func _on_loadslot_3_button_up():
+	_saver_loader.load_game3()
+	paused = false
+	Global.game_loaded = true
+
+
+func _on_loadbackbutton_button_up():
+	$loadmenu.visible = false
+	$pausemenu.visible = true
+
+
+func _on_saveslot_1_button_up():
+	_saver_loader.save_game1()
+
+
+func _on_saveslot_2_button_up():
+	_saver_loader.save_game2()
+
+
+func _on_saveslot_3_button_up():
+	_saver_loader.save_game3()
+
+
+func _on_savebackbutton_button_up():
+	$savemenu.visible = false
+	$pausemenu.visible = true
