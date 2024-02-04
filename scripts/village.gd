@@ -11,6 +11,7 @@ func _ready():
 	else:
 		$player.position = Global.player_position
 	Global.current_scene = "village"
+	Global.game_loaded = false
 
 
 func _process(_delta):

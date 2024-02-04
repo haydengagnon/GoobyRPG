@@ -7,6 +7,8 @@ var redslime_dead = false
 var enemy_can_attack = true
 var redslime_can_attack = true
 
+#Load Logic
+var game_loaded = false
 
 #Scene logic
 var current_scene = "start"
@@ -41,7 +43,8 @@ var neil_text = false
 #Quest Logic
 var has_neil_quest = false
 var completed_neil_quest = false
-var blue_slime_kills = 0
+var neil_blue_slime_kills = 0
+var bigg_e_red_slime_kills = 0
 
 #Sword equipped
 var has_sword = false

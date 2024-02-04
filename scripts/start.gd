@@ -1,11 +1,12 @@
 extends Node2D
 
+@onready var _saver_loader:SaverLoader = $player/SaverLoader
+
 var done_opening = false
 var can_open = false
 var item_name
 
 func _ready():
-	print($player.position)
 	if Global.world_to_start == true:
 		$player.position.x = Global.player_world_to_start_posx
 		$player.position.y = Global.player_world_to_start_posy
@@ -20,7 +21,9 @@ func _ready():
 		$chest/AnimatedSprite2D.play("already open")
 	else:
 		$chest/AnimatedSprite2D.play("closed")
-	print($player.position)
+	if Global.game_loaded == true:
+		_saver_loader.load_enemies()
+		Global.game_loaded = false
 
 
 func _process(_delta):
