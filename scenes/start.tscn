@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://b2u3gdep4g2vr" path="res://art/objects/objects.png" id="3_2skfo"]
 [ext_resource type="Texture2D" uid="uid://bplgjf4jacpgt" path="res://art/objects/chest_01.png" id="4_6yw57"]
 [ext_resource type="PackedScene" uid="uid://br0hh220gcdhl" path="res://scenes/player.tscn" id="5_vkm8s"]
-[ext_resource type="PackedScene" uid="uid://h4e7cfq6dyrg" path="res://scenes/hud.tscn" id="7_7cbjr"]
 [ext_resource type="PackedScene" uid="uid://c4aso13oksqwx" path="res://scenes/enemy.tscn" id="7_vhg7g"]
 [ext_resource type="FontFile" uid="uid://c46hadkwr6sgd" path="res://fonts/Xolonium-Regular.ttf" id="8_op8u0"]
 [ext_resource type="PackedScene" uid="uid://xdwt1bulnai7" path="res://scenes/chest.tscn" id="10_f1kyg"]
@@ -247,11 +246,26 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/inventory_help:theme_override_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s63m5"]
 _data = {
 "get_sword": SubResource("Animation_wt52v")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ganoy"]
+size = Vector2(18, 20)
 
 [node name="start" type="Node2D"]
 y_sort_enabled = true
@@ -279,7 +293,7 @@ layer_2/z_index = 0
 layer_2/tile_data = PackedInt32Array(-65536, 524290, 6, -65535, 524290, 6, -65534, 524290, 6, -65533, 524290, 6, -65532, 524290, 6, -65531, 524290, 6, -65530, 524290, 6, -65529, 524290, 6, -65528, 524290, 6, -65527, 524290, 6, -65526, 524290, 6, -65525, 524290, 6, -65524, 524290, 6, -65523, 524290, 6, -65522, 524290, 6, -65521, 524290, 6, -65520, 524290, 6, -65519, 524290, 6, -65518, 524290, 6, -65517, 524290, 6, -65516, 524290, 6, -65515, 524290, 6, -65514, 524290, 6, -65513, 524290, 6, -65512, 524290, 6, -65511, 524290, 6, -65510, 524290, 6, -65509, 524290, 6, -65508, 524290, 6, -65507, 524290, 6, -65506, 524290, 6, -65505, 524290, 6, -65504, 524290, 6, -65503, 524290, 6, -65502, 524290, 6, -65501, 524290, 6, -65500, 524290, 6, -65499, 524290, 6, 0, 524290, 6, 65536, 524290, 6, 131072, 524290, 6, 196608, 524290, 6, 262144, 524290, 6, 327680, 524290, 6, 393216, 524290, 6, 458752, 524290, 6, 524288, 524290, 6, 589824, 524290, 6, 655360, 524290, 6, 720896, 524290, 6, 786432, 524290, 6, 851968, 524290, 6, 917504, 524290, 6, 983040, 524290, 6, 1048576, 524290, 6, 1114112, 524290, 6, 1179648, 524290, 6, 1245184, 524290, 6, 1310720, 524290, 6, 1376256, 524290, 6, 1376257, 524290, 6, 1376258, 524290, 6, 1376259, 524290, 6, 1376260, 524290, 6, 1376261, 524290, 6, 1376262, 524290, 6, 1376263, 524290, 6, 1376264, 524290, 6, 1376265, 524290, 6, 1376266, 524290, 6, 1376267, 524290, 6, 1376268, 524290, 6, 1376269, 524290, 6, 1376270, 524290, 6, 1376271, 524290, 6, 1376272, 524290, 6, 1376273, 524290, 6, 1376274, 524290, 6, 1376275, 524290, 6, 1376276, 524290, 6, 1376277, 524290, 6, 1376278, 524290, 6, 1376279, 524290, 6, 1376280, 524290, 6, 1376281, 524290, 6, 1376282, 524290, 6, 1376283, 524290, 6, 1376284, 524290, 6, 1376285, 524290, 6, 1376286, 524290, 6, 1376287, 524290, 6, 1376288, 524290, 6, 1376289, 524290, 6, 1376290, 524290, 6, 1376291, 524290, 6, 1376292, 524290, 6, 1376293, 524290, 6, 458754, 2, 5, 458756, 2, 5, 458758, 2, 5, 458760, 2, 5, 458762, 2, 5, 458764, 2, 5, 458766, 2, 5, 458768, 2, 5, 458770, 2, 5, 458772, 2, 5, 37, 524290, 6, 65573, 524290, 6, 131109, 524290, 6, 196645, 524290, 6, 262181, 524290, 6, 327717, 524290, 6, 393253, 524290, 6, 458789, 524290, 6, 524325, 524290, 6, 589861, 524290, 6, 655397, 524290, 6, 720933, 524290, 6, 786469, 524290, 6, 852005, 524290, 6, 393218, 2, 5, 393220, 2, 5, 393222, 2, 5, 393224, 2, 5, 393226, 2, 5, 393228, 2, 5, 393230, 2, 5, 393232, 2, 5, 393234, 2, 5, 393236, 2, 5, 196639, 2, 5, 720929, 2, 5, 983047, 2, 5, 458777, 393218, 7, 1179651, 393218, 7, 1245218, 393218, 7, 983071, 655362, 7, 720906, 655362, 7, 983076, 2, 0)
 
 [node name="player" parent="." instance=ExtResource("5_vkm8s")]
-position = Vector2(61, 50)
+position = Vector2(63, 51)
 
 [node name="enemy" parent="." instance=ExtResource("7_vhg7g")]
 position = Vector2(214, 195)
@@ -297,8 +311,6 @@ shape = SubResource("RectangleShape2D_q4bpb")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(571, 149, 577, 174, 586, 174, 592, 236, 578, 237, 576, 255, 533, 254, 524, 240, 468, 241, 466, 256, 435, 257, 434, 269, 353, 273, 349, 255, 243, 256, 243, 272, 159, 272, 157, 257, 143, 254, 145, 246, 159, 245, 160, 235, 176, 235, 176, 241, 204, 249, 204, 234, 204, 234, 384, 233, 385, 246, 399, 245, 399, 233, 428, 232, 433, 217, 478, 218, 479, 190, 495, 188, 496, 177, 525, 169, 525, 161, 533, 151)
-
-[node name="HUD" parent="." instance=ExtResource("7_7cbjr")]
 
 [node name="movement" type="Label" parent="."]
 offset_left = 75.0
@@ -335,9 +347,9 @@ offset_right = 1281.0
 offset_bottom = 986.0
 scale = Vector2(0.05, 0.05)
 theme_override_fonts/font = ExtResource("8_op8u0")
-text = "Attack
-With
-spacebar"
+text = "Equip Your
+Sword to Attack
+With spacebar"
 label_settings = SubResource("LabelSettings_kr60m")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -377,7 +389,7 @@ offset_right = 1251.0
 offset_bottom = 1132.0
 scale = Vector2(0.05, 0.05)
 theme_override_fonts/font = ExtResource("8_op8u0")
-text = "Use Tab to
+text = "Use Q to
 check other
 stats"
 label_settings = SubResource("LabelSettings_kr60m")
@@ -390,13 +402,12 @@ libraries = {
 }
 
 [node name="recieve_sword" type="Label" parent="AnimationPlayer"]
-visible = false
 offset_left = 518.0
 offset_top = 102.0
 offset_right = 1501.0
 offset_bottom = 726.0
 scale = Vector2(0.05, 0.05)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 0)
 theme_override_font_sizes/font_size = 150
 text = "You've
 recieved
@@ -404,5 +415,29 @@ a rusty sword"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="inventory_help" type="Label" parent="AnimationPlayer"]
+offset_left = 455.0
+offset_top = 79.0
+offset_right = 1475.0
+offset_bottom = 919.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("8_op8u0")
+theme_override_font_sizes/font_size = 150
+text = "Open
+Inventory
+With Tab"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="chest_open_range" type="Area2D" parent="."]
+position = Vector2(533, 81)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="chest_open_range"]
+position = Vector2(10, 10)
+shape = SubResource("RectangleShape2D_ganoy")
+
 [connection signal="body_entered" from="enter_world" to="." method="_on_enter_world_body_entered"]
 [connection signal="body_exited" from="enter_world" to="." method="_on_enter_world_body_exited"]
+[connection signal="body_entered" from="chest_open_range" to="." method="_on_chest_open_range_body_entered"]
+[connection signal="body_exited" from="chest_open_range" to="." method="_on_chest_open_range_body_exited"]

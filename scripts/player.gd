@@ -1,20 +1,29 @@
 extends CharacterBody2D
 
+
 var enemy_in_range = false
 var redslime_in_range = false
 var enemy_attack_cooldown = true
 var player_alive = true
 var level = Global.level
-
+var death_played = false
 var attack_ip = false
+var weapon_damage
+var offhand_damage
+var hat_health
+var shirt_health
+var pants_health
 
 const speed = 100
 var current_dir = "none"
 
+
 func _ready():
 	$AnimatedSprite2D.play("front_idle")
+	health()
 	if Global.game_first_loadin == true:
 		Global.health = Global.max_health
+	$regen_timer.start()
 
 
 func _physics_process(delta):
@@ -26,59 +35,59 @@ func _physics_process(delta):
 	death()
 	levelup(Global.level)
 	damage()
+	health()
 	
-	
-	Global.max_health = Global.level * 100
 	
 
 func player_movement(_delta):
-	if attack_ip == false:
-		if Input.is_action_pressed("move_right"):
-			current_dir = "right"
-			play_animation(1)
-			if Input.is_action_pressed("move_up") and Input.is_action_pressed("move_down"):
-				velocity.x = speed
-				velocity.y = 0
-			elif Input.is_action_pressed("move_up"):
-				velocity.x = speed / 1.25
-				velocity.y = -speed / 1.25
+	if player_alive == true:
+		if attack_ip == false:
+			if Input.is_action_pressed("move_right"):
+				current_dir = "right"
+				play_animation(1)
+				if Input.is_action_pressed("move_up") and Input.is_action_pressed("move_down"):
+					velocity.x = speed
+					velocity.y = 0
+				elif Input.is_action_pressed("move_up"):
+					velocity.x = speed / 1.25
+					velocity.y = -speed / 1.25
+				elif Input.is_action_pressed("move_down"):
+					velocity.x = speed / 1.25
+					velocity.y = speed / 1.25
+				else:
+					velocity.x = speed
+					velocity.y = 0
+			elif Input.is_action_pressed("move_left"):
+				current_dir = "left"
+				play_animation(1)
+				if Input.is_action_pressed("move_up") and Input.is_action_pressed("move_down"):
+					velocity.x = -speed
+					velocity.y = 0
+				elif Input.is_action_pressed("move_up"):
+					velocity.x = -speed / 1.25
+					velocity.y = -speed / 1.25
+				elif Input.is_action_pressed("move_down"):
+					velocity.x = -speed / 1.25
+					velocity.y = speed / 1.25
+				else:
+					velocity.x = -speed
+					velocity.y = 0
 			elif Input.is_action_pressed("move_down"):
-				velocity.x = speed / 1.25
-				velocity.y = speed / 1.25
-			else:
-				velocity.x = speed
-				velocity.y = 0
-		elif Input.is_action_pressed("move_left"):
-			current_dir = "left"
-			play_animation(1)
-			if Input.is_action_pressed("move_up") and Input.is_action_pressed("move_down"):
-				velocity.x = -speed
-				velocity.y = 0
+				current_dir = "down"
+				play_animation(1)
+				velocity.x = 0
+				velocity.y = speed
 			elif Input.is_action_pressed("move_up"):
-				velocity.x = -speed / 1.25
-				velocity.y = -speed / 1.25
-			elif Input.is_action_pressed("move_down"):
-				velocity.x = -speed / 1.25
-				velocity.y = speed / 1.25
+				current_dir = "up"
+				play_animation(1)
+				velocity.x = 0
+				velocity.y = -speed
 			else:
-				velocity.x = -speed
+				play_animation(0)
+				velocity.x = 0
 				velocity.y = 0
-		elif Input.is_action_pressed("move_down"):
-			current_dir = "down"
-			play_animation(1)
-			velocity.x = 0
-			velocity.y = speed
-		elif Input.is_action_pressed("move_up"):
-			current_dir = "up"
-			play_animation(1)
-			velocity.x = 0
-			velocity.y = -speed
-		else:
-			play_animation(0)
-			velocity.x = 0
-			velocity.y = 0
 		
-	move_and_slide()
+		move_and_slide()
 
 func play_animation(movement):
 	var direction = current_dir
@@ -139,8 +148,8 @@ func enemy_attack():
 				Global.health -= 10
 				enemy_attack_cooldown = false
 				$attack_cooldown.start()
+				$regen_timer.stop()
 				$regen_cooldown.start()
-				print("Blue slime hit! ", Global.health)
 		
 func redslime_attack():
 	if Global.health > 0:
@@ -148,8 +157,8 @@ func redslime_attack():
 				Global.health -= 20
 				enemy_attack_cooldown = false
 				$attack_cooldown.start()
+				$regen_timer.stop()
 				$regen_cooldown.start()
-				print("Red slime hit! ", Global.health)
 
 func _on_attack_cooldown_timeout():
 	enemy_attack_cooldown = true
@@ -157,43 +166,32 @@ func _on_attack_cooldown_timeout():
 func attack():
 	var direction = current_dir
 	
-	if Global.has_sword == true:
-		if Input.is_action_just_pressed("attack"):
-			Global.player_current_attack = true
-			attack_ip = true
-			velocity.x = 0
-			velocity.y = 0
-			if direction == "right":
-				$AnimatedSprite2D.flip_h = false
-				$AnimatedSprite2D.play("side_attack")
-				$deal_attack_timer.start()
-			if direction == "left":
-				$AnimatedSprite2D.flip_h = true
-				$AnimatedSprite2D.play("side_attack")
-				$deal_attack_timer.start()
-			if direction == "down":
-				$AnimatedSprite2D.play("front_attack")
-				$deal_attack_timer.start()
-			if direction == "up":
-				$AnimatedSprite2D.play("back_attack")
-				$deal_attack_timer.start()
-			if Global.enemy_can_attack == false:
-				$attack_cooldown.start()
-			if Global.redslime_can_attack == false:
-				$attack_cooldown.start()
+	if player_alive == true:
+		if Global.has_sword == true:
+			if Input.is_action_just_pressed("attack"):
+				Global.player_current_attack = true
+				attack_ip = true
+				velocity.x = 0
+				velocity.y = 0
+				if direction == "right":
+					$AnimatedSprite2D.flip_h = false
+					$AnimatedSprite2D.play("side_attack")
+					$deal_attack_timer.start()
+				if direction == "left":
+					$AnimatedSprite2D.flip_h = true
+					$AnimatedSprite2D.play("side_attack")
+					$deal_attack_timer.start()
+				if direction == "down":
+					$AnimatedSprite2D.play("front_attack")
+					$deal_attack_timer.start()
+				if direction == "up":
+					$AnimatedSprite2D.play("back_attack")
+					$deal_attack_timer.start()
 			
 func interact():
 	if Input.is_action_just_pressed("interact"):
-		#print("Current lvl: ", Global.level)
-		#print("Current exp: ", Global.experience)
-		if Global.can_open == true:
-			Global.opened = true
-			print("Should open")
-		else:
-			Global.opened = false
 		if Global.talk_to_neil == true:
 			Global.neil_text = true
-			print("spoken")
 
 func _on_deal_attack_timer_timeout():
 	$deal_attack_timer.stop()
@@ -210,16 +208,15 @@ func _on_regen_timer_timeout():
 		Global.health += Global.max_health / 10
 		if Global.health > Global.max_health:
 			Global.health = Global.max_health
-		print("Healed to: ", Global.health)
-		
+
 
 func death():
 	if Global.health <= 0:
 		player_alive = false #go to death screen
 		Global.health = 0
-		print("player has been killed")
-		$AnimatedSprite2D.play("death")
-		
+		if death_played == false:
+			$AnimatedSprite2D.play("death")
+
 func levelup(lvl):
 	var formula = floor(400 * (lvl * 1.25))
 	var exp_req = int(formula)
@@ -227,15 +224,37 @@ func levelup(lvl):
 	if Global.experience == floor(400 * (lvl * 1.25)):
 		Global.level += 1
 		Global.experience = 0
-		print("Leveled Up! ", Global.level)
 	elif Global.experience > floor(400 * (lvl * 1.25)):
 		Global.level += 1
 		Global.experience = Global.experience % exp_req
-		print("Leveled Up! ", Global.level)
-		print("Current exp: ", Global.experience)
 		
 func damage():
-	if Global.rusty_sword == true:
-		Global.damage = (Global.level - 1) * 10 + 25
-	elif Global.iron_sword == true:
-		Global.damage = (Global.level - 1) * 15 + 50
+	if Global.has_sword == false:
+		Global.damage = 0
+	if Global.has_sword == true:
+		weapon_damage = JsonData.item_data[Global.weapon]["ItemAttack"]
+		if Global.offhand != null:
+			offhand_damage = JsonData.item_data[Global.offhand]["ItemAttack"]
+			Global.damage = (Global.level - 1) * 10 + weapon_damage + offhand_damage
+		else:
+			Global.damage = (Global.level - 1) * 10 + weapon_damage
+
+func health():
+	if Global.hat != null:
+		hat_health = JsonData.item_data[Global.hat]["HealthBonus"]
+	else:
+		hat_health = 0
+	if Global.shirt != null:
+		shirt_health = JsonData.item_data[Global.shirt]["HealthBonus"]
+	else:
+		shirt_health = 0
+	if Global.pants != null:
+		pants_health = JsonData.item_data[Global.pants]["HealthBonus"]
+	else:
+		pants_health = 0
+	Global.max_health = 100 + ((Global.level - 1) * 50) + hat_health + shirt_health + pants_health
+	if Global.health > Global.max_health:
+		Global.health = Global.max_health
+
+func _on_animated_sprite_2d_animation_finished():
+	death_played = true

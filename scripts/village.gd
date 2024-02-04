@@ -8,7 +8,10 @@ func _ready():
 		$player.position.x = Global.player_world_to_village_posx
 		$player.position.y = Global.player_world_to_village_posy
 		Global.world_to_village = false
+	else:
+		$player.position = Global.player_position
 	Global.current_scene = "village"
+	Global.game_loaded = false
 
 
 func _process(_delta):
@@ -62,16 +65,15 @@ func _on_west_entrance_body_exited(body):
 func _on_neiltalkarea_body_entered(body):
 	if body.has_method("player"):
 		Global.talk_to_neil = true
-		print("can talk")
 
 
 func _on_neiltalkarea_body_exited(body):
 	if body.has_method("player"):
 		Global.talk_to_neil = false
 		Global.neil_text = false
-		print("can't talk")
 
 func neil_speak():
+	var item = "ironsword"
 	if Global.neil_text == true and Global.blue_slime_kills < 5:
 		$neil_speak/Panel.visible = true
 		$neil_speak/Panel/Label.visible = true
@@ -79,9 +81,9 @@ func neil_speak():
 			$neil_speak.play("neilquest")
 		Global.has_neil_quest = true
 	elif Global.neil_text == true and Global.blue_slime_kills >= 5:
-		Global.completed_neil_quest = true
-		Global.rusty_sword = false
-		Global.iron_sword = true
+		if Global.completed_neil_quest == false:
+			PlayerInventory.add_item(item, 1)
+			Global.completed_neil_quest = true
 		$neil_speak/Panel.visible = true
 		$neil_speak/Panel/Label.visible = true
 		if neil_done_talking == false:

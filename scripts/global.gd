@@ -7,12 +7,18 @@ var redslime_dead = false
 var enemy_can_attack = true
 var redslime_can_attack = true
 
+#Load Logic
+var game_loaded = false
+var load1 = false
+var load2 = false
+var load3 = false
+
 #Scene logic
 var current_scene = "start"
 var transition_scene = false
 var cliffside_enter = false
 var start_enter = false
-var village_enter = false 
+var village_enter = false
 var world_enter = false
 
 #player stats
@@ -26,9 +32,12 @@ var armor = 0
 var display_more_stats = false
 
 #Chest logic
-var can_open = false
-var opened = false
-var done_opening_start = false
+var start_chest_opened = false
+var cliffside_chest_opened = false
+
+#Inventory
+var open_inv = false
+var mouse_in = false
 
 #NPC logic
 var talk_to_neil = false
@@ -37,17 +46,25 @@ var neil_text = false
 #Quest Logic
 var has_neil_quest = false
 var completed_neil_quest = false
-var blue_slime_kills = 5
+var neil_blue_slime_kills = 0
+var bigg_e_red_slime_kills = 0
 
 #Sword equipped
 var has_sword = false
 var sword_text = false
-var rusty_sword = false
-var iron_sword = false
+
+#Equippped items
+var weapon = null
+var offhand = null
+var hat = null
+var shirt = null
+var pants = null
 
 #player transition locations
 var player_exit_cliffside_posx = 275
 var player_exit_cliffside_posy = 20
+var player_enter_cliffside_posx = 88
+var player_enter_cliffside_posy = 256
 var player_start_to_world_posx = 30
 var player_start_to_world_posy = 64
 var player_start_posx = 61
@@ -58,6 +75,7 @@ var player_village_to_world_posx = 400
 var player_village_to_world_posy = 123
 var player_world_to_village_posx = 28
 var player_world_to_village_posy = 396
+var player_position = Vector2(0, 0)
 
 #player transition position logic
 var start_to_world = false

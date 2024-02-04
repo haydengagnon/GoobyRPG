@@ -1,0 +1,232 @@
+[gd_scene load_steps=8 format=3 uid="uid://cjwxvk1py80ck"]
+
+[ext_resource type="Texture2D" uid="uid://ymj8sg66s3vb" path="res://art/inventory/inventorybackground.png" id="1_c4oor"]
+[ext_resource type="Script" path="res://scripts/inventory.gd" id="1_cn4bo"]
+[ext_resource type="Texture2D" uid="uid://bhdvncbrxve7k" path="res://art/inventory/invslot.png" id="2_h1s61"]
+[ext_resource type="Script" path="res://scripts/Slot.gd" id="4_t3i60"]
+[ext_resource type="FontFile" uid="uid://c46hadkwr6sgd" path="res://fonts/Xolonium-Regular.ttf" id="5_r8bnt"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ftlsq"]
+texture = ExtResource("2_h1s61")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s2oh5"]
+texture = ExtResource("2_h1s61")
+
+[node name="Inventory" type="Node2D"]
+script = ExtResource("1_cn4bo")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.588235)
+offset_right = 350.0
+offset_bottom = 200.0
+texture = ExtResource("1_c4oor")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_left = 161.0
+offset_top = 18.0
+offset_right = 325.0
+offset_bottom = 182.0
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 4
+
+[node name="Slot1" type="Panel" parent="GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ftlsq")
+script = ExtResource("4_t3i60")
+
+[node name="Slot2" type="Panel" parent="GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ftlsq")
+script = ExtResource("4_t3i60")
+
+[node name="Slot3" type="Panel" parent="GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ftlsq")
+script = ExtResource("4_t3i60")
+
+[node name="Slot4" type="Panel" parent="GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ftlsq")
+script = ExtResource("4_t3i60")
+
+[node name="Slot5" type="Panel" parent="GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ftlsq")
+script = ExtResource("4_t3i60")
+
+[node name="Slot6" type="Panel" parent="GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ftlsq")
+script = ExtResource("4_t3i60")
+
+[node name="Slot7" type="Panel" parent="GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ftlsq")
+script = ExtResource("4_t3i60")
+
+[node name="Slot8" type="Panel" parent="GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ftlsq")
+script = ExtResource("4_t3i60")
+
+[node name="Slot9" type="Panel" parent="GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ftlsq")
+script = ExtResource("4_t3i60")
+
+[node name="Slot10" type="Panel" parent="GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ftlsq")
+script = ExtResource("4_t3i60")
+
+[node name="Slot11" type="Panel" parent="GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ftlsq")
+script = ExtResource("4_t3i60")
+
+[node name="Slot12" type="Panel" parent="GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ftlsq")
+script = ExtResource("4_t3i60")
+
+[node name="Slot13" type="Panel" parent="GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ftlsq")
+script = ExtResource("4_t3i60")
+
+[node name="Slot14" type="Panel" parent="GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ftlsq")
+script = ExtResource("4_t3i60")
+
+[node name="Slot15" type="Panel" parent="GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ftlsq")
+script = ExtResource("4_t3i60")
+
+[node name="Slot16" type="Panel" parent="GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ftlsq")
+script = ExtResource("4_t3i60")
+
+[node name="WeaponSlots" type="GridContainer" parent="."]
+offset_left = 29.0
+offset_top = 84.0
+offset_right = 149.0
+offset_bottom = 116.0
+theme_override_constants/h_separation = 56
+columns = 2
+
+[node name="WeaponSlot" type="Panel" parent="WeaponSlots"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_s2oh5")
+script = ExtResource("4_t3i60")
+
+[node name="Label" type="Label" parent="WeaponSlots/WeaponSlot"]
+layout_mode = 0
+offset_right = 656.0
+offset_bottom = 184.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_r8bnt")
+theme_override_font_sizes/font_size = 125
+text = "Weapon"
+horizontal_alignment = 1
+
+[node name="OffhandSlot" type="Panel" parent="WeaponSlots"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_s2oh5")
+script = ExtResource("4_t3i60")
+
+[node name="Label" type="Label" parent="WeaponSlots/OffhandSlot"]
+layout_mode = 0
+offset_right = 656.0
+offset_bottom = 184.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_r8bnt")
+theme_override_font_sizes/font_size = 125
+text = "Offhand"
+horizontal_alignment = 1
+
+[node name="EquipSlots" type="GridContainer" parent="."]
+offset_left = 73.0
+offset_top = 32.0
+offset_right = 105.0
+offset_bottom = 168.0
+theme_override_constants/v_separation = 20
+
+[node name="HelmetSlot" type="Panel" parent="EquipSlots"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_s2oh5")
+script = ExtResource("4_t3i60")
+
+[node name="Label" type="Label" parent="EquipSlots/HelmetSlot"]
+layout_mode = 0
+offset_right = 620.0
+offset_bottom = 184.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_r8bnt")
+theme_override_font_sizes/font_size = 125
+text = "Helmet"
+horizontal_alignment = 1
+
+[node name="ShirtSlot" type="Panel" parent="EquipSlots"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_s2oh5")
+script = ExtResource("4_t3i60")
+
+[node name="Label" type="Label" parent="EquipSlots/ShirtSlot"]
+layout_mode = 0
+offset_right = 620.0
+offset_bottom = 184.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_r8bnt")
+theme_override_font_sizes/font_size = 125
+text = "Shirt"
+horizontal_alignment = 1
+
+[node name="PantsSlot" type="Panel" parent="EquipSlots"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_s2oh5")
+script = ExtResource("4_t3i60")
+
+[node name="Label" type="Label" parent="EquipSlots/PantsSlot"]
+layout_mode = 0
+offset_right = 620.0
+offset_bottom = 184.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_r8bnt")
+theme_override_font_sizes/font_size = 125
+text = "Pants
+"
+horizontal_alignment = 1

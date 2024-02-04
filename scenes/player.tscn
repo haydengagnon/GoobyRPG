@@ -1,7 +1,9 @@
-[gd_scene load_steps=57 format=3 uid="uid://br0hh220gcdhl"]
+[gd_scene load_steps=59 format=3 uid="uid://br0hh220gcdhl"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_0864r"]
 [ext_resource type="Texture2D" uid="uid://bokikcwtbh33a" path="res://art/characters/player.png" id="2_pph6i"]
+[ext_resource type="PackedScene" uid="uid://h4e7cfq6dyrg" path="res://scenes/hud.tscn" id="3_2ny5k"]
+[ext_resource type="PackedScene" uid="uid://caetlvahlkqm6" path="res://scenes/saver_loader.tscn" id="4_kp6cu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uxjsg"]
 atlas = ExtResource("2_pph6i")
@@ -424,7 +426,7 @@ script = ExtResource("1_0864r")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_cgrtx")
-animation = &"death"
+animation = &"back_walk"
 offset = Vector2(0, -15)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -457,9 +459,17 @@ wait_time = 5.0
 
 [node name="regen_timer" type="Timer" parent="."]
 
+[node name="HUD" parent="." instance=ExtResource("3_2ny5k")]
+
+[node name="SaverLoader" parent="." instance=ExtResource("4_kp6cu")]
+unique_name_in_owner = true
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_exited"]
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
 [connection signal="timeout" from="deal_attack_timer" to="." method="_on_deal_attack_timer_timeout"]
 [connection signal="timeout" from="regen_cooldown" to="." method="_on_regen_cooldown_timeout"]
 [connection signal="timeout" from="regen_timer" to="." method="_on_regen_timer_timeout"]
+
+[editable path="HUD"]
