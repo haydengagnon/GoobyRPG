@@ -101,6 +101,8 @@ func deal_damage():
 		self.queue_free()
 		can_die = false
 		Global.redslime_dead = false
+		if Global.has_bigg_e_quest == true and Global.completed_bigg_e_quest == false:
+			Global.bigg_e_red_slime_kills += 1
 
 
 func _on_take_damage_cooldown_timeout():
