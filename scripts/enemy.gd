@@ -104,7 +104,7 @@ func deal_damage():
 		can_die = false
 		Global.enemy_dead = false
 		if Global.has_neil_quest == true and Global.completed_neil_quest == false:
-			Global.blue_slime_kills += 1
+			Global.neil_blue_slime_kills += 1
 
 
 func _on_take_damage_cooldown_timeout():
