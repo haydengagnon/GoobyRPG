@@ -20,8 +20,7 @@ func _process(_delta):
 	change_scene()
 	set_camera_limits()
 	neil_speak()
-
-
+	bigg_e_speak()
 
 		
 func set_camera_limits():
@@ -76,13 +75,13 @@ func _on_neiltalkarea_body_exited(body):
 
 func neil_speak():
 	var item = "ironsword"
-	if Global.neil_text == true and Global.blue_slime_kills < 5:
+	if Global.neil_text == true and Global.neil_blue_slime_kills < 5:
 		$neil_speak/Panel.visible = true
 		$neil_speak/Panel/Label.visible = true
 		if neil_done_talking == false:
 			$neil_speak.play("neilquest")
 		Global.has_neil_quest = true
-	elif Global.neil_text == true and Global.blue_slime_kills >= 5:
+	elif Global.neil_text == true and Global.neil_blue_slime_kills >= 5:
 		if Global.completed_neil_quest == false:
 			PlayerInventory.add_item(item, 1)
 			Global.completed_neil_quest = true
@@ -115,6 +114,9 @@ func _on_area_2d_body_exited(body):
 
 func bigg_e_speak():
 	var item = "leatherhat"
+	if Input.is_action_just_pressed("interact"):
+		if talk_to_bigg_e == true:
+			bigg_e_text = true
 	if bigg_e_text == true and Global.bigg_e_red_slime_kills < 3:
 		$bigg_e_speak/Panel.visible = true
 		$bigg_e_speak/Panel/Label.visible = true
@@ -128,9 +130,11 @@ func bigg_e_speak():
 		$bigg_e_speak/Panel.visible = true
 		$bigg_e_speak/Panel/Label.visible = true
 		if bigg_e_done_talking == false:
-			$bigg_e_speak/Panel.visible = false
-			$bigg_e_speak/Panel/Label.visible = false
-			bigg_e_done_talking = false
+				$bigg_e_speak.play("biggequestcomplete")
+	elif bigg_e_text == false:
+		$bigg_e_speak/Panel.visible = false
+		$bigg_e_speak/Panel/Label.visible = false
+		bigg_e_done_talking = false
 
 func _on_bigg_e_speak_animation_finished(anim_name):
 	if anim_name == "biggequest":

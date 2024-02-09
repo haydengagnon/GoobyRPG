@@ -4,8 +4,8 @@ extends Node
 var player_current_attack = false
 var enemy_dead = false
 var redslime_dead = false
-var enemy_can_attack = true
 var redslime_can_attack = true
+var deal_damage = false
 
 #Load Logic
 var game_loaded = false

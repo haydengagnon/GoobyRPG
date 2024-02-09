@@ -8,7 +8,8 @@ var health = 100
 var player_in_zone = false
 var can_take_damage = true
 var can_die = false
-var just_hit = false
+var take_damage = false
+var getting_hit = false
 
 func _physics_process(_delta):
 	deal_damage()
@@ -18,7 +19,7 @@ func _physics_process(_delta):
 	$healthbar.value = health
 	
 	if health > 0:
-		if just_hit == true:
+		if getting_hit == true:
 			$AnimatedSprite2D.play("hit")
 			move_and_collide(Vector2(0,0))
 			position -= (player.position - position) / speed
@@ -29,7 +30,7 @@ func _physics_process(_delta):
 			
 		elif player_chase:
 			move_and_collide(Vector2(0,0))
-			position += (player.position - position)/speed
+			position += (player.position - position) / speed
 			
 			$AnimatedSprite2D.play("walk")
 			
@@ -64,7 +65,6 @@ func _on_detection_area_body_entered(body):
 
 func _on_detection_area_body_exited(body):
 	if body.has_method("player"):
-		player = null
 		player_chase = false
 
 func enemy():
@@ -80,20 +80,20 @@ func _on_enemy_hitbox_body_exited(body):
 		player_in_zone = false
 
 func deal_damage():
-	if player_in_zone and Global.player_current_attack == true:
-		Global.enemy_can_attack = false
+	if take_damage == true:
 		if can_take_damage == true:
-			#Add in animation, movement, and stun target on hit
+			getting_hit = true
 			health -= Global.damage
-			just_hit = true
-			$justhit.start()
 			$take_damage_cooldown.start()
+			$justhit.start()
 			can_take_damage = false
 			if health <= 0:
 				Global.enemy_dead = true
 				$death_timer.start()
 				$AnimatedSprite2D.play("death")
 				health = 0
+	
+
 	if can_die == true:
 		var dagger_drop_rate = randi_range(0, 9)
 		var item = "dagger"
@@ -109,7 +109,6 @@ func deal_damage():
 
 func _on_take_damage_cooldown_timeout():
 	can_take_damage = true
-	Global.enemy_can_attack = true
 
 
 func _on_death_timer_timeout():
@@ -117,4 +116,4 @@ func _on_death_timer_timeout():
 
 
 func _on_justhit_timeout():
-	just_hit = false
+	getting_hit = false
