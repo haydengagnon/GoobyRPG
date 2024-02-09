@@ -179,7 +179,7 @@ position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_c0wm0")
 
 [node name="take_damage_cooldown" type="Timer" parent="."]
-wait_time = 0.6
+wait_time = 0.36
 
 [node name="death_timer" type="Timer" parent="."]
 wait_time = 0.5

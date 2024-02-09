@@ -152,9 +152,3 @@ func _on_animation_player_animation_finished(anim_name):
 		cliffside_sign_animation_done = true
 	if anim_name == "villagesign":
 		village_area_sign_animation_done = true
-
-
-
-
-
-

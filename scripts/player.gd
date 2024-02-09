@@ -13,6 +13,7 @@ var offhand_damage
 var hat_health
 var shirt_health
 var pants_health
+var enemy = null
 
 const speed = 100
 var current_dir = "none"
@@ -168,25 +169,27 @@ func attack():
 	
 	if player_alive == true:
 		if Global.has_sword == true:
-			if Input.is_action_just_pressed("attack"):
-				Global.player_current_attack = true
-				attack_ip = true
-				velocity.x = 0
-				velocity.y = 0
-				if direction == "right":
-					$AnimatedSprite2D.flip_h = false
-					$AnimatedSprite2D.play("side_attack")
-					$deal_attack_timer.start()
-				if direction == "left":
-					$AnimatedSprite2D.flip_h = true
-					$AnimatedSprite2D.play("side_attack")
-					$deal_attack_timer.start()
-				if direction == "down":
-					$AnimatedSprite2D.play("front_attack")
-					$deal_attack_timer.start()
-				if direction == "up":
-					$AnimatedSprite2D.play("back_attack")
-					$deal_attack_timer.start()
+			if attack_ip == false:
+				if Input.is_action_just_pressed("attack"):
+					Global.player_current_attack = true
+					attack_ip = true
+					$attack_area/CollisionShape2D.disabled = false
+					velocity.x = 0
+					velocity.y = 0
+					if direction == "right":
+						$AnimatedSprite2D.flip_h = false
+						$AnimatedSprite2D.play("side_attack")
+						$deal_attack_timer.start()
+					if direction == "left":
+						$AnimatedSprite2D.flip_h = true
+						$AnimatedSprite2D.play("side_attack")
+						$deal_attack_timer.start()
+					if direction == "down":
+						$AnimatedSprite2D.play("front_attack")
+						$deal_attack_timer.start()
+					if direction == "up":
+						$AnimatedSprite2D.play("back_attack")
+						$deal_attack_timer.start()
 			
 func interact():
 	if Input.is_action_just_pressed("interact"):
@@ -197,6 +200,7 @@ func _on_deal_attack_timer_timeout():
 	$deal_attack_timer.stop()
 	Global.player_current_attack = false
 	attack_ip = false
+	$attack_area/CollisionShape2D.disabled = true
 
 
 func _on_regen_cooldown_timeout():
@@ -257,4 +261,41 @@ func health():
 		Global.health = Global.max_health
 
 func _on_animated_sprite_2d_animation_finished():
-	death_played = true
+	if $AnimatedSprite2D.animation == "death":
+		death_played = true
+
+
+func _on_animated_sprite_2d_animation_changed():
+	if $AnimatedSprite2D.animation == "back_attack":
+		$attack_area/CollisionShape2D.position = Vector2(-1, -10)
+		$attack_area/CollisionShape2D.rotation_degrees = 90
+		$attack_area/CollisionShape2D.shape.radius = 5
+		$attack_area/CollisionShape2D.shape.height = 20
+	if $AnimatedSprite2D.animation == "front_attack":
+		$attack_area/CollisionShape2D.position = Vector2(1, 3)
+		$attack_area/CollisionShape2D.rotation_degrees = 90
+		$attack_area/CollisionShape2D.shape.radius = 5
+		$attack_area/CollisionShape2D.shape.height = 20
+	if $AnimatedSprite2D.animation == "side_attack":
+		if current_dir == "right":
+			$attack_area/CollisionShape2D.position = Vector2(8, -4)
+			$attack_area/CollisionShape2D.rotation_degrees = 0
+			$attack_area/CollisionShape2D.shape.radius = 6
+			$attack_area/CollisionShape2D.shape.height = 18
+		if current_dir == "left":
+			$attack_area/CollisionShape2D.position = Vector2(-9, -4)
+			$attack_area/CollisionShape2D.rotation_degrees = 0
+			$attack_area/CollisionShape2D.shape.radius = 6
+			$attack_area/CollisionShape2D.shape.height = 18
+
+
+
+func _on_attack_area_body_entered(body):
+	if body.has_method("enemy"):
+		body.deal_damage()
+		body.take_damage = true
+
+
+func _on_attack_area_body_exited(body):
+	if body.has_method("enemy"):
+		body.take_damage = false

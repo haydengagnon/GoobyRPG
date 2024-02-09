@@ -3,7 +3,6 @@ extends CanvasLayer
 @onready var _saver_loader:SaverLoader = %SaverLoader
 
 var expneeded = floor(400 * (Global.level * 1.25))
-var paused = false
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -51,18 +50,21 @@ func player_stats():
 
 func pause():
 	if Input.is_action_just_pressed("pause"):
-		if paused == false:
+		if $pausemenu.visible == false:
 			get_tree().paused = true
-			paused = true
 			$pausemenu.visible = true
-		elif paused == true:
+		elif $pausemenu.visible == true:
 			get_tree().paused = false
-			paused = false
 			$pausemenu.visible = false
+		if $loadmenu.visible == true:
+			$loadmenu.visible = false
+			$pausemenu.visible = true
+		if $savemenu.visible == true:
+			$savemenu.visible = false
+			$pausemenu.visible = true
 
 func _on_close_button_up():
 	get_tree().paused = false
-	paused = false
 	$pausemenu.visible = false
 
 
@@ -78,20 +80,23 @@ func _on_save_button_down():
 
 func _on_loadslot_1_button_up():
 	_saver_loader.load_game1()
-	paused = false
 	Global.game_loaded = true
+	$loadmenu.visible = false
+	get_tree().paused = false
 
 
 func _on_loadslot_2_button_up():
 	_saver_loader.load_game2()
-	paused = false
 	Global.game_loaded = true
+	$loadmenu.visible = false
+	get_tree().paused = false
 
 
 func _on_loadslot_3_button_up():
 	_saver_loader.load_game3()
-	paused = false
 	Global.game_loaded = true
+	$loadmenu.visible = false
+	get_tree().paused = false
 
 
 func _on_loadbackbutton_button_up():

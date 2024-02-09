@@ -20,7 +20,6 @@ func _on_load_button_up():
 	$titlescreen/load.visible = false
 	$titlescreen/exit.visible = false
 
-
 func _on_back_button_up():
 	$titlescreen/GridContainer.visible = false
 	$titlescreen/back.visible = false
