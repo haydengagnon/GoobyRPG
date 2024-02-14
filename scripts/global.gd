@@ -20,6 +20,7 @@ var cliffside_enter = false
 var start_enter = false
 var village_enter = false
 var world_enter = false
+var slime_forest_enter = false
 
 #player stats
 var experience = 0
@@ -63,20 +64,29 @@ var shirt = null
 var pants = null
 
 #player transition locations
-var player_exit_cliffside_posx = 275
-var player_exit_cliffside_posy = 20
-var player_enter_cliffside_posx = 88
-var player_enter_cliffside_posy = 256
-var player_start_to_world_posx = 30
-var player_start_to_world_posy = 64
-var player_start_posx = 61
-var player_start_posy = 52
-var player_world_to_start_posx = 582
-var player_world_to_start_posy = 283
-var player_village_to_world_posx = 400
-var player_village_to_world_posy = 123
-var player_world_to_village_posx = 28
-var player_world_to_village_posy = 396
+var player_exit_cliffside_pos = Vector2(275, 20)
+#var player_exit_cliffside_posx = 275
+#var player_exit_cliffside_posy = 20
+var player_enter_cliffside_pos = Vector2(88, 256)
+#var player_enter_cliffside_posx = 88
+#var player_enter_cliffside_posy = 256
+var player_start_to_world_pos = Vector2(30, 64)
+#var player_start_to_world_posx = 30
+#var player_start_to_world_posy = 64
+var player_start_pos = Vector2(61, 52)
+#var player_start_posx = 61
+#var player_start_posy = 52
+var player_world_to_start_pos = Vector2(582, 283)
+#var player_world_to_start_posx = 582
+#var player_world_to_start_posy = 283
+var player_village_to_world_pos = Vector2(400, 123)
+#var player_village_to_world_posx = 400
+#var player_village_to_world_posy = 123
+var player_world_to_village_pos = Vector2(28, 393)
+#var player_world_to_village_posx = 28
+#var player_world_to_village_posy = 396
+var player_slime_forest_to_village_pos = Vector2(1096, 363)
+var player_village_to_slime_forest_pos = Vector2(34, 56)
 var player_position = Vector2(0, 0)
 
 #player transition position logic
@@ -86,6 +96,8 @@ var world_to_start = false
 var world_to_cliffside = false
 var world_to_village = false
 var village_to_world = false
+var village_to_slime_forest = false
+var slime_forest_to_village = false
 var game_first_loadin = true
 
 #Function for transitioning to and from each scene
@@ -112,3 +124,10 @@ func finish_changescenes():
 			if world_enter == true:
 				current_scene = "world"
 				world_enter = false
+			elif slime_forest_enter == true:
+				current_scene = "slimeforest"
+				slime_forest_enter = false
+		elif current_scene == "slimeforest":
+			if village_enter == true:
+				current_scene = "village"
+				village_enter = false

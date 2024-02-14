@@ -7,9 +7,11 @@ var bigg_e_text = false
 
 func _ready():
 	if Global.world_to_village == true:
-		$player.position.x = Global.player_world_to_village_posx
-		$player.position.y = Global.player_world_to_village_posy
+		$player.position = Global.player_world_to_village_pos
 		Global.world_to_village = false
+	elif Global.slime_forest_to_village == true:
+		$player.position = Global.player_slime_forest_to_village_pos
+		Global.slime_forest_to_village = false
 	else:
 		$player.position = Global.player_position
 	Global.current_scene = "village"
@@ -36,6 +38,9 @@ func change_scene():
 			get_tree().change_scene_to_file("res://scenes/world.tscn")
 			Global.finish_changescenes()
 			Global.village_to_world = true
+		elif Global.slime_forest_enter == true:
+			get_tree().change_scene_to_file("res://scenes/slimeforest.tscn")
+			Global.village_to_slime_forest = true
 
 func _on_world_entrance_body_entered(body):
 	if body.has_method("player"):
@@ -48,19 +53,24 @@ func _on_world_entrance_body_exited(body):
 
 
 func _on_north_entrance_body_entered(body):
-	pass # Replace with function body.
+	if body.has_method("player"):
+		pass
 
 
 func _on_north_entrance_body_exited(body):
-	pass # Replace with function body.
+	if body.has_method("player"):
+		pass
 
 
-func _on_west_entrance_body_entered(body):
-	pass # Replace with function body.
+func _on_slime_forest_entrance_body_entered(body):
+	if body.has_method("player"):
+		Global.slime_forest_enter = true
+		Global.transition_scene = true
 
 
-func _on_west_entrance_body_exited(body):
-	pass # Replace with function body.
+func _on_slime_forest_entrance_body_exited(body):
+	if body.has_method("player"):
+		Global.transition_scene = false
 
 
 func _on_neiltalkarea_body_entered(body):
@@ -141,3 +151,6 @@ func _on_bigg_e_speak_animation_finished(anim_name):
 		bigg_e_done_talking = true
 	if anim_name == "biggequestcomplete":
 		bigg_e_done_talking = true
+
+
+

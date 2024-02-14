@@ -1,8 +1,11 @@
 extends CharacterBody2D
 
-var speed = 50
-var player_chase = false
+var speed = 40
 var player = null
+var attack = false
+var attack_pos = Vector2(0, 0)
+var current_pos = Vector2(0, 0)
+
 
 var health = 100
 var player_in_zone = false
@@ -23,17 +26,22 @@ func _physics_process(_delta):
 			$AnimatedSprite2D.play("hit")
 			move_and_collide(Vector2(0,0))
 			position -= (player.position - position) / speed
+			attack = false
+			$attack.start()
+			$attack_done.stop()
 			if(player.position.x - position.x) < 0:
 				$AnimatedSprite2D.flip_h = true
 			else:
 				$AnimatedSprite2D.flip_h = false
 			
-		elif player_chase:
+		elif attack == true:
 			move_and_collide(Vector2(0,0))
-			position += (player.position - position) / speed
-			
+			position += (attack_pos - current_pos) / speed
+			if position == attack_pos:
+				attack = false
+
 			$AnimatedSprite2D.play("walk")
-			
+
 			if(player.position.x - position.x) < 0:
 				$AnimatedSprite2D.flip_h = true
 			else:
@@ -60,12 +68,16 @@ func on_load_game(saved_data:SavedData):
 func _on_detection_area_body_entered(body):
 	if body.has_method("player"):
 		player = body
-		player_chase = true
+		$attack.start()
+		$detection_area/CollisionShape2D.shape.radius = 95
 
 
 func _on_detection_area_body_exited(body):
 	if body.has_method("player"):
-		player_chase = false
+		attack = false
+		$attack.stop()
+		$attack_done.stop()
+		$detection_area/CollisionShape2D.shape.radius = 62
 
 func enemy():
 	pass
@@ -117,3 +129,15 @@ func _on_death_timer_timeout():
 
 func _on_justhit_timeout():
 	getting_hit = false
+
+
+func _on_attack_timeout():
+	attack = true
+	attack_pos = player.position
+	current_pos = position
+	$attack_done.start()
+
+
+func _on_attack_done_timeout():
+	attack = false
+	$attack.start()
