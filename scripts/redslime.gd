@@ -3,6 +3,9 @@ extends CharacterBody2D
 var speed = 50
 var player_chase = false
 var player = null
+var attack = false
+var current_pos = Vector2(0, 0)
+var attack_pos = Vector2(0, 0)
 
 var health = 250
 var player_in_zone = false
@@ -20,23 +23,25 @@ func _physics_process(_delta):
 	if health > 0:
 		if getting_hit == true:
 			$AnimatedSprite2D.play("hit")
-			move_and_collide((Vector2(0,0)))
-			position -= (player.position - position) / speed
-			if (player.position.x - position.x) < 0:
-				$AnimatedSprite2D.flip_h = true
-			else:
-				$AnimatedSprite2D.flip_h = false
-		elif player_chase:
 			move_and_collide(Vector2(0,0))
-			position += (player.position - position) / speed
-			
-			$AnimatedSprite2D.play("walk")
-			
+			position -= (player.position - position) / speed
 			if(player.position.x - position.x) < 0:
 				$AnimatedSprite2D.flip_h = true
 			else:
 				$AnimatedSprite2D.flip_h = false
-				
+			
+		elif attack == true:
+			move_and_collide(Vector2(0,0))
+			position += (attack_pos - current_pos) / speed
+#			if position == attack_pos:
+#				attack = false
+
+			$AnimatedSprite2D.play("walk")
+
+			if(player.position.x - position.x) < 0:
+				$AnimatedSprite2D.flip_h = true
+			else:
+				$AnimatedSprite2D.flip_h = false
 		else:
 			$AnimatedSprite2D.play("idle")
 
@@ -60,12 +65,15 @@ func _on_detection_area_body_entered(body):
 	if body.has_method("player"):
 		player = body
 		player_chase = true
+		$attack.start()
 
 
 func _on_detection_area_body_exited(body):
 	if body.has_method("player"):
-		player = null
-		player_chase = false
+		player_chase = true
+		attack = false
+		$attack.stop()
+		$attack_done.stop()
 
 func enemy():
 	pass
@@ -117,3 +125,15 @@ func _on_death_timer_timeout():
 
 func _on_justhit_timeout():
 	getting_hit = false
+
+
+func _on_attack_timeout():
+	attack = true
+	attack_pos = player.position
+	current_pos = position
+	$attack_done.start()
+
+
+func _on_attack_done_timeout():
+	attack = false
+	$attack.start()

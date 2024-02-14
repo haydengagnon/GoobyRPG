@@ -149,6 +149,7 @@ animations = [{
 radius = 62.0081
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kd60e"]
+radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c0wm0"]
 radius = 5.09902
@@ -171,7 +172,7 @@ shape = SubResource("CircleShape2D_4r4wc")
 [node name="enemy_hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_hitbox"]
-position = Vector2(0, -6)
+position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_kd60e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -197,6 +198,13 @@ show_percentage = false
 [node name="justhit" type="Timer" parent="."]
 wait_time = 0.25
 
+[node name="attack" type="Timer" parent="."]
+wait_time = 0.75
+one_shot = true
+
+[node name="attack_done" type="Timer" parent="."]
+wait_time = 0.75
+
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
 [connection signal="body_entered" from="enemy_hitbox" to="." method="_on_enemy_hitbox_body_entered"]
@@ -204,3 +212,5 @@ wait_time = 0.25
 [connection signal="timeout" from="take_damage_cooldown" to="." method="_on_take_damage_cooldown_timeout"]
 [connection signal="timeout" from="death_timer" to="." method="_on_death_timer_timeout"]
 [connection signal="timeout" from="justhit" to="." method="_on_justhit_timeout"]
+[connection signal="timeout" from="attack" to="." method="_on_attack_timeout"]
+[connection signal="timeout" from="attack_done" to="." method="_on_attack_done_timeout"]

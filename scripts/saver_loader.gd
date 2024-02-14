@@ -70,7 +70,6 @@ func load_game1():
 func load_from_home1():
 	var saved_game:SavedGame = load("user://savegame1.tres") as SavedGame
 	var global_dict = (saved_game.global_data.get_property_list())
-	print(saved_game.global_data.get("start_chest_opened"))
 	
 	var i = 0
 	for item in global_dict:
@@ -170,7 +169,6 @@ func load_game2():
 func load_from_home2():
 	var saved_game:SavedGame = load("user://savegame2.tres") as SavedGame
 	var global_dict = (saved_game.global_data.get_property_list())
-	print(saved_game.global_data.get("start_chest_opened"))
 	
 	var i = 0
 	for item in global_dict:
@@ -270,7 +268,6 @@ func load_game3():
 func load_from_home3():
 	var saved_game:SavedGame = load("user://savegame3.tres") as SavedGame
 	var global_dict = (saved_game.global_data.get_property_list())
-	print(saved_game.global_data.get("start_chest_opened"))
 	
 	var i = 0
 	for item in global_dict:

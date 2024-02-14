@@ -11,16 +11,13 @@ var village_area_sign_animation_done = false
 
 func _ready():
 	if Global.start_to_world == true:
-		$player.position.x = Global.player_start_to_world_posx
-		$player.position.y = Global.player_start_to_world_posy
+		$player.position = Global.player_start_to_world_pos
 		Global.start_to_world = false
 	elif Global.cliffside_to_world == true:
-		$player.position.x = Global.player_exit_cliffside_posx
-		$player.position.y = Global.player_exit_cliffside_posy
+		$player.position = Global.player_exit_cliffside_pos
 		Global.cliffside_to_world = false
 	elif Global.village_to_world == true:
-		$player.position.x = Global.player_village_to_world_posx
-		$player.position.y = Global.player_village_to_world_posy
+		$player.position = Global.player_village_to_world_pos
 		Global.village_to_world = false
 	else:
 		$player.position = Global.player_position

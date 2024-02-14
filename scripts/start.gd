@@ -8,12 +8,10 @@ var item_name
 
 func _ready():
 	if Global.world_to_start == true:
-		$player.position.x = Global.player_world_to_start_posx
-		$player.position.y = Global.player_world_to_start_posy
+		$player.position = Global.player_world_to_start_pos
 		Global.world_to_start = false
 	elif Global.game_first_loadin == true:
-		$player.position.x = Global.player_start_posx
-		$player.position.y = Global.player_start_posy
+		$player.position = Global.player_start_pos
 		Global.game_first_loadin = false
 	else:
 		$player.position = Global.player_position
