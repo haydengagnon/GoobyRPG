@@ -12,6 +12,9 @@ func _ready():
 	elif Global.slime_forest_to_village == true:
 		$player.position = Global.player_slime_forest_to_village_pos
 		Global.slime_forest_to_village = false
+	elif Global.decaying_to_village == true:
+		$player.position = Global.player_decaying_to_village_pos
+		Global.decaying_to_village = false
 	else:
 		$player.position = Global.player_position
 	Global.current_scene = "village"
@@ -41,6 +44,9 @@ func change_scene():
 		elif Global.slime_forest_enter == true:
 			get_tree().change_scene_to_file("res://scenes/slimeforest.tscn")
 			Global.village_to_slime_forest = true
+		elif Global.decaying_path_enter == true:
+			get_tree().change_scene_to_file("res://scenes/decayingpath.tscn")
+			Global.village_to_decaying = true
 
 func _on_world_entrance_body_entered(body):
 	if body.has_method("player"):
@@ -50,16 +56,6 @@ func _on_world_entrance_body_entered(body):
 func _on_world_entrance_body_exited(body):
 	if body.has_method("player"):
 		Global.transition_scene = false
-
-
-func _on_north_entrance_body_entered(body):
-	if body.has_method("player"):
-		pass
-
-
-func _on_north_entrance_body_exited(body):
-	if body.has_method("player"):
-		pass
 
 
 func _on_slime_forest_entrance_body_entered(body):
@@ -153,4 +149,12 @@ func _on_bigg_e_speak_animation_finished(anim_name):
 		bigg_e_done_talking = true
 
 
+func _on_decaying_path_entrance_body_entered(body):
+	if body.has_method("player"):
+		Global.transition_scene = true
+		Global.decaying_path_enter = true
 
+
+func _on_decaying_path_entrance_body_exited(body):
+	if body.has_method("player"):
+		Global.decaying_path_enter = false
