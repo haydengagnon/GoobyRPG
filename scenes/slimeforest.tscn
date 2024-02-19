@@ -35,11 +35,20 @@ layer_2/tile_data = PackedInt32Array(-65536, 524295, 6, -65535, 524295, 6, -6553
 [node name="player" parent="." instance=ExtResource("2_2v14d")]
 position = Vector2(34, 56)
 
+[node name="HUD" parent="player" index="8"]
+visible = false
+
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-28.5, 59)
 shape = SubResource("RectangleShape2D_mppw8")
 
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(49, -26, 0, -25, -82, -17, -20, 2, 0, 14, 1149, 14, 1149, 556, 18, 557, 17, 104, 0, 104, 0, 111, -57, 111, -57, 8, -5, 8, -80, -12, -28, 614, 1177, 601, 1186, -37)
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+
+[editable path="player"]
+[editable path="player/HUD"]
