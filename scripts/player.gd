@@ -145,7 +145,7 @@ func _on_player_hitbox_body_exited(body):
 		
 func enemy_attack():
 	if Global.health > 0:
-			if enemy_in_range and enemy_attack_cooldown == true and Global.enemy_dead == false:
+			if enemy_in_range and enemy_attack_cooldown == true and Global.slime_dead == false:
 				Global.health -= 10
 				enemy_attack_cooldown = false
 				$attack_cooldown.start()

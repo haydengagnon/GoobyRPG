@@ -158,3 +158,63 @@ func _on_decaying_path_entrance_body_entered(body):
 func _on_decaying_path_entrance_body_exited(body):
 	if body.has_method("player"):
 		Global.decaying_path_enter = false
+
+
+func _on_neil_sign_body_entered(body):
+	if body.has_method("player"):
+		$neil_sign_text.visible = true
+		$neil_speak.play("neil_sign")
+
+
+func _on_neil_sign_body_exited(body):
+	if body.has_method("player"):
+		$neil_sign_text.visible = false
+		$neil_speak.stop()
+
+
+func _on_bigge_sign_body_entered(body):
+	if body.has_method("player"):
+		$bigge_sign_text.visible = true
+		$bigg_e_speak.play("bigge_sign")
+
+
+func _on_bigge_sign_body_exited(body):
+	if body.has_method("player"):
+		$bigge_sign_text.visible = false
+		$bigg_e_speak.stop()
+
+
+func _on_path_sign_body_entered(body):
+	if body.has_method("player"):
+		$path_sign_text.visible = true
+		$neil_speak.play("path_sign")
+
+
+func _on_path_sign_body_exited(body):
+	if body.has_method("player"):
+		$path_sign_text.visible = false
+		$neil_speak.stop()
+
+
+func _on_decaying_sign_body_entered(body):
+	if body.has_method("player"):
+		$decaying_sign_text.visible = true
+		$neil_speak.play("decaying_sign")
+
+
+func _on_decaying_sign_body_exited(body):
+	if body.has_method("player"):
+		$decaying_sign_text.visible = false
+		$neil_speak.stop()
+
+
+func _on_slime_forest_sign_body_entered(body):
+	if body.has_method("player"):
+		$slime_forest_sign_text.visible = true
+		$neil_speak.play("slime_sign")
+
+
+func _on_slime_forest_sign_body_exited(body):
+	if body.has_method("player"):
+		$slime_forest_sign_text.visible = false
+		$neil_speak.stop()

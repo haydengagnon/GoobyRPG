@@ -63,8 +63,8 @@ func change_scene():
 func sword_recieved():
 	if done_opening == true:
 		if Global.sword_text == false:
-			$AnimationPlayer/recieve_sword.visible = true
-			$AnimationPlayer/inventory_help.visible = true
+			$recieve_sword.visible = true
+			$inventory_help.visible = true
 			$AnimationPlayer.play("get_sword")
 			Global.sword_text = true
 
@@ -85,3 +85,17 @@ func open_chest():
 				$chest/AnimatedSprite2D.play("open_chest")
 				Global.start_chest_opened = true
 				done_opening = true
+
+
+func _on_path_sign_body_entered(body):
+	if body.has_method("player"):
+		$signs.visible = false
+		$path_sign_text.visible = true
+		$AnimationPlayer.play("signs")
+		
+
+
+func _on_path_sign_body_exited(body):
+	if body.has_method("player"):
+		$path_sign_text.visible = false
+		$AnimationPlayer.stop()

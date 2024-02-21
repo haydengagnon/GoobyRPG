@@ -13,37 +13,16 @@ var can_take_damage = true
 var can_die = false
 var take_damage = false
 var getting_hit = false
+var charge = false
+var detected = false
 
 func _physics_process(_delta):
 	deal_damage()
+	animate()
 	
 	$healthbar.max_value = 250
 	$healthbar.value = health
-	
-	if health > 0:
-		if getting_hit == true:
-			$AnimatedSprite2D.play("hit")
-			move_and_collide(Vector2(0,0))
-			position -= (player.position - position) / speed
-			if(player.position.x - position.x) < 0:
-				$AnimatedSprite2D.flip_h = true
-			else:
-				$AnimatedSprite2D.flip_h = false
-			
-		elif attack == true:
-			move_and_collide(Vector2(0,0))
-			position += (attack_pos - current_pos) / speed
-#			if position == attack_pos:
-#				attack = false
 
-			$AnimatedSprite2D.play("walk")
-
-			if(player.position.x - position.x) < 0:
-				$AnimatedSprite2D.flip_h = true
-			else:
-				$AnimatedSprite2D.flip_h = false
-		else:
-			$AnimatedSprite2D.play("idle")
 
 func on_save_game(saved_data:Array[SavedData]):
 	var my_data = SavedData.new()
@@ -64,16 +43,21 @@ func on_load_game(saved_data:SavedData):
 func _on_detection_area_body_entered(body):
 	if body.has_method("player"):
 		player = body
-		player_chase = true
+		detected = true
+		if charge == false:
+			charge = true
 		$attack.start()
+		$detection_area/CollisionShape2D.shape.radius = 95
 
 
 func _on_detection_area_body_exited(body):
 	if body.has_method("player"):
-		player_chase = true
 		attack = false
+		detected = false
+		charge = false
 		$attack.stop()
 		$attack_done.stop()
+		$detection_area/CollisionShape2D.shape.radius = 62
 
 func enemy():
 	pass
@@ -97,7 +81,7 @@ func deal_damage():
 			$justhit.start()
 			can_take_damage = false
 			if health <= 0:
-				Global.enemy_dead = true
+				Global.redslime_dead = true
 				$death_timer.start()
 				$AnimatedSprite2D.play("death")
 				health = 0
@@ -129,6 +113,7 @@ func _on_justhit_timeout():
 
 func _on_attack_timeout():
 	attack = true
+	charge = false
 	attack_pos = player.position
 	current_pos = position
 	$attack_done.start()
@@ -136,4 +121,45 @@ func _on_attack_timeout():
 
 func _on_attack_done_timeout():
 	attack = false
+	charge = true
 	$attack.start()
+
+
+func animate():
+	if health > 0:
+		if getting_hit == true:
+			$AnimatedSprite2D.play("hit")
+			move_and_collide(Vector2(0,0))
+			position -= (player.position - position) / speed
+			attack = false
+			$attack.start()
+			$attack_done.stop()
+			if(player.position.x - position.x) < 0:
+				$AnimatedSprite2D.flip_h = true
+			else:
+				$AnimatedSprite2D.flip_h = false
+			charge = true
+				
+		elif attack == true:
+			move_and_collide(Vector2(0,0))
+			position += (attack_pos - current_pos) / speed
+			if position == attack_pos:
+				attack = false
+
+			$AnimatedSprite2D.play("walk")
+
+			if(player.position.x - position.x) < 0:
+				$AnimatedSprite2D.flip_h = true
+			else:
+				$AnimatedSprite2D.flip_h = false
+				
+		elif detected == true:
+			if charge == true:
+				if(player.position.x - position.x) < 0:
+					$AnimatedSprite2D.flip_h = true
+				if(player.position.x - position.x) > 0:
+					$AnimatedSprite2D.flip_h = false
+				$AnimatedSprite2D.play("charge")
+				charge = false
+		else:
+			$AnimatedSprite2D.play("idle")

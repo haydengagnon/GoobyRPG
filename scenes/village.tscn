@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://biv0vl3twldvp"]
+[gd_scene load_steps=28 format=3 uid="uid://biv0vl3twldvp"]
 
 [ext_resource type="Script" path="res://scripts/village.gd" id="1_ibdcb"]
 [ext_resource type="TileSet" uid="uid://eqeuaixdq8cx" path="res://art/tilesets/mytileset.tres" id="2_pwkma"]
@@ -138,12 +138,113 @@ Have my old iron sword
 as a reward."]
 }
 
+[sub_resource type="Animation" id="Animation_0x12n"]
+resource_name = "neil_sign"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("neil_sign_text:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_p23n7"]
+resource_name = "bigge_sign"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bigge_sign_text:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_yptpn"]
+resource_name = "path_sign"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("path_sign_text:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rbpbc"]
+resource_name = "decaying_sign"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("decaying_sign_text:label_settings:font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_m3yd1"]
+resource_name = "slime_sign"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("slime_forest_sign_text:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8n3l4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("decaying_sign_text:label_settings:font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ug21q"]
 _data = {
+"RESET": SubResource("Animation_8n3l4"),
+"bigge_sign": SubResource("Animation_p23n7"),
 "biggequest": SubResource("Animation_qs5rh"),
 "biggequestcomplete": SubResource("Animation_q3jx1"),
+"decaying_sign": SubResource("Animation_rbpbc"),
+"neil_sign": SubResource("Animation_0x12n"),
 "neilquest": SubResource("Animation_v1dng"),
-"neilquestcomplete": SubResource("Animation_mvyb2")
+"neilquestcomplete": SubResource("Animation_mvyb2"),
+"path_sign": SubResource("Animation_yptpn"),
+"slime_sign": SubResource("Animation_m3yd1")
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_teolj"]
@@ -161,6 +262,23 @@ corner_radius_bottom_left = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ps0f2"]
 size = Vector2(22, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qpf5o"]
+size = Vector2(30, 28.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rcnpo"]
+size = Vector2(25, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vlbag"]
+size = Vector2(25, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_emofp"]
+size = Vector2(24, 27)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bnyjc"]
+line_spacing = -40.0
+font = ExtResource("14_soefw")
+font_size = 100
 
 [node name="village" type="Node2D"]
 y_sort_enabled = true
@@ -287,6 +405,113 @@ theme_override_font_sizes/font_size = 75
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="neil_sign" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="neil_sign"]
+position = Vector2(312, 301.5)
+shape = SubResource("RectangleShape2D_qpf5o")
+
+[node name="bigge_sign" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bigge_sign"]
+position = Vector2(503.5, 237.5)
+shape = SubResource("RectangleShape2D_rcnpo")
+
+[node name="path_sign" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="path_sign"]
+position = Vector2(24, 371.75)
+shape = SubResource("RectangleShape2D_qpf5o")
+
+[node name="decaying_sign" type="Area2D" parent="."]
+position = Vector2(840, 19)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="decaying_sign"]
+position = Vector2(0.5, 10.5)
+shape = SubResource("RectangleShape2D_vlbag")
+
+[node name="slime_forest_sign" type="Area2D" parent="."]
+position = Vector2(1096, 320)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="slime_forest_sign"]
+position = Vector2(0, 14.5)
+shape = SubResource("RectangleShape2D_emofp")
+
+[node name="neil_sign_text" type="Label" parent="."]
+visible = false
+top_level = true
+offset_left = 305.0
+offset_top = 274.0
+offset_right = 641.0
+offset_bottom = 520.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_fonts/font = ExtResource("14_soefw")
+theme_override_font_sizes/font_size = 100
+text = "Neil's
+House"
+horizontal_alignment = 1
+
+[node name="bigge_sign_text" type="Label" parent="."]
+visible = false
+top_level = true
+offset_left = 493.0
+offset_top = 210.0
+offset_right = 855.0
+offset_bottom = 456.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_fonts/font = ExtResource("14_soefw")
+theme_override_font_sizes/font_size = 100
+text = "Big E's
+House"
+horizontal_alignment = 1
+
+[node name="path_sign_text" type="Label" parent="."]
+visible = false
+offset_left = 15.0
+offset_top = 390.0
+offset_right = 366.0
+offset_bottom = 759.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("14_soefw")
+theme_override_font_sizes/font_size = 100
+text = "Village
+Path
+<--"
+horizontal_alignment = 1
+
+[node name="decaying_sign_text" type="Label" parent="."]
+visible = false
+top_level = true
+offset_left = 834.0
+offset_top = 2.00001
+offset_right = 1170.0
+offset_bottom = 248.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("14_soefw")
+theme_override_font_sizes/font_size = 100
+text = "Decaying  ^
+Path          |"
+label_settings = SubResource("LabelSettings_bnyjc")
+vertical_alignment = 1
+
+[node name="slime_forest_sign_text" type="Label" parent="."]
+visible = false
+offset_left = 1069.0
+offset_top = 355.0
+offset_right = 2059.0
+offset_bottom = 723.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("14_soefw")
+theme_override_font_sizes/font_size = 150
+text = "Slime Forest
+-->"
+horizontal_alignment = 1
+
 [connection signal="body_entered" from="world_entrance" to="." method="_on_world_entrance_body_entered"]
 [connection signal="body_exited" from="world_entrance" to="." method="_on_world_entrance_body_exited"]
 [connection signal="body_entered" from="decaying_path_entrance" to="." method="_on_decaying_path_entrance_body_entered"]
@@ -299,3 +524,13 @@ vertical_alignment = 1
 [connection signal="body_entered" from="biggetalkarea" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="biggetalkarea" to="." method="_on_area_2d_body_exited"]
 [connection signal="animation_finished" from="bigg_e_speak" to="." method="_on_bigg_e_speak_animation_finished"]
+[connection signal="body_entered" from="neil_sign" to="." method="_on_neil_sign_body_entered"]
+[connection signal="body_exited" from="neil_sign" to="." method="_on_neil_sign_body_exited"]
+[connection signal="body_entered" from="bigge_sign" to="." method="_on_bigge_sign_body_entered"]
+[connection signal="body_exited" from="bigge_sign" to="." method="_on_bigge_sign_body_exited"]
+[connection signal="body_entered" from="path_sign" to="." method="_on_path_sign_body_entered"]
+[connection signal="body_exited" from="path_sign" to="." method="_on_path_sign_body_exited"]
+[connection signal="body_entered" from="decaying_sign" to="." method="_on_decaying_sign_body_entered"]
+[connection signal="body_exited" from="decaying_sign" to="." method="_on_decaying_sign_body_exited"]
+[connection signal="body_entered" from="slime_forest_sign" to="." method="_on_slime_forest_sign_body_entered"]
+[connection signal="body_exited" from="slime_forest_sign" to="." method="_on_slime_forest_sign_body_exited"]
