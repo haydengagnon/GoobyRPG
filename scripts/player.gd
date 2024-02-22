@@ -14,6 +14,11 @@ var hat_health
 var shirt_health
 var pants_health
 var enemy = null
+var lifesteal
+var roll_in_progress = false
+var invincible = false
+var dodge_cooldown = false
+var current_speed
 
 const speed = 100
 var current_dir = "none"
@@ -37,56 +42,60 @@ func _physics_process(delta):
 	levelup(Global.level)
 	damage()
 	health()
+	dodge_roll()
 	
 	
 
 func player_movement(_delta):
 	if player_alive == true:
 		if attack_ip == false:
-			if Input.is_action_pressed("move_right"):
-				current_dir = "right"
-				play_animation(1)
-				if Input.is_action_pressed("move_up") and Input.is_action_pressed("move_down"):
-					velocity.x = speed
-					velocity.y = 0
-				elif Input.is_action_pressed("move_up"):
-					velocity.x = speed / 1.25
-					velocity.y = -speed / 1.25
+			if roll_in_progress == false:
+				if Input.is_action_pressed("move_right"):
+					current_dir = "right"
+					play_animation(1)
+					if Input.is_action_pressed("move_up") and Input.is_action_pressed("move_down"):
+						velocity.x = speed
+						velocity.y = 0
+					elif Input.is_action_pressed("move_up"):
+						velocity.x = speed / 1.25
+						velocity.y = -speed / 1.25
+					elif Input.is_action_pressed("move_down"):
+						velocity.x = speed / 1.25
+						velocity.y = speed / 1.25
+					else:
+						velocity.x = speed
+						velocity.y = 0
+				elif Input.is_action_pressed("move_left"):
+					current_dir = "left"
+					play_animation(1)
+					if Input.is_action_pressed("move_up") and Input.is_action_pressed("move_down"):
+						velocity.x = -speed
+						velocity.y = 0
+					elif Input.is_action_pressed("move_up"):
+						velocity.x = -speed / 1.25
+						velocity.y = -speed / 1.25
+					elif Input.is_action_pressed("move_down"):
+						velocity.x = -speed / 1.25
+						velocity.y = speed / 1.25
+					else:
+						velocity.x = -speed
+						velocity.y = 0
 				elif Input.is_action_pressed("move_down"):
-					velocity.x = speed / 1.25
-					velocity.y = speed / 1.25
-				else:
-					velocity.x = speed
-					velocity.y = 0
-			elif Input.is_action_pressed("move_left"):
-				current_dir = "left"
-				play_animation(1)
-				if Input.is_action_pressed("move_up") and Input.is_action_pressed("move_down"):
-					velocity.x = -speed
-					velocity.y = 0
+					current_dir = "down"
+					play_animation(1)
+					velocity.x = 0
+					velocity.y = speed
 				elif Input.is_action_pressed("move_up"):
-					velocity.x = -speed / 1.25
-					velocity.y = -speed / 1.25
-				elif Input.is_action_pressed("move_down"):
-					velocity.x = -speed / 1.25
-					velocity.y = speed / 1.25
+					current_dir = "up"
+					play_animation(1)
+					velocity.x = 0
+					velocity.y = -speed
 				else:
-					velocity.x = -speed
+					play_animation(0)
+					velocity.x = 0
 					velocity.y = 0
-			elif Input.is_action_pressed("move_down"):
-				current_dir = "down"
-				play_animation(1)
-				velocity.x = 0
-				velocity.y = speed
-			elif Input.is_action_pressed("move_up"):
-				current_dir = "up"
-				play_animation(1)
-				velocity.x = 0
-				velocity.y = -speed
-			else:
-				play_animation(0)
-				velocity.x = 0
-				velocity.y = 0
+			elif roll_in_progress == true:
+				velocity = current_speed
 		
 		move_and_slide()
 
@@ -94,30 +103,31 @@ func play_animation(movement):
 	var direction = current_dir
 	var animation = $AnimatedSprite2D
 	
-	if direction == "right":
-		animation.flip_h = false
-		if movement == 1:
-			animation.play("side_walk")
-		elif movement == 0:
-			if attack_ip == false:
-				animation.play("side_idle")
-			
-	if direction == "left":
-		animation.flip_h = true
-		if movement == 1:
-			animation.play("side_walk")
-		elif movement == 0:
-			if attack_ip == false:
-				animation.play("side_idle")
-			
-	
-	if direction == "down":
-		animation.flip_h = false
-		if movement == 1:
-			animation.play("front_walk")
-		elif movement == 0:
-			if attack_ip == false:
-				animation.play("front_idle")
+	if roll_in_progress == false:
+		if direction == "right":
+			animation.flip_h = false
+			if movement == 1:
+				animation.play("side_walk")
+			elif movement == 0:
+				if attack_ip == false:
+					animation.play("side_idle")
+				
+		if direction == "left":
+			animation.flip_h = true
+			if movement == 1:
+				animation.play("side_walk")
+			elif movement == 0:
+				if attack_ip == false:
+					animation.play("side_idle")
+				
+		
+		if direction == "down":
+			animation.flip_h = false
+			if movement == 1:
+				animation.play("front_walk")
+			elif movement == 0:
+				if attack_ip == false:
+					animation.play("front_idle")
 	
 	if direction == "up":
 		animation.flip_h = false
@@ -146,7 +156,8 @@ func _on_player_hitbox_body_exited(body):
 func enemy_attack():
 	if Global.health > 0:
 			if enemy_in_range and enemy_attack_cooldown == true and Global.slime_dead == false:
-				Global.health -= 10
+				if invincible == false:
+					Global.health -= 10
 				enemy_attack_cooldown = false
 				$attack_cooldown.start()
 				$regen_timer.stop()
@@ -155,7 +166,8 @@ func enemy_attack():
 func redslime_attack():
 	if Global.health > 0:
 			if redslime_in_range and enemy_attack_cooldown == true and Global.redslime_dead == false:
-				Global.health -= 20
+				if invincible == false:
+					Global.health -= 20
 				enemy_attack_cooldown = false
 				$attack_cooldown.start()
 				$regen_timer.stop()
@@ -170,26 +182,27 @@ func attack():
 	if player_alive == true:
 		if Global.has_sword == true:
 			if attack_ip == false:
-				if Input.is_action_just_pressed("attack"):
-					Global.player_current_attack = true
-					attack_ip = true
-					$attack_area/CollisionShape2D.disabled = false
-					velocity.x = 0
-					velocity.y = 0
-					if direction == "right":
-						$AnimatedSprite2D.flip_h = false
-						$AnimatedSprite2D.play("side_attack")
-						$deal_attack_timer.start()
-					if direction == "left":
-						$AnimatedSprite2D.flip_h = true
-						$AnimatedSprite2D.play("side_attack")
-						$deal_attack_timer.start()
-					if direction == "down":
-						$AnimatedSprite2D.play("front_attack")
-						$deal_attack_timer.start()
-					if direction == "up":
-						$AnimatedSprite2D.play("back_attack")
-						$deal_attack_timer.start()
+				if roll_in_progress == false:
+					if Input.is_action_just_pressed("attack"):
+						Global.player_current_attack = true
+						attack_ip = true
+						$attack_area/CollisionShape2D.disabled = false
+						velocity.x = 0
+						velocity.y = 0
+						if direction == "right":
+							$AnimatedSprite2D.flip_h = false
+							$AnimatedSprite2D.play("side_attack")
+							$deal_attack_timer.start()
+						if direction == "left":
+							$AnimatedSprite2D.flip_h = true
+							$AnimatedSprite2D.play("side_attack")
+							$deal_attack_timer.start()
+						if direction == "down":
+							$AnimatedSprite2D.play("front_attack")
+							$deal_attack_timer.start()
+						if direction == "up":
+							$AnimatedSprite2D.play("back_attack")
+							$deal_attack_timer.start()
 			
 func interact():
 	if Input.is_action_just_pressed("interact"):
@@ -236,6 +249,7 @@ func damage():
 	if Global.has_sword == false:
 		Global.damage = 0
 	if Global.has_sword == true:
+		lifesteal = JsonData.item_data[Global.weapon]["Lifesteal"]
 		weapon_damage = JsonData.item_data[Global.weapon]["ItemAttack"]
 		if Global.offhand != null:
 			offhand_damage = JsonData.item_data[Global.offhand]["ItemAttack"]
@@ -299,3 +313,28 @@ func _on_attack_area_body_entered(body):
 func _on_attack_area_body_exited(body):
 	if body.has_method("enemy"):
 		body.take_damage = false
+
+
+func dodge_roll():
+	if Input.is_action_just_pressed("dodge"):
+		if dodge_cooldown == false:
+			dodge_cooldown = true
+			current_speed = velocity
+			roll_in_progress = true
+			invincible = true
+			$AnimatedSprite2D.play("dodge_roll")
+			$dodge_anim_timer.start()
+			$iframe_timer.start()
+			$dodge_cooldown_timer.start()
+
+
+func _on_dodge_anim_timer_timeout():
+	roll_in_progress = false
+
+
+func _on_iframe_timer_timeout():
+	invincible = false
+
+
+func _on_dodge_cooldown_timer_timeout():
+	dodge_cooldown = false

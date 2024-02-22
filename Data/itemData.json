@@ -3,12 +3,14 @@
 		"ItemCategory": "Weapon",
 		"StackSize": 1,
 		"ItemAttack": 20,
+		"Lifesteal": 0,
 		"Description": "A rusty sword that you found in the forest"
 	},
 	"ironsword": {
 		"ItemCategory": "Weapon",
 		"StackSize": 1,
 		"ItemAttack": 40,
+		"Lifesteal": 0,
 		"Description": "An iron sword gifted to you by Neil"
 	},
 	"healthpotion": {
@@ -40,5 +42,12 @@
 		"StackSize": 1,
 		"ItemAttack": 15,
 		"Description": "A small dagger easily handled in you weak hand"
+	},
+	"bonesword": {
+		"ItemCategory": "Weapon",
+		"StackSize": 1,
+		"ItemAttack": 75,
+		"Lifesteal": 10,
+		"Description": "A sword forged from blood and bones"
 	}
 }

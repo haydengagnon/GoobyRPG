@@ -142,16 +142,17 @@ radius = 65.0077
 [sub_resource type="CircleShape2D" id="CircleShape2D_nwlru"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h7bh2"]
-radius = 5.0
+radius = 4.0
 
 [node name="redslime" type="CharacterBody2D" groups=["game_events"]]
 modulate = Color(0.819608, 0.192157, 0.156863, 1)
 script = ExtResource("1_5aty7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.25, 1.25)
 sprite_frames = SubResource("SpriteFrames_b5qe2")
 animation = &"walk"
-offset = Vector2(0, -3)
+offset = Vector2(0, -3.5)
 
 [node name="detection_area" type="Area2D" parent="."]
 visible = false
@@ -169,7 +170,7 @@ position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_nwlru")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_h7bh2")
 
 [node name="take_damage_cooldown" type="Timer" parent="."]

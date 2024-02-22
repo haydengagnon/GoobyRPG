@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var _saver_loader:SaverLoader = $player/SaverLoader
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	if Global.village_to_decaying == true:
 		$player.position = Global.player_village_to_decaying_pos
@@ -23,7 +23,6 @@ func _ready():
 	Global.game_loaded = false
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	set_camera_limits()
 	change_scene()
@@ -55,3 +54,15 @@ func _on_village_entrance_body_entered(body):
 func _on_village_entrance_body_exited(body):
 	if body.has_method("player"):
 		Global.decaying_path_enter = false
+
+
+func _on_area_2d_body_entered(body):
+	if body.has_method("player"):
+		$village_sign_text.visible = true
+		$AnimationPlayer.play("village_sign")
+
+
+func _on_area_2d_body_exited(body):
+	if body.has_method("player"):
+		$village_sign_text.visible = false
+		$AnimationPlayer.stop()

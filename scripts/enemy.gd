@@ -76,6 +76,7 @@ func deal_damage():
 		if can_take_damage == true:
 			getting_hit = true
 			health -= Global.damage
+			Global.health += player.lifesteal
 			$take_damage_cooldown.start()
 			$justhit.start()
 			can_take_damage = false

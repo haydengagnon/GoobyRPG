@@ -77,3 +77,15 @@ func open_chest():
 				$chest/AnimatedSprite2D.play("open_chest")
 				Global.cliffside_chest_opened = true
 				done_opening = true
+
+
+func _on_path_sign_body_entered(body):
+	if body.has_method("player"):
+		$path_text.visible = true
+		$AnimationPlayer.play("path_sign")
+
+
+func _on_path_sign_body_exited(body):
+	if body.has_method("player"):
+		$path_text.visible = false
+		$AnimationPlayer.stop()

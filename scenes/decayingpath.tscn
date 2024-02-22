@@ -1,11 +1,57 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqa04bnja580q"]
+[gd_scene load_steps=11 format=3 uid="uid://cqa04bnja580q"]
 
 [ext_resource type="Script" path="res://scripts/decayingpath.gd" id="1_r63pt"]
 [ext_resource type="TileSet" uid="uid://eqeuaixdq8cx" path="res://art/tilesets/mytileset.tres" id="2_ho4wd"]
 [ext_resource type="PackedScene" uid="uid://br0hh220gcdhl" path="res://scenes/player.tscn" id="3_cxyss"]
+[ext_resource type="FontFile" uid="uid://c46hadkwr6sgd" path="res://fonts/Xolonium-Regular.ttf" id="4_yvyth"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ge0xd"]
 size = Vector2(138, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e53f6"]
+size = Vector2(24, 29)
+
+[sub_resource type="Animation" id="Animation_wgswx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("village_sign_text:label_settings:font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_smhbm"]
+resource_name = "village_sign"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("village_sign_text:label_settings:font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_42vph"]
+_data = {
+"RESET": SubResource("Animation_wgswx"),
+"village_sign": SubResource("Animation_smhbm")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_44uoa"]
+line_spacing = -40.0
+font = ExtResource("4_yvyth")
+font_size = 150
 
 [node name="decayingpath" type="Node2D"]
 y_sort_enabled = true
@@ -28,9 +74,6 @@ layer_1/tile_data = PackedInt32Array(-65519, 524295, 6, -65536, 524295, 6, -6553
 [node name="player" parent="." instance=ExtResource("3_cxyss")]
 position = Vector2(178, 618)
 
-[node name="HUD" parent="player" index="8"]
-visible = false
-
 [node name="village_entrance" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="village_entrance"]
@@ -42,8 +85,34 @@ shape = SubResource("RectangleShape2D_ge0xd")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="borders"]
 polygon = PackedVector2Array(241, 614, 335, 615, 333, 13, 18, 13, 18, 612, 113, 612, 113, 640, 0, 640, -1, -25, 354, -22, 353, 640, 274, 640, 233, 693, 48, 680, 106, 640, 106, 667, 244, 667, 244, 640, 241, 640)
 
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(232, 585)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 22.5)
+shape = SubResource("RectangleShape2D_e53f6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_42vph")
+}
+
+[node name="village_sign_text" type="Label" parent="."]
+visible = false
+offset_left = 192.0
+offset_top = 609.0
+offset_right = 719.0
+offset_bottom = 1161.0
+scale = Vector2(0.05, 0.05)
+theme_override_fonts/font = ExtResource("4_yvyth")
+theme_override_font_sizes/font_size = 150
+text = "Village
+|
+v"
+label_settings = SubResource("LabelSettings_44uoa")
+horizontal_alignment = 1
+
 [connection signal="body_entered" from="village_entrance" to="." method="_on_village_entrance_body_entered"]
 [connection signal="body_exited" from="village_entrance" to="." method="_on_village_entrance_body_exited"]
-
-[editable path="player"]
-[editable path="player/HUD"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

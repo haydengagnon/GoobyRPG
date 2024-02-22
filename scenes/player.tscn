@@ -438,7 +438,7 @@ animations = [{
 radius = 4.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nutdg"]
-radius = 4.0
+radius = 6.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uik8i"]
 radius = 5.0
@@ -450,9 +450,7 @@ script = ExtResource("1_0864r")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_cgrtx")
-animation = &"side_attack"
-frame = 1
-frame_progress = 0.670972
+animation = &"dodge_roll"
 offset = Vector2(0, -3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -500,6 +498,15 @@ skew = -0.00872665
 shape = SubResource("CapsuleShape2D_uik8i")
 disabled = true
 
+[node name="dodge_anim_timer" type="Timer" parent="."]
+wait_time = 0.625
+
+[node name="iframe_timer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="dodge_cooldown_timer" type="Timer" parent="."]
+wait_time = 1.1
+
 [connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_changed"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
@@ -510,5 +517,8 @@ disabled = true
 [connection signal="timeout" from="regen_timer" to="." method="_on_regen_timer_timeout"]
 [connection signal="body_entered" from="attack_area" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="attack_area" to="." method="_on_attack_area_body_exited"]
+[connection signal="timeout" from="dodge_anim_timer" to="." method="_on_dodge_anim_timer_timeout"]
+[connection signal="timeout" from="iframe_timer" to="." method="_on_iframe_timer_timeout"]
+[connection signal="timeout" from="dodge_cooldown_timer" to="." method="_on_dodge_cooldown_timer_timeout"]
 
 [editable path="HUD"]
