@@ -13,41 +13,16 @@ var can_take_damage = true
 var can_die = false
 var take_damage = false
 var getting_hit = false
+var detected = false
+var charge = false
 
 func _physics_process(_delta):
 	deal_damage()
-	
+	animate()
 	
 	$healthbar.max_value = 100
 	$healthbar.value = health
-	
-	if health > 0:
-		if getting_hit == true:
-			$AnimatedSprite2D.play("hit")
-			move_and_collide(Vector2(0,0))
-			position -= (player.position - position) / speed
-			attack = false
-			$attack.start()
-			$attack_done.stop()
-			if(player.position.x - position.x) < 0:
-				$AnimatedSprite2D.flip_h = true
-			else:
-				$AnimatedSprite2D.flip_h = false
-			
-		elif attack == true:
-			move_and_collide(Vector2(0,0))
-			position += (attack_pos - current_pos) / speed
-			if position == attack_pos:
-				attack = false
 
-			$AnimatedSprite2D.play("walk")
-
-			if(player.position.x - position.x) < 0:
-				$AnimatedSprite2D.flip_h = true
-			else:
-				$AnimatedSprite2D.flip_h = false
-		else:
-			$AnimatedSprite2D.play("idle")
 
 func on_save_game(saved_data:Array[SavedData]):
 	var my_data = SavedData.new()
@@ -68,6 +43,9 @@ func on_load_game(saved_data:SavedData):
 func _on_detection_area_body_entered(body):
 	if body.has_method("player"):
 		player = body
+		detected = true
+		if charge == false:
+			charge = true
 		$attack.start()
 		$detection_area/CollisionShape2D.shape.radius = 95
 
@@ -75,6 +53,8 @@ func _on_detection_area_body_entered(body):
 func _on_detection_area_body_exited(body):
 	if body.has_method("player"):
 		attack = false
+		detected = false
+		charge = false
 		$attack.stop()
 		$attack_done.stop()
 		$detection_area/CollisionShape2D.shape.radius = 62
@@ -84,23 +64,28 @@ func enemy():
 
 func _on_enemy_hitbox_body_entered(body):
 	if body.has_method("player"):
-		player_in_zone = true
+		if body.invincible == false:
+			body.get_hit()
+			Global.health -= 10
+		$enemy_hitbox/CollisionShape2D.set_deferred("disabled", true)
+		$attack_cd.start()
 
 
 func _on_enemy_hitbox_body_exited(body):
 	if body.has_method("player"):
-		player_in_zone = false
+		pass
 
 func deal_damage():
 	if take_damage == true:
 		if can_take_damage == true:
 			getting_hit = true
 			health -= Global.damage
+			Global.health += player.lifesteal
 			$take_damage_cooldown.start()
 			$justhit.start()
 			can_take_damage = false
 			if health <= 0:
-				Global.enemy_dead = true
+				Global.slime_dead = true
 				$death_timer.start()
 				$AnimatedSprite2D.play("death")
 				health = 0
@@ -114,7 +99,7 @@ func deal_damage():
 			PlayerInventory.add_item(item, 1)
 		self.queue_free()
 		can_die = false
-		Global.enemy_dead = false
+		Global.slime_dead = false
 		if Global.has_neil_quest == true and Global.completed_neil_quest == false:
 			Global.neil_blue_slime_kills += 1
 
@@ -133,6 +118,7 @@ func _on_justhit_timeout():
 
 func _on_attack_timeout():
 	attack = true
+	charge = false
 	attack_pos = player.position
 	current_pos = position
 	$attack_done.start()
@@ -140,4 +126,49 @@ func _on_attack_timeout():
 
 func _on_attack_done_timeout():
 	attack = false
+	charge = true
 	$attack.start()
+
+
+func animate():
+	if health > 0:
+		if getting_hit == true:
+			$AnimatedSprite2D.play("hit")
+			move_and_collide(Vector2(0,0))
+			position -= (player.position - position) / speed
+			attack = false
+			$attack.start()
+			$attack_done.stop()
+			if(player.position.x - position.x) < 0:
+				$AnimatedSprite2D.flip_h = true
+			else:
+				$AnimatedSprite2D.flip_h = false
+			charge = true
+				
+		elif attack == true:
+			move_and_collide(Vector2(0,0))
+			position += (attack_pos - current_pos) / speed
+			if position == attack_pos:
+				attack = false
+
+			$AnimatedSprite2D.play("walk")
+
+			if(player.position.x - position.x) < 0:
+				$AnimatedSprite2D.flip_h = true
+			else:
+				$AnimatedSprite2D.flip_h = false
+				
+		elif detected == true:
+			if charge == true:
+				if(player.position.x - position.x) < 0:
+					$AnimatedSprite2D.flip_h = true
+				if(player.position.x - position.x) > 0:
+					$AnimatedSprite2D.flip_h = false
+				$AnimatedSprite2D.play("charge")
+				charge = false
+		else:
+			$AnimatedSprite2D.play("idle")
+
+
+func _on_attack_cd_timeout():
+	$enemy_hitbox/CollisionShape2D.set_deferred("disabled", false)

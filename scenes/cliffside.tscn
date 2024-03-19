@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://h7gq3fxns2mq"]
+[gd_scene load_steps=18 format=3 uid="uid://h7gq3fxns2mq"]
 
 [ext_resource type="Script" path="res://scripts/cliffside.gd" id="1_2jlaw"]
 [ext_resource type="Texture2D" uid="uid://cw3p3v6wsl4sq" path="res://art/tilesets/grass.png" id="1_lkwu8"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://br0hh220gcdhl" path="res://scenes/player.tscn" id="4_lcvd4"]
 [ext_resource type="PackedScene" uid="uid://mom618kl3h80" path="res://scenes/redslime.tscn" id="6_aollk"]
 [ext_resource type="PackedScene" uid="uid://xdwt1bulnai7" path="res://scenes/chest.tscn" id="7_oj3gm"]
+[ext_resource type="FontFile" uid="uid://c46hadkwr6sgd" path="res://fonts/Xolonium-Regular.ttf" id="8_chqfd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xdnqh"]
 texture = ExtResource("1_lkwu8")
@@ -221,6 +222,30 @@ size = Vector2(115, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n1ros"]
 size = Vector2(16, 20)
 
+[sub_resource type="Animation" id="Animation_ceu6g"]
+resource_name = "path_sign"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("path_text:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0osol"]
+_data = {
+"path_sign": SubResource("Animation_ceu6g")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pcohs"]
+size = Vector2(23, 26)
+
 [node name="cliffside" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_2jlaw")
@@ -275,7 +300,36 @@ position = Vector2(480, 42)
 position = Vector2(480, 48)
 shape = SubResource("RectangleShape2D_n1ros")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0osol")
+}
+
+[node name="path_sign" type="Area2D" parent="."]
+position = Vector2(136, 222)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="path_sign"]
+position = Vector2(-0.5, 15)
+shape = SubResource("RectangleShape2D_pcohs")
+
+[node name="path_text" type="Label" parent="."]
+visible = false
+offset_left = 72.0
+offset_top = 239.0
+offset_right = 1017.0
+offset_bottom = 791.0
+scale = Vector2(0.05, 0.05)
+theme_override_fonts/font = ExtResource("8_chqfd")
+theme_override_font_sizes/font_size = 150
+text = "Village Path
+|
+V
+"
+horizontal_alignment = 1
+
 [connection signal="body_entered" from="cliffside_exit" to="." method="_on_cliffside_exit_body_entered"]
 [connection signal="body_exited" from="cliffside_exit" to="." method="_on_cliffside_exit_body_exited"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="path_sign" to="." method="_on_path_sign_body_entered"]
+[connection signal="body_exited" from="path_sign" to="." method="_on_path_sign_body_exited"]

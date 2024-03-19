@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvpkqj67u58k4"
-path="res://.godot/imported/skeleton.png-db6116b63ac2248a6354e009ccc972fc.ctex"
+uid="uid://ceqrirdmnelfp"
+path="res://.godot/imported/bonesword.png-4fd7ac83d4338d1c910a8dc19b7c0ff8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/characters/skeleton.png"
-dest_files=["res://.godot/imported/skeleton.png-db6116b63ac2248a6354e009ccc972fc.ctex"]
+source_file="res://art/items/bonesword.png"
+dest_files=["res://.godot/imported/bonesword.png-4fd7ac83d4338d1c910a8dc19b7c0ff8.ctex"]
 
 [params]
 

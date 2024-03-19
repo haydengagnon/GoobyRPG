@@ -2,9 +2,10 @@ extends Node
 
 #Damage logic
 var player_current_attack = false
-var enemy_dead = false
+var slime_dead = false
 var redslime_dead = false
 var redslime_can_attack = true
+var skeleton_dead
 var deal_damage = false
 
 #Load Logic

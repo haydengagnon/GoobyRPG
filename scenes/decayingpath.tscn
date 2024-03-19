@@ -1,11 +1,58 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqa04bnja580q"]
+[gd_scene load_steps=12 format=3 uid="uid://cqa04bnja580q"]
 
 [ext_resource type="Script" path="res://scripts/decayingpath.gd" id="1_r63pt"]
 [ext_resource type="TileSet" uid="uid://eqeuaixdq8cx" path="res://art/tilesets/mytileset.tres" id="2_ho4wd"]
 [ext_resource type="PackedScene" uid="uid://br0hh220gcdhl" path="res://scenes/player.tscn" id="3_cxyss"]
+[ext_resource type="FontFile" uid="uid://c46hadkwr6sgd" path="res://fonts/Xolonium-Regular.ttf" id="4_yvyth"]
+[ext_resource type="PackedScene" uid="uid://circowae07iry" path="res://scenes/skeleton.tscn" id="5_mhrud"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ge0xd"]
 size = Vector2(138, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e53f6"]
+size = Vector2(24, 29)
+
+[sub_resource type="Animation" id="Animation_wgswx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("village_sign_text:label_settings:font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_smhbm"]
+resource_name = "village_sign"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("village_sign_text:label_settings:font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_42vph"]
+_data = {
+"RESET": SubResource("Animation_wgswx"),
+"village_sign": SubResource("Animation_smhbm")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_44uoa"]
+line_spacing = -40.0
+font = ExtResource("4_yvyth")
+font_size = 150
 
 [node name="decayingpath" type="Node2D"]
 y_sort_enabled = true
@@ -23,7 +70,7 @@ layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = true
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
-layer_1/tile_data = PackedInt32Array(-65519, 524295, 6, -65536, 524295, 6, -65535, 524295, 6, -65534, 524295, 6, -65533, 524295, 6, -65532, 524295, 6, -65531, 524295, 6, -65530, 524295, 6, -65529, 524295, 6, -65528, 524295, 6, -65527, 524295, 6, -65526, 524295, 6, -65525, 524295, 6, -65524, 524295, 6, -65523, 524295, 6, -65522, 524295, 6, -65521, 524295, 6, -65520, 524295, 6, 0, 524295, 6, 65536, 524295, 6, 131072, 524295, 6, 196608, 524295, 6, 262144, 524295, 6, 327680, 524295, 6, 393216, 524295, 6, 458752, 524295, 6, 524288, 524295, 6, 589824, 524295, 6, 655360, 524295, 6, 720896, 524295, 6, 786432, 524295, 6, 851968, 524295, 6, 917504, 524295, 6, 983040, 524295, 6, 1048576, 524295, 6, 1114112, 524295, 6, 1179648, 524295, 6, 1245184, 524295, 6, 1310720, 524295, 6, 1376256, 524295, 6, 1441792, 524295, 6, 1507328, 524295, 6, 1572864, 524295, 6, 1638400, 524295, 6, 1703936, 524295, 6, 1769472, 524295, 6, 1835008, 524295, 6, 1900544, 524295, 6, 1966080, 524295, 6, 2031616, 524295, 6, 2097152, 524295, 6, 2162688, 524295, 6, 2228224, 524295, 6, 2293760, 524295, 6, 2359296, 524295, 6, 2424832, 524295, 6, 2490368, 524295, 6, 2490369, 524295, 6, 2490370, 524295, 6, 2490371, 524295, 6, 2490372, 524295, 6, -65518, 524295, 6, -65517, 524295, 6, -65516, 524295, 6, -65515, 524295, 6, 21, 524295, 6, 65557, 524295, 6, 131093, 524295, 6, 196629, 524295, 6, 262165, 524295, 6, 327701, 524295, 6, 393237, 524295, 6, 458773, 524295, 6, 524309, 524295, 6, 589845, 524295, 6, 655381, 524295, 6, 720917, 524295, 6, 786453, 524295, 6, 851989, 524295, 6, 917525, 524295, 6, 983061, 524295, 6, 1048597, 524295, 6, 1114133, 524295, 6, 1179669, 524295, 6, 1245205, 524295, 6, 1310741, 524295, 6, 1376277, 524295, 6, 1441813, 524295, 6, 1507349, 524295, 6, 1572885, 524295, 6, 1638421, 524295, 6, 1703957, 524295, 6, 1769493, 524295, 6, 1835029, 524295, 6, 1900565, 524295, 6, 1966101, 524295, 6, 2031637, 524295, 6, 2097173, 524295, 6, 2162709, 524295, 6, 2228245, 524295, 6, 2293781, 524295, 6, 2359317, 524295, 6, 2424853, 524295, 6, 2490389, 524295, 6, 2490388, 524295, 6, 2490387, 524295, 6, 2490386, 524295, 6, 2490385, 524295, 6, 2490384, 524295, 6, 2490383, 524295, 6, 2490373, 524295, 6, 2490374, 524295, 6)
+layer_1/tile_data = PackedInt32Array(-65519, 524295, 6, -65536, 524295, 6, -65535, 524295, 6, -65534, 524295, 6, -65533, 524295, 6, -65532, 524295, 6, -65531, 524295, 6, -65530, 524295, 6, -65529, 524295, 6, -65528, 524295, 6, -65527, 524295, 6, -65526, 524295, 6, -65525, 524295, 6, -65524, 524295, 6, -65523, 524295, 6, -65522, 524295, 6, -65521, 524295, 6, -65520, 524295, 6, 0, 524295, 6, 65536, 524295, 6, 131072, 524295, 6, 196608, 524295, 6, 262144, 524295, 6, 327680, 524295, 6, 393216, 524295, 6, 458752, 524295, 6, 524288, 524295, 6, 589824, 524295, 6, 655360, 524295, 6, 720896, 524295, 6, 786432, 524295, 6, 851968, 524295, 6, 917504, 524295, 6, 983040, 524295, 6, 1048576, 524295, 6, 1114112, 524295, 6, 1179648, 524295, 6, 1245184, 524295, 6, 1310720, 524295, 6, 1376256, 524295, 6, 1441792, 524295, 6, 1507328, 524295, 6, 1572864, 524295, 6, 1638400, 524295, 6, 1703936, 524295, 6, 1769472, 524295, 6, 1835008, 524295, 6, 1900544, 524295, 6, 1966080, 524295, 6, 2031616, 524295, 6, 2097152, 524295, 6, 2162688, 524295, 6, 2228224, 524295, 6, 2293760, 524295, 6, 2359296, 524295, 6, 2424832, 524295, 6, 2490368, 524295, 6, 2490369, 524295, 6, 2490370, 524295, 6, 2490371, 524295, 6, 2490372, 524295, 6, -65518, 524295, 6, -65517, 524295, 6, -65516, 524295, 6, -65515, 524295, 6, 21, 524295, 6, 65557, 524295, 6, 131093, 524295, 6, 196629, 524295, 6, 262165, 524295, 6, 327701, 524295, 6, 393237, 524295, 6, 458773, 524295, 6, 524309, 524295, 6, 589845, 524295, 6, 655381, 524295, 6, 720917, 524295, 6, 786453, 524295, 6, 851989, 524295, 6, 917525, 524295, 6, 983061, 524295, 6, 1048597, 524295, 6, 1114133, 524295, 6, 1179669, 524295, 6, 1245205, 524295, 6, 1310741, 524295, 6, 1376277, 524295, 6, 1441813, 524295, 6, 1507349, 524295, 6, 1572885, 524295, 6, 1638421, 524295, 6, 1703957, 524295, 6, 1769493, 524295, 6, 1835029, 524295, 6, 1900565, 524295, 6, 1966101, 524295, 6, 2031637, 524295, 6, 2097173, 524295, 6, 2162709, 524295, 6, 2228245, 524295, 6, 2293781, 524295, 6, 2359317, 524295, 6, 2424853, 524295, 6, 2490389, 524295, 6, 2490388, 524295, 6, 2490387, 524295, 6, 2490386, 524295, 6, 2490385, 524295, 6, 2490384, 524295, 6, 2490383, 524295, 6, 2490373, 524295, 6, 2490374, 524295, 6, 2162704, 655367, 7, 2293766, 655367, 7, 1835017, 655367, 7, 1572880, 655367, 7, 1376263, 655367, 7, 983055, 655367, 7, 786437, 655367, 7, 196625, 655367, 7, 1900564, 327687, 0, 1310726, 327687, 0, 917519, 327687, 0, 2424846, 7, 0, 1769475, 393223, 7, 1310738, 393223, 7, 589834, 393223, 7)
 
 [node name="player" parent="." instance=ExtResource("3_cxyss")]
 position = Vector2(178, 618)
@@ -39,5 +86,43 @@ shape = SubResource("RectangleShape2D_ge0xd")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="borders"]
 polygon = PackedVector2Array(241, 614, 335, 615, 333, 13, 18, 13, 18, 612, 113, 612, 113, 640, 0, 640, -1, -25, 354, -22, 353, 640, 274, 640, 233, 693, 48, 680, 106, 640, 106, 667, 244, 667, 244, 640, 241, 640)
 
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(232, 585)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 22.5)
+shape = SubResource("RectangleShape2D_e53f6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_42vph")
+}
+
+[node name="village_sign_text" type="Label" parent="."]
+visible = false
+offset_left = 192.0
+offset_top = 609.0
+offset_right = 719.0
+offset_bottom = 1161.0
+scale = Vector2(0.05, 0.05)
+theme_override_fonts/font = ExtResource("4_yvyth")
+theme_override_font_sizes/font_size = 150
+text = "Village
+|
+v"
+label_settings = SubResource("LabelSettings_44uoa")
+horizontal_alignment = 1
+
+[node name="skeleton" parent="." instance=ExtResource("5_mhrud")]
+position = Vector2(261, 351)
+
+[node name="skeleton2" parent="." instance=ExtResource("5_mhrud")]
+position = Vector2(98, 302)
+
+[node name="skeleton3" parent="." instance=ExtResource("5_mhrud")]
+position = Vector2(139, 463)
+
 [connection signal="body_entered" from="village_entrance" to="." method="_on_village_entrance_body_entered"]
 [connection signal="body_exited" from="village_entrance" to="." method="_on_village_entrance_body_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
