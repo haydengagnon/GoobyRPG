@@ -481,7 +481,7 @@ offset_right = 1336.0
 offset_bottom = 867.0
 scale = Vector2(0.05, 0.05)
 theme_override_fonts/font = ExtResource("8_op8u0")
-text = "Use C to
+text = "Use Shift to
 Dodge Roll"
 label_settings = SubResource("LabelSettings_kr60m")
 horizontal_alignment = 1

@@ -64,12 +64,16 @@ func enemy():
 
 func _on_redslime_hitbox_body_entered(body):
 	if body.has_method("player"):
-		player_in_zone = true
+		if body.invincible == false:
+			body.get_hit()
+			Global.health -= 25
+		$redslime_hitbox/CollisionShape2D.set_deferred("disabled", true)
+		$attack_cd.start()
 
 
 func _on_redslime_hitbox_body_exited(body):
 	if body.has_method("player"):
-		player_in_zone = false
+		pass
 
 
 func deal_damage():
@@ -164,3 +168,7 @@ func animate():
 				charge = false
 		else:
 			$AnimatedSprite2D.play("idle")
+
+
+func _on_attack_cd_timeout():
+	$redslime_hitbox/CollisionShape2D.set_deferred("disabled", false)

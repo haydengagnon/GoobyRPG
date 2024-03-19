@@ -1,7 +1,7 @@
 [gd_scene load_steps=22 format=3 uid="uid://c4aso13oksqwx"]
 
 [ext_resource type="Texture2D" uid="uid://doyfkpuqoybnn" path="res://art/characters/slime.png" id="1_1ybuv"]
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_4wfbl"]
+[ext_resource type="Script" path="res://scripts/blueslime.gd" id="1_3cub4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vhwny"]
 atlas = ExtResource("1_1ybuv")
@@ -146,7 +146,7 @@ radius = 7.0
 radius = 4.0
 
 [node name="blueslime" type="CharacterBody2D" groups=["game_events"]]
-script = ExtResource("1_4wfbl")
+script = ExtResource("1_3cub4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(0, 1, 1, 1)
@@ -155,7 +155,6 @@ animation = &"charge"
 offset = Vector2(0, -3)
 
 [node name="detection_area" type="Area2D" parent="."]
-visible = false
 collision_layer = 2
 collision_mask = 2
 
@@ -190,6 +189,7 @@ show_percentage = false
 
 [node name="justhit" type="Timer" parent="."]
 wait_time = 0.25
+one_shot = true
 
 [node name="attack" type="Timer" parent="."]
 wait_time = 0.75
@@ -197,6 +197,10 @@ one_shot = true
 
 [node name="attack_done" type="Timer" parent="."]
 wait_time = 0.75
+one_shot = true
+
+[node name="attack_cd" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
@@ -207,3 +211,4 @@ wait_time = 0.75
 [connection signal="timeout" from="justhit" to="." method="_on_justhit_timeout"]
 [connection signal="timeout" from="attack" to="." method="_on_attack_timeout"]
 [connection signal="timeout" from="attack_done" to="." method="_on_attack_done_timeout"]
+[connection signal="timeout" from="attack_cd" to="." method="_on_attack_cd_timeout"]

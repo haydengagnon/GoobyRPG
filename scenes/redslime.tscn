@@ -155,7 +155,6 @@ animation = &"walk"
 offset = Vector2(0, -3.5)
 
 [node name="detection_area" type="Area2D" parent="."]
-visible = false
 collision_layer = 2
 collision_mask = 2
 
@@ -163,7 +162,6 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_2qp6y")
 
 [node name="redslime_hitbox" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="redslime_hitbox"]
 position = Vector2(0, -3)
@@ -191,6 +189,7 @@ show_percentage = false
 
 [node name="justhit" type="Timer" parent="."]
 wait_time = 0.25
+one_shot = true
 
 [node name="attack" type="Timer" parent="."]
 wait_time = 0.75
@@ -198,6 +197,9 @@ one_shot = true
 
 [node name="attack_done" type="Timer" parent="."]
 wait_time = 0.75
+one_shot = true
+
+[node name="attack_cd" type="Timer" parent="."]
 one_shot = true
 
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
@@ -209,3 +211,4 @@ one_shot = true
 [connection signal="timeout" from="justhit" to="." method="_on_justhit_timeout"]
 [connection signal="timeout" from="attack" to="." method="_on_attack_timeout"]
 [connection signal="timeout" from="attack_done" to="." method="_on_attack_done_timeout"]
+[connection signal="timeout" from="attack_cd" to="." method="_on_attack_cd_timeout"]
