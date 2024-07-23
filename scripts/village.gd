@@ -43,9 +43,11 @@ func change_scene():
 			Global.village_to_world = true
 		elif Global.slime_forest_enter == true:
 			get_tree().change_scene_to_file("res://scenes/slimeforest.tscn")
+			Global.finish_changescenes()
 			Global.village_to_slime_forest = true
 		elif Global.decaying_path_enter == true:
 			get_tree().change_scene_to_file("res://scenes/decayingpath.tscn")
+			Global.finish_changescenes()
 			Global.village_to_decaying = true
 
 func _on_world_entrance_body_entered(body):
@@ -157,7 +159,7 @@ func _on_decaying_path_entrance_body_entered(body):
 
 func _on_decaying_path_entrance_body_exited(body):
 	if body.has_method("player"):
-		Global.decaying_path_enter = false
+		Global.transition_scene = false
 
 
 func _on_neil_sign_body_entered(body):

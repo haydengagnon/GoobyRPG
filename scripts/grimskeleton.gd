@@ -49,7 +49,7 @@ func on_load_game(saved_data:SavedData):
 func enemy():
 	pass
 
-func skeleton():
+func grimskeleton():
 	pass
 
 func move():
@@ -220,3 +220,4 @@ func _on_attack_left_area_body_exited(body):
 		attacking = false
 		$attack_timer.stop()
 		$charge_timer.stop()
+

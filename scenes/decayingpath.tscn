@@ -114,13 +114,13 @@ label_settings = SubResource("LabelSettings_44uoa")
 horizontal_alignment = 1
 
 [node name="skeleton" parent="." instance=ExtResource("5_mhrud")]
-position = Vector2(261, 351)
+position = Vector2(253, 331)
 
 [node name="skeleton2" parent="." instance=ExtResource("5_mhrud")]
 position = Vector2(98, 302)
 
 [node name="skeleton3" parent="." instance=ExtResource("5_mhrud")]
-position = Vector2(139, 463)
+position = Vector2(181, 460)
 
 [connection signal="body_entered" from="village_entrance" to="." method="_on_village_entrance_body_entered"]
 [connection signal="body_exited" from="village_entrance" to="." method="_on_village_entrance_body_exited"]

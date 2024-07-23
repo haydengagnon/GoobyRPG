@@ -23,7 +23,7 @@ func _ready():
 	Global.game_loaded = false
 
 
-func _process(delta):
+func _process(_delta):
 	set_camera_limits()
 	change_scene()
 	
@@ -39,7 +39,7 @@ func set_camera_limits():
 
 func change_scene():
 	if Global.transition_scene == true:
-		if Global.decaying_path_enter == true:
+		if Global.village_enter == true:
 			get_tree().change_scene_to_file("res://scenes/village.tscn")
 			Global.finish_changescenes()
 			Global.decaying_to_village = true
@@ -48,12 +48,12 @@ func change_scene():
 func _on_village_entrance_body_entered(body):
 	if body.has_method("player"):
 		Global.transition_scene = true
-		Global.decaying_path_enter = true
+		Global.village_enter = true
 
 
 func _on_village_entrance_body_exited(body):
 	if body.has_method("player"):
-		Global.decaying_path_enter = false
+		Global.transition_scene = false
 
 
 func _on_area_2d_body_entered(body):
