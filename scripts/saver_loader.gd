@@ -13,6 +13,7 @@ func save_game1():
 	saved_game.level = Global.level
 	saved_game.health = Global.health
 	saved_game.experience = Global.experience
+	saved_game.moola = Global.moola
 	saved_game.game_first_loadin = Global.game_first_loadin
 	saved_game.current_scene = Global.current_scene
 	saved_game.player_position = player.position
@@ -50,6 +51,7 @@ func load_game1():
 	Global.level = saved_game.level
 	Global.health = saved_game.health
 	Global.experience = saved_game.experience
+	Global.moola = saved_game.moola
 	Global.game_first_loadin = saved_game.game_first_loadin
 	Global.current_scene = saved_game.current_scene
 	get_tree().change_scene_to_file("res://scenes/" + Global.current_scene + ".tscn")
@@ -82,6 +84,7 @@ func load_from_home1():
 	Global.level = saved_game.level
 	Global.health = saved_game.health
 	Global.experience = saved_game.experience
+	Global.moola = saved_game.moola
 	Global.game_first_loadin = saved_game.game_first_loadin
 	Global.current_scene = saved_game.current_scene
 	get_tree().change_scene_to_file("res://scenes/" + Global.current_scene + ".tscn")
@@ -113,6 +116,7 @@ func save_game2():
 	saved_game.level = Global.level
 	saved_game.health = Global.health
 	saved_game.experience = Global.experience
+	saved_game.moola = Global.moola
 	saved_game.game_first_loadin = Global.game_first_loadin
 	saved_game.current_scene = Global.current_scene
 	saved_game.player_position = player.position
@@ -150,6 +154,7 @@ func load_game2():
 	Global.level = saved_game.level
 	Global.health = saved_game.health
 	Global.experience = saved_game.experience
+	Global.moola = saved_game.moola
 	Global.game_first_loadin = saved_game.game_first_loadin
 	Global.current_scene = saved_game.current_scene
 	get_tree().change_scene_to_file("res://scenes/" + Global.current_scene + ".tscn")
@@ -182,6 +187,7 @@ func load_from_home2():
 	Global.level = saved_game.level
 	Global.health = saved_game.health
 	Global.experience = saved_game.experience
+	Global.moola = saved_game.moola
 	Global.game_first_loadin = saved_game.game_first_loadin
 	Global.current_scene = saved_game.current_scene
 	get_tree().change_scene_to_file("res://scenes/" + Global.current_scene + ".tscn")
@@ -213,6 +219,7 @@ func save_game3():
 	saved_game.level = Global.level
 	saved_game.health = Global.health
 	saved_game.experience = Global.experience
+	saved_game.moola = Global.moola
 	saved_game.game_first_loadin = Global.game_first_loadin
 	saved_game.current_scene = Global.current_scene
 	saved_game.player_position = player.position
@@ -250,6 +257,7 @@ func load_game3():
 	Global.level = saved_game.level
 	Global.health = saved_game.health
 	Global.experience = saved_game.experience
+	Global.moola = saved_game.moola
 	Global.game_first_loadin = saved_game.game_first_loadin
 	Global.current_scene = saved_game.current_scene
 	get_tree().change_scene_to_file("res://scenes/" + Global.current_scene + ".tscn")
@@ -282,6 +290,7 @@ func load_from_home3():
 	Global.level = saved_game.level
 	Global.health = saved_game.health
 	Global.experience = saved_game.experience
+	Global.moola = saved_game.moola
 	Global.game_first_loadin = saved_game.game_first_loadin
 	Global.current_scene = saved_game.current_scene
 	get_tree().change_scene_to_file("res://scenes/" + Global.current_scene + ".tscn")

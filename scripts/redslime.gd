@@ -97,6 +97,7 @@ func deal_damage():
 		Global.experience += 100
 		if leather_shirt_drop == 9:
 			PlayerInventory.add_item(item, 1)
+		Global.moola += 3
 		self.queue_free()
 		can_die = false
 		Global.redslime_dead = false

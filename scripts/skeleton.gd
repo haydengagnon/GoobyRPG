@@ -129,6 +129,7 @@ func deal_damage():
 		Global.experience += 200
 		if idkwhatitemyet_droprate == 99:
 			PlayerInventory.add_item(item, 1)
+		Global.moola += 5
 		self.queue_free()
 		can_die = false
 		Global.skeleton_dead = false

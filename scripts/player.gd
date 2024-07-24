@@ -35,8 +35,6 @@ func _ready():
 
 func _physics_process(delta):
 	player_movement(delta)
-#	enemy_attack()
-#	redslime_attack()
 	attack()
 	interact()
 	death()
@@ -154,28 +152,8 @@ func _on_player_hitbox_body_exited(body):
 	if body.has_method("redslime"):
 		redslime_in_range = false
 		
-#func enemy_attack():
-#	if Global.health > 0:
-#			if enemy_in_range and enemy_attack_cooldown == true and Global.slime_dead == false:
-#				if invincible == false:
-#					Global.health -= 10
-#				enemy_attack_cooldown = false
-#				$attack_cooldown.start()
-#				$regen_timer.stop()
-#				$regen_cooldown.start()
-#
-#func redslime_attack():
-#	if Global.health > 0:
-#			if redslime_in_range and enemy_attack_cooldown == true and Global.redslime_dead == false:
-#				if invincible == false:
-#					Global.health -= 20
-#				enemy_attack_cooldown = false
-#				$attack_cooldown.start()
-#				$regen_timer.stop()
-#				$regen_cooldown.start()
 
 func get_hit():
-#	$attack_cooldown.start()
 	$regen_timer.stop()
 	$regen_cooldown.start()
 
