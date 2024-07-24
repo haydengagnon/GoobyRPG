@@ -26,6 +26,7 @@ func save_game1():
 	global_data.completed_neil_quest = Global.completed_neil_quest
 	global_data.neil_blue_slime_kills = Global.neil_blue_slime_kills
 	global_data.bigg_e_red_slime_kills = Global.bigg_e_red_slime_kills
+	global_data.completed_bigg_e_quest = Global.completed_bigg_e_quest
 	
 	var saved_data:Array[SavedData] = []
 	get_tree().call_group("game_events", "on_save_game", saved_data)
@@ -125,6 +126,7 @@ func save_game2():
 	global_data.completed_neil_quest = Global.completed_neil_quest
 	global_data.neil_blue_slime_kills = Global.neil_blue_slime_kills
 	global_data.bigg_e_red_slime_kills = Global.bigg_e_red_slime_kills
+	global_data.completed_bigg_e_quest = Global.completed_bigg_e_quest
 	
 	var saved_data:Array[SavedData] = []
 	get_tree().call_group("game_events", "on_save_game", saved_data)
@@ -224,6 +226,7 @@ func save_game3():
 	global_data.completed_neil_quest = Global.completed_neil_quest
 	global_data.neil_blue_slime_kills = Global.neil_blue_slime_kills
 	global_data.bigg_e_red_slime_kills = Global.bigg_e_red_slime_kills
+	global_data.completed_bigg_e_quest = Global.completed_bigg_e_quest
 	
 	var saved_data:Array[SavedData] = []
 	get_tree().call_group("game_events", "on_save_game", saved_data)

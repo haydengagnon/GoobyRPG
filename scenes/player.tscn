@@ -502,7 +502,8 @@ disabled = true
 wait_time = 0.625
 
 [node name="iframe_timer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.4
+one_shot = true
 
 [node name="dodge_cooldown_timer" type="Timer" parent="."]
 wait_time = 1.1

@@ -4,12 +4,15 @@ const SlotClass = preload("res://scripts/Slot.gd")
 @onready var inventory_slots = $GridContainer
 @onready var equip_slot = $EquipSlots
 @onready var weapon_slot = $WeaponSlots
+@onready var trash_slot = $TrashSlots
+
 var holding_item = null
 
 func _ready():
 	var slots = inventory_slots.get_children()
 	var equip_slots = equip_slot.get_children()
 	var weapon_slots = weapon_slot.get_children()
+	var trash_slots = trash_slot.get_children()
 	for i in range(slots.size()):
 		slots[i].gui_input.connect(slot_gui_input.bind(slots[i]))
 		slots[i].slot_index = i
@@ -27,6 +30,10 @@ func _ready():
 		weapon_slots[i].slot_index = i
 	weapon_slots[0].slotType = SlotClass.SlotType.WEAPON
 	weapon_slots[1].slotType = SlotClass.SlotType.OFFHAND
+	
+	trash_slots[0].gui_input.connect(slot_gui_input.bind(trash_slots[0]))
+	trash_slots[0].slotType = SlotClass.SlotType.TRASH
+
 
 	initialize_inventory()
 	initialize_equips()
@@ -97,6 +104,7 @@ func update_equipment():
 		Global.pants = null
 
 
+
 func able_to_put_into_slot(slot: SlotClass):
 	if holding_item == null:
 		return true
@@ -115,11 +123,18 @@ func able_to_put_into_slot(slot: SlotClass):
 
 func left_click_empty_slot(slot: SlotClass):
 	if able_to_put_into_slot(slot):
-		PlayerInventory.add_item_to_empty_slot(holding_item, slot)
-		slot.putIntoSlot(holding_item)
-		update_weapons()
-		update_equipment()
-		holding_item = null
+		if slot.slotType == SlotClass.SlotType.TRASH:
+			PlayerInventory.add_item_to_empty_slot(holding_item, slot)
+			PlayerInventory.remove_item(slot)
+			slot.putIntoSlot(holding_item)
+			slot.deleteItem(holding_item)
+			holding_item = null
+		else:
+			PlayerInventory.add_item_to_empty_slot(holding_item, slot)
+			slot.putIntoSlot(holding_item)
+			update_weapons()
+			update_equipment()
+			holding_item = null
 
 func left_click_different_item(event: InputEvent, slot: SlotClass):
 	if able_to_put_into_slot(slot):
@@ -154,6 +169,7 @@ func left_click_not_holding_item(slot: SlotClass):
 	holding_item = slot.item
 	slot.pickFromSlot()
 	holding_item.global_position = get_global_mouse_position()
+	
 
 func open_inventory(event: InputEvent):
 	if event.is_action_just_pressed("inventory"):

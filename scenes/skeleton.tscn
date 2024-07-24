@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://circowae07iry"]
+[gd_scene load_steps=40 format=3 uid="uid://dvwbyf1pcg3sa"]
 
 [ext_resource type="Script" path="res://scripts/skeleton.gd" id="1_wm4nn"]
 [ext_resource type="Texture2D" uid="uid://bvpkqj67u58k4" path="res://art/characters/skeleton.png" id="2_haud3"]
@@ -286,6 +286,9 @@ radius = 75.0067
 radius = 5.0
 height = 20.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_312tb"]
+radius = 21.0
+
 [node name="skeleton" type="CharacterBody2D"]
 script = ExtResource("1_wm4nn")
 
@@ -343,9 +346,14 @@ position = Vector2(-8, -4)
 shape = SubResource("CapsuleShape2D_og55q")
 disabled = true
 
+[node name="attack_left_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_left_area"]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_312tb")
+
 [connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_changed"]
 [connection signal="body_entered" from="attack_area" to="." method="_on_attack_area_body_entered"]
-[connection signal="body_exited" from="attack_area" to="." method="_on_attack_area_body_exited"]
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
 [connection signal="timeout" from="take_damage_cooldown" to="." method="_on_take_damage_cooldown_timeout"]
@@ -355,3 +363,4 @@ disabled = true
 [connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]
 [connection signal="body_entered" from="attack_collision" to="." method="_on_attack_collision_body_entered"]
 [connection signal="body_exited" from="attack_collision" to="." method="_on_attack_collision_body_exited"]
+[connection signal="body_exited" from="attack_left_area" to="." method="_on_attack_left_area_body_exited"]

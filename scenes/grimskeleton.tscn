@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://jc8q07aj4cpk"]
+
+[ext_resource type="Script" path="res://scripts/grimskeleton.gd" id="1_hpba7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aoi5b"]
+radius = 7.0
+
+[node name="grimskeleton" type="CharacterBody2D"]
+script = ExtResource("1_hpba7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_aoi5b")
