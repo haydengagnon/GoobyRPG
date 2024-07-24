@@ -235,16 +235,16 @@ horizontal_alignment = 1
 offset_left = 29.0
 offset_top = 136.0
 offset_right = 61.0
-offset_bottom = 168.0
+offset_bottom = 272.0
 theme_override_constants/v_separation = 20
 
-[node name="TrashSlot" type="Panel" parent="TrashSlots"]
+[node name="HelmetSlot" type="Panel" parent="TrashSlots"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_s2oh5")
 script = ExtResource("4_t3i60")
 
-[node name="Label" type="Label" parent="TrashSlots/TrashSlot"]
+[node name="Label" type="Label" parent="TrashSlots/HelmetSlot"]
 layout_mode = 0
 offset_right = 620.0
 offset_bottom = 184.0
@@ -252,5 +252,42 @@ scale = Vector2(0.05, 0.05)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_r8bnt")
 theme_override_font_sizes/font_size = 125
-text = "Trash"
+text = "Helmet"
+horizontal_alignment = 1
+
+[node name="ShirtSlot" type="Panel" parent="TrashSlots"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_s2oh5")
+script = ExtResource("4_t3i60")
+
+[node name="Label" type="Label" parent="TrashSlots/ShirtSlot"]
+layout_mode = 0
+offset_right = 620.0
+offset_bottom = 184.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_r8bnt")
+theme_override_font_sizes/font_size = 125
+text = "Shirt"
+horizontal_alignment = 1
+
+[node name="PantsSlot" type="Panel" parent="TrashSlots"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_s2oh5")
+script = ExtResource("4_t3i60")
+
+[node name="Label" type="Label" parent="TrashSlots/PantsSlot"]
+layout_mode = 0
+offset_right = 620.0
+offset_bottom = 184.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_r8bnt")
+theme_override_font_sizes/font_size = 125
+text = "Pants
+"
 horizontal_alignment = 1

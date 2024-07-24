@@ -1,7 +1,7 @@
 [gd_scene load_steps=28 format=3 uid="uid://biv0vl3twldvp"]
 
 [ext_resource type="Script" path="res://scripts/village.gd" id="1_ibdcb"]
-[ext_resource type="TileSet" uid="uid://eqeuaixdq8cx" path="res://art/tilesets/mytileset.tres" id="2_pwkma"]
+[ext_resource type="TileSet" uid="uid://doalbjx44p2wf" path="res://art/tilesets/mytileset.tres" id="2_pwkma"]
 [ext_resource type="PackedScene" uid="uid://br0hh220gcdhl" path="res://scenes/player.tscn" id="11_cdiuq"]
 [ext_resource type="PackedScene" uid="uid://bbbarl18rbcam" path="res://scenes/npc.tscn" id="13_heebi"]
 [ext_resource type="FontFile" uid="uid://c46hadkwr6sgd" path="res://fonts/Xolonium-Regular.ttf" id="14_soefw"]

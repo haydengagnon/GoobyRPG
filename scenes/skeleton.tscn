@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://circowae07iry"]
+[gd_scene load_steps=40 format=3 uid="uid://dvwbyf1pcg3sa"]
 
 [ext_resource type="Script" path="res://scripts/skeleton.gd" id="1_wm4nn"]
 [ext_resource type="Texture2D" uid="uid://bvpkqj67u58k4" path="res://art/characters/skeleton.png" id="2_haud3"]

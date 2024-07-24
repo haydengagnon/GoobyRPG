@@ -10,7 +10,8 @@ enum SlotType {
 	SHIRT,
 	PANTS,
 	WEAPON,
-	OFFHAND
+	OFFHAND,
+	TRASH
 }
 
 var slotType = null
@@ -39,3 +40,8 @@ func initialize_item(item_name, item_quantity):
 	else:
 		item.set_item(item_name, item_quantity)
 
+func deleteItem(item_name):
+	remove_child(item)
+	var inventoryNode = find_parent("Inventory")
+	inventoryNode.remove_child(item)
+	item = null

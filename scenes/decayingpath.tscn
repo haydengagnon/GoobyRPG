@@ -1,10 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://cqa04bnja580q"]
+[gd_scene load_steps=12 format=3 uid="uid://b6pk3cjhvlddt"]
 
 [ext_resource type="Script" path="res://scripts/decayingpath.gd" id="1_r63pt"]
-[ext_resource type="TileSet" uid="uid://eqeuaixdq8cx" path="res://art/tilesets/mytileset.tres" id="2_ho4wd"]
+[ext_resource type="TileSet" uid="uid://doalbjx44p2wf" path="res://art/tilesets/mytileset.tres" id="2_ho4wd"]
 [ext_resource type="PackedScene" uid="uid://br0hh220gcdhl" path="res://scenes/player.tscn" id="3_cxyss"]
 [ext_resource type="FontFile" uid="uid://c46hadkwr6sgd" path="res://fonts/Xolonium-Regular.ttf" id="4_yvyth"]
-[ext_resource type="PackedScene" uid="uid://circowae07iry" path="res://scenes/skeleton.tscn" id="5_mhrud"]
+[ext_resource type="PackedScene" uid="uid://dvwbyf1pcg3sa" path="res://scenes/skeleton.tscn" id="5_mhrud"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ge0xd"]
 size = Vector2(138, 27)
