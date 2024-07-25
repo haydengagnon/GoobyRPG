@@ -42,6 +42,4 @@ func initialize_item(item_name, item_quantity):
 
 func deleteItem(item_name):
 	remove_child(item)
-	var inventoryNode = find_parent("Inventory")
-	inventoryNode.remove_child(item)
 	item = null

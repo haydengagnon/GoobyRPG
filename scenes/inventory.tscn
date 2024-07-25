@@ -5,12 +5,6 @@
 [ext_resource type="Script" path="res://scripts/Slot.gd" id="4_t3i60"]
 [ext_resource type="FontFile" uid="uid://c46hadkwr6sgd" path="res://fonts/Xolonium-Regular.ttf" id="5_r8bnt"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ftlsq"]
-texture = ExtResource("2_h1s61")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s2oh5"]
-texture = ExtResource("2_h1s61")
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yrdpd"]
 bg_color = Color(0.415686, 0.34902, 0.211765, 1)
 border_width_left = 10
@@ -23,9 +17,34 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ftlsq"]
+texture = ExtResource("2_h1s61")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s2oh5"]
+texture = ExtResource("2_h1s61")
+
 [node name="Inventory" type="Node2D"]
 position = Vector2(0, 32)
 script = ExtResource("1_cn4bo")
+
+[node name="Moola" type="Panel" parent="."]
+show_behind_parent = true
+offset_top = -32.0
+offset_right = 351.0
+offset_bottom = 201.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_yrdpd")
+
+[node name="MoolaText" type="Label" parent="Moola"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 5.0
+offset_right = 1623.0
+offset_bottom = 608.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_r8bnt")
+theme_override_font_sizes/font_size = 500
+text = "Moola"
 
 [node name="GridContainer" type="GridContainer" parent="."]
 offset_left = 161.0
@@ -260,22 +279,3 @@ theme_override_fonts/font = ExtResource("5_r8bnt")
 theme_override_font_sizes/font_size = 125
 text = "Trash"
 horizontal_alignment = 1
-
-[node name="Moola" type="Panel" parent="."]
-show_behind_parent = true
-offset_top = -32.0
-offset_right = 351.0
-offset_bottom = 201.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_yrdpd")
-
-[node name="MoolaText" type="Label" parent="Moola"]
-layout_mode = 0
-offset_left = 13.0
-offset_top = 5.0
-offset_right = 1623.0
-offset_bottom = 608.0
-scale = Vector2(0.05, 0.05)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("5_r8bnt")
-theme_override_font_sizes/font_size = 500
-text = "Moola"
