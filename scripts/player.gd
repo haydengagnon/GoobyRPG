@@ -13,6 +13,7 @@ var offhand_damage
 var hat_health
 var shirt_health
 var pants_health
+var offhand_health
 var enemy = null
 var lifesteal
 var roll_in_progress = false
@@ -20,6 +21,7 @@ var invincible = false
 var dodge_cooldown = false
 var current_speed
 var smacked = false
+var attacking = false
 
 const speed = 100
 var current_dir = "none"
@@ -166,14 +168,16 @@ func _on_attack_cooldown_timeout():
 
 func attack():
 	var direction = current_dir
+	$deal_attack_timer.wait_time = JsonData.item_data[Global.weapon]["AttackSpeed"]
 	
 	if player_alive == true:
 		if Global.has_sword == true:
-			if attack_ip == false:
+			if attacking == false:
 				if roll_in_progress == false:
 					if Input.is_action_just_pressed("attack"):
 						Global.player_current_attack = true
 						attack_ip = true
+						attacking = true
 						$attack_area/CollisionShape2D.disabled = false
 						velocity.x = 0
 						velocity.y = 0
@@ -181,16 +185,20 @@ func attack():
 							$AnimatedSprite2D.flip_h = false
 							$AnimatedSprite2D.play("side_attack")
 							$deal_attack_timer.start()
+							$attack_animation_timer.start()
 						if direction == "left":
 							$AnimatedSprite2D.flip_h = true
 							$AnimatedSprite2D.play("side_attack")
 							$deal_attack_timer.start()
+							$attack_animation_timer.start()
 						if direction == "down":
 							$AnimatedSprite2D.play("front_attack")
 							$deal_attack_timer.start()
+							$attack_animation_timer.start()
 						if direction == "up":
 							$AnimatedSprite2D.play("back_attack")
 							$deal_attack_timer.start()
+							$attack_animation_timer.start()
 			
 func interact():
 	if Input.is_action_just_pressed("interact"):
@@ -199,9 +207,8 @@ func interact():
 
 func _on_deal_attack_timer_timeout():
 	$deal_attack_timer.stop()
-	Global.player_current_attack = false
-	attack_ip = false
-	$attack_area/CollisionShape2D.disabled = true
+	attacking = false
+	
 
 
 func _on_regen_cooldown_timeout():
@@ -258,7 +265,10 @@ func health():
 		pants_health = JsonData.item_data[Global.pants]["HealthBonus"]
 	else:
 		pants_health = 0
-	Global.max_health = 100 + ((Global.level - 1) * 50) + hat_health + shirt_health + pants_health
+	if Global.offhand != null:
+		offhand_health = JsonData.item_data[Global.offhand]["HealthBonus"]
+
+	Global.max_health = 100 + ((Global.level - 1) * 50) + hat_health + shirt_health + pants_health + offhand_health
 	if Global.health > Global.max_health:
 		Global.health = Global.max_health
 
@@ -326,3 +336,10 @@ func _on_iframe_timer_timeout():
 
 func _on_dodge_cooldown_timer_timeout():
 	dodge_cooldown = false
+
+
+func _on_attack_animation_timer_timeout():
+	$attack_animation_timer.stop()
+	Global.player_current_attack = false
+	attack_ip = false
+	$attack_area/CollisionShape2D.disabled = true

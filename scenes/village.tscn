@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://biv0vl3twldvp"]
+[gd_scene load_steps=29 format=3 uid="uid://biv0vl3twldvp"]
 
 [ext_resource type="Script" path="res://scripts/village.gd" id="1_ibdcb"]
 [ext_resource type="TileSet" uid="uid://doalbjx44p2wf" path="res://art/tilesets/mytileset.tres" id="2_pwkma"]
+[ext_resource type="PackedScene" uid="uid://b7j3yyno60qyn" path="res://scenes/village_shop.tscn" id="6_j0ut6"]
 [ext_resource type="PackedScene" uid="uid://br0hh220gcdhl" path="res://scenes/player.tscn" id="11_cdiuq"]
 [ext_resource type="PackedScene" uid="uid://bbbarl18rbcam" path="res://scenes/npc.tscn" id="13_heebi"]
 [ext_resource type="FontFile" uid="uid://c46hadkwr6sgd" path="res://fonts/Xolonium-Regular.ttf" id="14_soefw"]
@@ -511,6 +512,9 @@ theme_override_font_sizes/font_size = 150
 text = "Slime Forest
 -->"
 horizontal_alignment = 1
+
+[node name="VillageShop" parent="." instance=ExtResource("6_j0ut6")]
+position = Vector2(421, 239)
 
 [connection signal="body_entered" from="world_entrance" to="." method="_on_world_entrance_body_entered"]
 [connection signal="body_exited" from="world_entrance" to="." method="_on_world_entrance_body_exited"]

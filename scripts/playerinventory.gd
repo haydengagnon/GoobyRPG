@@ -11,7 +11,7 @@ var shirt_health
 var pants_health
 
 var inventory = {
-
+	
 }
 
 var equips = {

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://b7j3yyno60qyn"]
+[gd_scene load_steps=7 format=3 uid="uid://b7j3yyno60qyn"]
 
-[ext_resource type="Script" path="res://scripts/VillageShop.gd" id="1_js7k5"]
+[ext_resource type="Script" path="res://scripts/villageshop.gd" id="1_lv5na"]
 [ext_resource type="Texture2D" uid="uid://bhdvncbrxve7k" path="res://art/inventory/invslot.png" id="2_0l8s3"]
 [ext_resource type="Script" path="res://scripts/Slot.gd" id="3_1jnlt"]
+[ext_resource type="FontFile" uid="uid://c46hadkwr6sgd" path="res://fonts/Xolonium-Regular.ttf" id="4_6h2v6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_74jb2"]
 bg_color = Color(0.415686, 0.34902, 0.211765, 1)
@@ -21,7 +22,7 @@ corner_radius_bottom_left = 16
 texture = ExtResource("2_0l8s3")
 
 [node name="VillageShop" type="Node2D"]
-script = ExtResource("1_js7k5")
+script = ExtResource("1_lv5na")
 
 [node name="ShopBackground" type="Panel" parent="."]
 offset_right = 198.0
@@ -51,11 +52,34 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_og305")
 script = ExtResource("3_1jnlt")
 
+[node name="Label" type="Label" parent="ShopBackground/GridContainer/Slot1"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -6.0
+offset_right = 702.0
+offset_bottom = 138.0
+scale = Vector2(0.05, 0.05)
+theme_override_fonts/font = ExtResource("4_6h2v6")
+theme_override_font_sizes/font_size = 100
+text = "Wooden Club"
+horizontal_alignment = 1
+
 [node name="Slot2" type="Panel" parent="ShopBackground/GridContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_og305")
 script = ExtResource("3_1jnlt")
+
+[node name="Label" type="Label" parent="ShopBackground/GridContainer/Slot2"]
+offset_left = -2.0
+offset_top = -6.0
+offset_right = 702.0
+offset_bottom = 138.0
+scale = Vector2(0.05, 0.05)
+theme_override_fonts/font = ExtResource("4_6h2v6")
+theme_override_font_sizes/font_size = 100
+text = "Round Shield"
+horizontal_alignment = 1
 
 [node name="Slot3" type="Panel" parent="ShopBackground/GridContainer"]
 custom_minimum_size = Vector2(32, 32)

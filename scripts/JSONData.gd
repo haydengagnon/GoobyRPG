@@ -8,4 +8,17 @@ func _ready():
 func load_data(file_path : String):
 	var file_data = FileAccess.get_file_as_string(file_path)
 	var json_data = JSON.parse_string(file_data)
+	print(json_data)
+
+	for item in json_data:
+		if !json_data[item].has("ItemAttack"):
+			json_data[item]["ItemAttack"] = 0
+		if !json_data[item].has("Lifesteal"):
+			json_data[item]["Lifesteal"] = 0
+		if !json_data[item].has("Value"):
+			json_data[item]["Value"] = 0
+		if !json_data[item].has("HealthBonus"):
+			json_data[item]["HealthBonus"] = 0
+			
+	print(json_data)
 	return json_data
