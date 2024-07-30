@@ -559,21 +559,16 @@ horizontal_alignment = 1
 position = Vector2(760, 308)
 
 [node name="VillageShop" parent="." instance=ExtResource("6_j0ut6")]
-visible = false
 z_index = 1
 position = Vector2(711, 219)
 scale = Vector2(0.5, 0.5)
 
-[node name="ShopArea" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
 position = Vector2(760, 320)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ShopArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_hyr0e")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(760, 283)
-zoom = Vector2(4, 4)
 
 [connection signal="body_entered" from="world_entrance" to="." method="_on_world_entrance_body_entered"]
 [connection signal="body_exited" from="world_entrance" to="." method="_on_world_entrance_body_exited"]
@@ -599,8 +594,3 @@ zoom = Vector2(4, 4)
 [connection signal="body_exited" from="slime_forest_sign" to="." method="_on_slime_forest_sign_body_exited"]
 [connection signal="body_entered" from="thornton_sign" to="." method="_on_thornton_sign_body_entered"]
 [connection signal="body_exited" from="thornton_sign" to="." method="_on_thornton_sign_body_exited"]
-[connection signal="body_entered" from="ShopArea" to="." method="_on_shop_area_body_entered"]
-[connection signal="body_exited" from="ShopArea" to="." method="_on_shop_area_body_exited"]
-
-[editable path="player"]
-[editable path="player/HUD"]

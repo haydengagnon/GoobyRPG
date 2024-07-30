@@ -1,77 +1,79 @@
 {
 	"rustysword": {
+		"Name": "Rusty Sword",
 		"ItemCategory": "Weapon",
 		"StackSize": 1,
 		"ItemAttack": 20,
 		"AttackSpeed": 0.355,
-		"Value": 5,
 		"Description": "A rusty sword that you found in the forest"
 	},
 	"ironsword": {
+		"Name": "Iron Sword",
 		"ItemCategory": "Weapon",
 		"StackSize": 1,
 		"ItemAttack": 40,
 		"AttackSpeed": 0.355,
-		"Value": 5,
 		"Description": "An iron sword gifted to you by Neil"
 	},
 	"healthpotion": {
+		"Name": "Health Potion",
 		"ItemCategory": "Consumable",
 		"StackSize": 5,
 		"HealAmount": 50,
-		"Value": 5,
 		"Description": "A potion that restores 100 health"
 	},
 	"leathershirt": {
+		"Name": "Leather Shirt",
 		"ItemCategory": "Shirt",
 		"StackSize": 1,
 		"HealthBonus": 50,
-		"Value": 5,
 		"Description": "A crude armor made out of leather"
 	},
 	"leatherhat": {
+		"Name": "Leather Hat",
 		"ItemCategory": "Hat",
 		"StackSize": 1,
 		"HealthBonus": 25,
-		"Value": 5,
 		"Description": "A crude hat made out of leather"
 	},
 	"leatherpants": {
+		"Name": "Leather Pants",
 		"ItemCategory": "Pants",
 		"StackSize": 1,
 		"HealthBonus": 35,
-		"Value": 5,
 		"Description": "A crude pair of pants made out of leather"
 	},
 	"dagger": {
+		"Name": "Dagger",
 		"ItemCategory": "Offhand",
 		"StackSize": 1,
 		"ItemAttack": 15,
-		"Value": 5,
 		"Description": "A small dagger easily handled in you weak hand"
 	},
 	"bonesword": {
+		"Name": "Bone Sword",
 		"ItemCategory": "Weapon",
 		"StackSize": 1,
 		"ItemAttack": 75,
 		"AttackSpeed": 0.355,
 		"Lifesteal": 10,
-		"Value": 5,
 		"Description": "A sword forged from blood and bones"
 	},
 	"woodenclub": {
+		"Name": "Wooden Club",
 		"ItemCategory": "Weapon",
 		"StackSize": 1,
 		"ItemAttack": 120,
 		"AttackSpeed": 0.7,
-		"Value": 5,
+		"Value": 20,
 		"Description": "It's really just a tree branch"
 	},
 	"roundshield": {
+		"Name": "Round Shield",
 		"ItemCategory": "Offhand",
 		"StackSize": 1,
 		"HealthBonus": 50,
-		"Value": 5,
+		"Value": 25,
 		"Description": "A small round shield to offer protection"
 	}
 }

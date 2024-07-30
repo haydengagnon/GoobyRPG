@@ -168,7 +168,8 @@ func _on_attack_cooldown_timeout():
 
 func attack():
 	var direction = current_dir
-	$deal_attack_timer.wait_time = JsonData.item_data[Global.weapon]["AttackSpeed"]
+	if Global.has_sword:
+		$deal_attack_timer.wait_time = JsonData.item_data[Global.weapon]["AttackSpeed"]
 	
 	if player_alive == true:
 		if Global.has_sword == true:
@@ -267,6 +268,8 @@ func health():
 		pants_health = 0
 	if Global.offhand != null:
 		offhand_health = JsonData.item_data[Global.offhand]["HealthBonus"]
+	else:
+		offhand_health = 0
 
 	Global.max_health = 100 + ((Global.level - 1) * 50) + hat_health + shirt_health + pants_health + offhand_health
 	if Global.health > Global.max_health:

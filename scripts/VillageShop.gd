@@ -11,6 +11,7 @@ func _ready():
 		slots[i].gui_input.connect(slot_gui_input.bind(slots[i]))
 		slots[i].slot_index = i
 		slots[i].slotType = SlotClass.SlotType.INVENTORY
+		slots[i].mouse_entered.connect(slot_gui_input.bind(slots[i]))
 		
 	initialize_inventory()
 
@@ -19,10 +20,23 @@ func _input(_event):
 		holding_item.global_position = get_global_mouse_position()
 
 func slot_gui_input(event: InputEvent, slot: SlotClass):
+	var item_name
+	var item_cost
+	if slot.item != null:
+		item_name = JsonData.item_data[slot.item.item_name]["Name"]
+		item_cost= JsonData.item_data[slot.item.item_name]["Value"]
+		$Tooltip.visible = true
+		$Tooltip.position = get_global_mouse_position()
+		$Tooltip/TooltipLabel.text = item_name + "\nCost: " + str(item_cost)
+	else:
+		$Tooltip.visible = false
+	
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
 			if slot.item:
 				buy_item(slot)
+	
+	
 
 
 func initialize_inventory():
@@ -42,9 +56,6 @@ func buy_item(slot: SlotClass):
 func sell_item():
 	pass
 
-func open_inventory(event: InputEvent):
-	if event.is_action_just_pressed("inventory"):
-		if $ShopBackground.visible:
-			$ShopBackground.visible = false
-		else:
-			$ShopBackground.visible = true		
+
+func _on_slot_exited():
+	$Tooltip.visible = false

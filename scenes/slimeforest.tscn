@@ -35,7 +35,7 @@ layer_2/tile_data = PackedInt32Array(-65536, 524295, 6, -65535, 524295, 6, -6553
 [node name="player" parent="." instance=ExtResource("2_2v14d")]
 position = Vector2(34, 56)
 
-[node name="HUD" parent="player" index="8"]
+[node name="HUD" parent="player" index="9"]
 visible = false
 
 [node name="Area2D" type="Area2D" parent="."]
