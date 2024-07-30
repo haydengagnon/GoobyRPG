@@ -47,6 +47,7 @@ func player_stats():
 	$other_stats/vbox/armor.text = str("Armor: ", Global.armor)
 	$other_stats/vbox/exp.text = str("Exp: ", Global.experience, "/", floor(400 * (Global.level * 1.25)))
 	$other_stats/vbox/speed.text = "Speed: 100"
+	$Inventory/Moola/MoolaText.text = str("Moola: ", Global.moola)
 
 func pause():
 	if Input.is_action_just_pressed("pause"):

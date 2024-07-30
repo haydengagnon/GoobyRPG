@@ -1,0 +1,204 @@
+[gd_scene load_steps=8 format=3 uid="uid://b7j3yyno60qyn"]
+
+[ext_resource type="Script" path="res://scripts/villageshop.gd" id="1_lv5na"]
+[ext_resource type="Texture2D" uid="uid://bhdvncbrxve7k" path="res://art/inventory/invslot.png" id="2_0l8s3"]
+[ext_resource type="Script" path="res://scripts/Slot.gd" id="3_1jnlt"]
+[ext_resource type="FontFile" uid="uid://c46hadkwr6sgd" path="res://fonts/Xolonium-Regular.ttf" id="4_6h2v6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_df8i8"]
+bg_color = Color(0.137255, 0.137255, 0.137255, 0.584314)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.137255, 0.137255, 0.137255, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_74jb2"]
+bg_color = Color(0.415686, 0.34902, 0.211765, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.643137, 0.560784, 0.254902, 1)
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_og305"]
+texture = ExtResource("2_0l8s3")
+
+[node name="VillageShop" type="Node2D"]
+script = ExtResource("1_lv5na")
+
+[node name="Tooltip" type="Panel" parent="."]
+visible = false
+top_level = true
+z_index = 2
+offset_right = 66.0
+offset_bottom = 24.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_df8i8")
+
+[node name="TooltipLabel" type="Label" parent="Tooltip"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 1242.0
+offset_bottom = 402.0
+scale = Vector2(0.05, 0.05)
+theme_override_fonts/font = ExtResource("4_6h2v6")
+theme_override_font_sizes/font_size = 150
+text = "Weapon
+Price: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShopBackground" type="Panel" parent="."]
+offset_right = 198.0
+offset_bottom = 189.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_74jb2")
+
+[node name="GridContainer" type="GridContainer" parent="ShopBackground"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -82.0
+offset_right = 82.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 4
+
+[node name="Slot1" type="Panel" parent="ShopBackground/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_og305")
+script = ExtResource("3_1jnlt")
+
+[node name="Label" type="Label" parent="ShopBackground/GridContainer/Slot1"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -6.0
+offset_right = 702.0
+offset_bottom = 138.0
+scale = Vector2(0.05, 0.05)
+theme_override_fonts/font = ExtResource("4_6h2v6")
+theme_override_font_sizes/font_size = 100
+text = "Wooden Club"
+horizontal_alignment = 1
+
+[node name="Slot2" type="Panel" parent="ShopBackground/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_og305")
+script = ExtResource("3_1jnlt")
+
+[node name="Label" type="Label" parent="ShopBackground/GridContainer/Slot2"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -6.0
+offset_right = 702.0
+offset_bottom = 138.0
+scale = Vector2(0.05, 0.05)
+theme_override_fonts/font = ExtResource("4_6h2v6")
+theme_override_font_sizes/font_size = 100
+text = "Round Shield"
+horizontal_alignment = 1
+
+[node name="Slot3" type="Panel" parent="ShopBackground/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_og305")
+script = ExtResource("3_1jnlt")
+
+[node name="Slot4" type="Panel" parent="ShopBackground/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_og305")
+script = ExtResource("3_1jnlt")
+
+[node name="Slot5" type="Panel" parent="ShopBackground/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_og305")
+script = ExtResource("3_1jnlt")
+
+[node name="Slot6" type="Panel" parent="ShopBackground/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_og305")
+script = ExtResource("3_1jnlt")
+
+[node name="Slot7" type="Panel" parent="ShopBackground/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_og305")
+script = ExtResource("3_1jnlt")
+
+[node name="Slot8" type="Panel" parent="ShopBackground/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_og305")
+script = ExtResource("3_1jnlt")
+
+[node name="Slot9" type="Panel" parent="ShopBackground/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_og305")
+script = ExtResource("3_1jnlt")
+
+[node name="Slot10" type="Panel" parent="ShopBackground/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_og305")
+script = ExtResource("3_1jnlt")
+
+[node name="Slot11" type="Panel" parent="ShopBackground/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_og305")
+script = ExtResource("3_1jnlt")
+
+[node name="Slot12" type="Panel" parent="ShopBackground/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_og305")
+script = ExtResource("3_1jnlt")
+
+[node name="Slot13" type="Panel" parent="ShopBackground/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_og305")
+script = ExtResource("3_1jnlt")
+
+[node name="Slot14" type="Panel" parent="ShopBackground/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_og305")
+script = ExtResource("3_1jnlt")
+
+[node name="Slot15" type="Panel" parent="ShopBackground/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_og305")
+script = ExtResource("3_1jnlt")
+
+[node name="Slot16" type="Panel" parent="ShopBackground/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_og305")
+script = ExtResource("3_1jnlt")
+
+[connection signal="mouse_exited" from="ShopBackground/GridContainer/Slot1" to="." method="_on_slot_exited"]
+[connection signal="mouse_exited" from="ShopBackground/GridContainer/Slot2" to="." method="_on_slot_exited"]

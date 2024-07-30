@@ -4,6 +4,7 @@ var neil_done_talking = false
 var bigg_e_done_talking = false
 var talk_to_bigg_e = false
 var bigg_e_text = false
+var inShop = false
 
 func _ready():
 	if Global.world_to_village == true:
@@ -26,6 +27,7 @@ func _process(_delta):
 	set_camera_limits()
 	neil_speak()
 	bigg_e_speak()
+	shopping()
 
 		
 func set_camera_limits():
@@ -220,3 +222,42 @@ func _on_slime_forest_sign_body_exited(body):
 	if body.has_method("player"):
 		$slime_forest_sign_text.visible = false
 		$neil_speak.stop()
+
+
+func _on_thornton_sign_body_entered(body):
+	if body.has_method("player"):
+		$thornton_sign_text.visible = true
+		$neil_speak.play("thornton_sign")
+
+
+func _on_thornton_sign_body_exited(body):
+	if body.has_method("player"):
+		$thornton_sign_text.visible = false
+		$neil_speak.stop()
+
+
+func shopping():
+	if inShop == true:
+		if Input.is_action_just_pressed("interact"):
+			print("shopping")
+			if $VillageShop.visible == false:
+				$VillageShop.visible = true
+				$Camera2D.enabled = true
+				$player/Camera2D.enabled = false
+			else:
+				$VillageShop.visible = false
+				$player/Camera2D.enabled = true
+				$Camera2D.enabled = false
+
+
+func _on_shop_area_body_entered(body):
+	if body.has_method("player"):
+		inShop = true
+
+
+func _on_shop_area_body_exited(body):
+	if body.has_method("player"):
+		inShop = false
+		$VillageShop.visible = false
+		$player/Camera2D.enabled = true
+		$Camera2D.enabled = false

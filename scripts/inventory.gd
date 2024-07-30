@@ -17,10 +17,12 @@ func _ready():
 		slots[i].gui_input.connect(slot_gui_input.bind(slots[i]))
 		slots[i].slot_index = i
 		slots[i].slotType = SlotClass.SlotType.INVENTORY
+		slots[i].mouse_entered.connect(slot_gui_input.bind(slots[i]))
 		
 	for i in range(equip_slots.size()):
 		equip_slots[i].gui_input.connect(slot_gui_input.bind(equip_slots[i]))
 		equip_slots[i].slot_index = i
+		equip_slots[i].mouse_entered.connect(slot_gui_input.bind(equip_slots[i]))
 	equip_slots[0].slotType = SlotClass.SlotType.HAT
 	equip_slots[1].slotType = SlotClass.SlotType.SHIRT
 	equip_slots[2].slotType = SlotClass.SlotType.PANTS
@@ -28,6 +30,7 @@ func _ready():
 	for i in range(weapon_slots.size()):
 		weapon_slots[i].gui_input.connect(slot_gui_input.bind(weapon_slots[i]))
 		weapon_slots[i].slot_index = i
+		weapon_slots[i].mouse_entered.connect(slot_gui_input.bind(weapon_slots[i]))
 	weapon_slots[0].slotType = SlotClass.SlotType.WEAPON
 	weapon_slots[1].slotType = SlotClass.SlotType.OFFHAND
 	
@@ -42,6 +45,35 @@ func _ready():
 	update_equipment()
 
 func slot_gui_input(event: InputEvent, slot: SlotClass):
+	var item_name = ""
+	var item_damage = 0
+	var item_health = 0
+	var item_lifesteal = 0
+	var item_description = ""
+	if slot.item != null:
+		item_name = JsonData.item_data[slot.item.item_name]["Name"]
+		item_damage = JsonData.item_data[slot.item.item_name]["ItemAttack"]
+		item_health = JsonData.item_data[slot.item.item_name]["HealthBonus"]
+		item_lifesteal = JsonData.item_data[slot.item.item_name]["Lifesteal"]
+		item_description = JsonData.item_data[slot.item.item_name]["Description"]
+		$Tooltip.size.y = 0
+		$Tooltip/TooltipLabel.text = item_name
+		if item_damage != 0:
+			$Tooltip/TooltipLabel.text += "\nAttack: " + str(item_damage)
+			$Tooltip.size.y += 21
+		if item_health != 0:
+			$Tooltip/TooltipLabel.text += "\nHealth: " + str(item_health)
+			$Tooltip.size.y += 21
+		if item_lifesteal != 0:
+			$Tooltip/TooltipLabel.text += "\nLifesteal: " + str(item_lifesteal)
+			$Tooltip.size.y += 21
+		$Tooltip/TooltipLabel.text += "\nDescription: " + item_description
+		$Tooltip.size.y += 21
+		$Tooltip.visible = true
+		$Tooltip.position = get_global_mouse_position() - $Tooltip.size
+	else:
+		$Tooltip.visible = false
+	
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
 			if holding_item != null:
@@ -177,3 +209,7 @@ func open_inventory(event: InputEvent):
 			$Inventory.visible = false
 		else:
 			$Inventory.visible = true
+
+
+func _on_mouse_exited():
+	$Tooltip.visible = false

@@ -31,6 +31,7 @@ var max_health = 100
 var health = 50
 var level = 1
 var armor = 0
+var moola = 0
 
 var display_more_stats = false
 

@@ -4,6 +4,7 @@ extends Resource
 @export var level: int
 @export var experience: int
 @export var health: float
+@export var moola: int
 @export var game_first_loadin: bool
 @export var current_scene: String
 @export var player_position: Vector2

@@ -97,6 +97,7 @@ func deal_damage():
 		Global.experience += 50
 		if dagger_drop_rate == 9:
 			PlayerInventory.add_item(item, 1)
+		Global.moola += randi_range(1, 3)
 		self.queue_free()
 		can_die = false
 		Global.slime_dead = false
